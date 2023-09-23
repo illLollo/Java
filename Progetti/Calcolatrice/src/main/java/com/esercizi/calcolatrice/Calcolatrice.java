@@ -6,15 +6,19 @@ public class Calcolatrice
 {  
     public void start()
     {  
-        switch (getOperationType())
+        try
         {
-            case ADDIZIONE -> System.out.println(new Addizione(getValidDouble("Inserisci il primo addendo: "), getValidDouble("Inserisci il secondo addendo: ")).calcola());
-            case SOTTRAZIONE -> System.out.println(new Sottrazione(getValidDouble("Inserisci il sottraendo: "), getValidDouble("Inserisci il minuendo: ")).calcola());
-            case MOLTIPLICAZIONE -> System.out.println(new Moltiplicazione(getValidDouble("Inserisci il primo fattore: "), getValidDouble("Inserisci il secondo fattore: ")).calcola());
-            case DIVISIONE -> System.out.println(new Divisione(getValidDouble("Inserisci il dividendo: "), getValidDouble("Inserisci il divisore: ")).calcola());
-            case POTENZA -> System.out.println(new Potenza(getValidDouble("Inserisci la base: "), getValidDouble("Inserisci l'esponente: ")).calcola());
-            case RADICEQUADRATA -> System.out.println(new Radice(getValidDouble("Inserisci il valore da calcolare la radice quadrata: ")).calcola());
-        }
+            switch (getOperationType())
+            {
+                case ADDIZIONE -> System.out.println(new Addizione(getValidDouble("Inserisci il primo addendo: "), getValidDouble("Inserisci il secondo addendo: ")).calcola());
+                case SOTTRAZIONE -> System.out.println(new Sottrazione(getValidDouble("Inserisci il sottraendo: "), getValidDouble("Inserisci il minuendo: ")).calcola());
+                case MOLTIPLICAZIONE -> System.out.println(new Moltiplicazione(getValidDouble("Inserisci il primo fattore: "), getValidDouble("Inserisci il secondo fattore: ")).calcola());
+                case DIVISIONE -> System.out.println(new Divisione(getValidDouble("Inserisci il dividendo: "), getValidDouble("Inserisci il divisore: ")).calcola());
+                case POTENZA -> System.out.println(new Potenza(getValidDouble("Inserisci la base: "), getValidDouble("Inserisci l'esponente: ")).calcola());
+                case RADICEQUADRATA -> System.out.println(new Radice(getValidDouble("Inserisci il valore da calcolare la radice quadrata: ")).calcola());
+            }
+        } 
+        catch (ArithmeticException e) { System.err.println(e.getMessage()); }
     }
     private static Operazioni getOperationType() { return getOperationType("Inserisci il tipo di operazione (+, -, *, /, ^, |): "); }
     private static Operazioni getOperationType(String prompt)
