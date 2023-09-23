@@ -1,3 +1,5 @@
+import java.util.Iterator;
+
 public class LinkedVector <T> implements List<T>  {
 
     private transient Node<T> first;
@@ -170,4 +172,25 @@ public class LinkedVector <T> implements List<T>  {
     @Override
     public void clear() { this.size = 0; this.first = null; this.last = null; }
 
+    /**
+     * Returns an iterator over elements of type {@code T}.
+     *
+     * @return an Iterator.
+     */
+    @Override
+    public Iterator<T> iterator() {
+        return new Iterator<>() {
+            private Node<T> iterator = first;
+            @Override
+            public boolean hasNext() { return iterator != null; }
+
+            @Override
+            public T next()
+            {
+                final T temp = iterator.getData();
+                iterator = iterator.getNext();
+                return temp;
+            }
+        };
+    }
 }

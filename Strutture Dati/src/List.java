@@ -1,4 +1,4 @@
-public interface List<T>
+public interface List<T> extends Iterable<T>
 {
     boolean push(T element);
     boolean set(int index, T value) throws EmptyArrayException;

@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.Iterator;
 
 public class VectorList<T> implements List<T> {
 
@@ -16,6 +17,7 @@ public class VectorList<T> implements List<T> {
         this.capacity = (initialSize == 0 ? 10 : initialSize);
         this.buffer = (T[]) new Object[capacity];
     }
+    VectorList(T[] initializerList) { this.size = initializerList.length; this.capacity = initializerList.length; this.buffer = initializerList; }
 
     @Override
     public boolean push(T element)
@@ -139,5 +141,28 @@ public class VectorList<T> implements List<T> {
     {
         this.capacity += slots;
         buffer = Arrays.copyOf(this.buffer, this.capacity);
+    }
+
+    /**
+     * Returns an iterator over elements of type {@code T}.
+     *
+     * @return an Iterator.
+     */
+    @Override
+    public Iterator<T> iterator() {
+        return new Iterator<>()
+        {
+            private int currentIndex = 0;
+            @Override
+            public boolean hasNext()
+            {
+                return currentIndex < size;
+            }
+
+            @Override
+            public T next() {
+                return buffer[currentIndex++];
+            }
+        };
     }
 }

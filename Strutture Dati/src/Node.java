@@ -17,4 +17,12 @@ public class Node<T>
     public Node<T> getPrevious() { return this.previous; }
     public void setNext(Node<T> next) { this.next = next; }
     public Node<T> getNext() { return this.next; }
+
+    @Override
+    public String toString()
+    {
+        StringBuilder sb = new StringBuilder();
+        sb.append(this.getData());
+        return sb.toString();
+    }
 }

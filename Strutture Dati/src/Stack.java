@@ -1,4 +1,6 @@
 import java.util.Arrays;
+import java.util.Iterator;
+
 public class Stack<T> implements List<T>
 {
     private T[] buffer;
@@ -153,4 +155,24 @@ public class Stack<T> implements List<T>
     }
     private void expand() { this.expand(10); }
 
+    /**
+     * Returns an iterator over elements of type {@code T}.
+     *
+     * @return an Iterator.
+     */
+    @Override
+    public Iterator<T> iterator() {
+        return new Iterator<T>() {
+            private int currentIndex = 0;
+            @Override
+            public boolean hasNext() {
+                return currentIndex < size;
+            }
+
+            @Override
+            public T next() {
+                return buffer[size - 1 - currentIndex++];
+            }
+        };
+    }
 }

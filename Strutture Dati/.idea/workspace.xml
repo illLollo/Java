@@ -4,15 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1e0c6751-22b5-4512-bece-503aa5e8e677" name="Changes" comment="New Changes">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ElementNotInArrayException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/EmptyArrayException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Stack.java" afterDir="false" />
+    <list default="true" id="1e0c6751-22b5-4512-bece-503aa5e8e677" name="Changes" comment="Aggiunta Stack e implementazione nuovi metodi">
+      <change afterPath="$PROJECT_DIR$/src/Queue.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/LinkedVector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/LinkedVector.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/List.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/List.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Node.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Node.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Stack.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Stack.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/VectorList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/VectorList.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -115,7 +114,14 @@
       <option name="project" value="LOCAL" />
       <updated>1695043359650</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Aggiunta Stack e implementazione nuovi metodi">
+      <created>1695498290753</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1695498290753</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -131,7 +137,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="New Changes" />
-    <option name="LAST_COMMIT_MESSAGE" value="New Changes" />
+    <MESSAGE value="Aggiunta Stack e implementazione nuovi metodi" />
+    <option name="LAST_COMMIT_MESSAGE" value="Aggiunta Stack e implementazione nuovi metodi" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
