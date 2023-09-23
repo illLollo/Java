@@ -33,7 +33,7 @@ public class VectorList<T> implements List<T> {
         this.buffer[index] = value;
         return true;
     }
-    @Override
+
     public boolean insert(int index, T value)
     {
         if (index < 0 || index > this.size) throw new ArrayIndexOutOfBoundsException("Indice Negativo o Troppo Grande");
@@ -55,7 +55,7 @@ public class VectorList<T> implements List<T> {
 
     @Override
     public T pop() throws ArrayIndexOutOfBoundsException { return this.pop(this.indexOf(this.getLast())); }
-    @Override
+
     public T pop(int index)
     {
         if (this.isEmpty()) throw new ArrayIndexOutOfBoundsException("Array Vuoto!");
@@ -71,7 +71,7 @@ public class VectorList<T> implements List<T> {
 
         return temp;
     }
-    @Override
+
     public T popByValue(T value) throws ArrayIndexOutOfBoundsException { return this.pop(this.indexOf(value)); }
     @Override
     public T get(int index)
@@ -123,6 +123,12 @@ public class VectorList<T> implements List<T> {
     }
     @Override
     public void print() { System.out.println(this); }
+
+    /**
+     *
+     */
+    @Override
+    public void clear() { this.size = 0; }
 
     private void shrink()
     {

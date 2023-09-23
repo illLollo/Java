@@ -1,7 +1,7 @@
 public class LinkedVector <T> implements List<T>  {
 
-    private transient Node<T> first = null;
-    private transient Node<T> last = null;
+    private transient Node<T> first;
+    private transient Node<T> last;
 
     private int size = 0;
 
@@ -26,7 +26,6 @@ public class LinkedVector <T> implements List<T>  {
     @Override
     public boolean set(int index, T value) throws ArrayIndexOutOfBoundsException { this.search(index).setData(value); return true; }
 
-    @Override
     public boolean insert(int index, T value)
     {
         if (index == 0)
@@ -68,7 +67,7 @@ public class LinkedVector <T> implements List<T>  {
         return temp;
     }
 
-    @Override
+
     public T pop(int index) throws ArrayIndexOutOfBoundsException
     {
         Node<T> iterator = this.search(index);
@@ -83,7 +82,7 @@ public class LinkedVector <T> implements List<T>  {
         return iterator.getData();
     }
 
-    @Override
+
     public T popByValue(T value) { return this.pop(this.indexOf(value)); }
 
     private Node<T> search(int index)
@@ -164,5 +163,11 @@ public class LinkedVector <T> implements List<T>  {
 
     @Override
     public void print() { System.out.println(this); }
+
+    /**
+     * clears the list
+     */
+    @Override
+    public void clear() { this.size = 0; this.first = null; this.last = null; }
 
 }
