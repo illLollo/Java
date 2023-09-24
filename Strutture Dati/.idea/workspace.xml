@@ -4,16 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1e0c6751-22b5-4512-bece-503aa5e8e677" name="Changes" comment="Aggiunta Stack e implementazione nuovi metodi">
-      <change afterPath="$PROJECT_DIR$/src/Queue.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/LinkedVector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/LinkedVector.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/List.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/List.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Node.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Node.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Stack.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Stack.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/VectorList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/VectorList.java" afterDir="false" />
-    </list>
+    <list default="true" id="1e0c6751-22b5-4512-bece-503aa5e8e677" name="Changes" comment="Aggiunta Queue e implementazione nuovi metodi (aggiunto supporto foreach alle strutture)" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -121,7 +112,14 @@
       <option name="project" value="LOCAL" />
       <updated>1695498290753</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Aggiunta Queue e implementazione nuovi metodi (aggiunto supporto foreach alle strutture)">
+      <created>1695504312840</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1695504312840</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -138,7 +136,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="New Changes" />
     <MESSAGE value="Aggiunta Stack e implementazione nuovi metodi" />
-    <option name="LAST_COMMIT_MESSAGE" value="Aggiunta Stack e implementazione nuovi metodi" />
+    <MESSAGE value="Aggiunta Queue e implementazione nuovi metodi (aggiunto supporto foreach alle strutture)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Aggiunta Queue e implementazione nuovi metodi (aggiunto supporto foreach alle strutture)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

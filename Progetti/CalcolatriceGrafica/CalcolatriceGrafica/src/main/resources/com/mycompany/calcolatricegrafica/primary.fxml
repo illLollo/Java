@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" spacing="15.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.calcolatricegrafica.Controller">
+   <children>
+      <Label text="Calcolatrice" textAlignment="CENTER">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="result" alignment="CENTER_RIGHT" editable="false" style="-fx-background-color: transparent; -fx-border-color: none;" text="0">
+         <VBox.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </VBox.margin>
+      </TextField>
+      <GridPane alignment="CENTER" hgap="10.0" vgap="10.0" VBox.vgrow="ALWAYS">
+         <columnConstraints>
+            <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="ALWAYS" percentWidth="25" />
+            <ColumnConstraints fillWidth="false" halignment="CENTER" percentWidth="25" />
+            <ColumnConstraints fillWidth="false" halignment="CENTER" percentWidth="25" />
+            <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="ALWAYS" percentWidth="25" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="-Infinity" percentHeight="25.0" valignment="CENTER" vgrow="ALWAYS" />
+            <RowConstraints minHeight="-Infinity" percentHeight="25.0" valignment="CENTER" vgrow="ALWAYS" />
+            <RowConstraints percentHeight="25.0" valignment="CENTER" vgrow="ALWAYS" />
+            <RowConstraints percentHeight="25.0" valignment="CENTER" vgrow="ALWAYS" />
+            <RowConstraints maxHeight="22.0" minHeight="22.0" percentHeight="25.0" prefHeight="22.0" valignment="CENTER" vgrow="ALWAYS" />
+            <RowConstraints maxHeight="0.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
+            <RowConstraints vgrow="SOMETIMES" />
+            <RowConstraints vgrow="SOMETIMES" />
+            <RowConstraints vgrow="SOMETIMES" />
+            <RowConstraints vgrow="SOMETIMES" />
+            <RowConstraints vgrow="SOMETIMES" />
+            <RowConstraints vgrow="SOMETIMES" />
+            <RowConstraints vgrow="SOMETIMES" />
+            <RowConstraints vgrow="SOMETIMES" />
+            <RowConstraints vgrow="SOMETIMES" />
+            <RowConstraints vgrow="SOMETIMES" />
+            <RowConstraints vgrow="SOMETIMES" />
+            <RowConstraints vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="0.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="0.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Button fx:id="radq" minWidth="-Infinity" text="RADQ" />
+            <Button fx:id="square" minWidth="-Infinity" text="SQUARE" GridPane.columnIndex="1" />
+            <Button fx:id="cancel" minWidth="-Infinity" text="C" GridPane.columnIndex="2" />
+            <Button fx:id="delete" minWidth="-Infinity" text="BACK" GridPane.columnIndex="3" />
+            <Button fx:id="number_7" text="7" GridPane.rowIndex="1" />
+            <Button fx:id="number_8" minWidth="-Infinity" text="8" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Button fx:id="number_9" minWidth="-Infinity" text="9" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <Button fx:id="divide" minWidth="-Infinity" text="/" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+            <Button fx:id="number_4" minWidth="-Infinity" mnemonicParsing="false" text="4" GridPane.rowIndex="2" />
+            <Button fx:id="number_5" minWidth="-Infinity" mnemonicParsing="false" text="5" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Button fx:id="number_6" minWidth="-Infinity" mnemonicParsing="false" text="6" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <Button fx:id="multiply" minWidth="-Infinity" mnemonicParsing="false" text="*" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+            <Button fx:id="number_1" minWidth="-Infinity" mnemonicParsing="false" text="1" GridPane.rowIndex="3" />
+            <Button fx:id="number_2" minWidth="-Infinity" mnemonicParsing="false" text="2" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Button fx:id="number_3" minWidth="-Infinity" mnemonicParsing="false" text="3" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+            <Button fx:id="subtract" minWidth="-Infinity" mnemonicParsing="false" text="-" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+            <Button fx:id="number_0" minWidth="-Infinity" mnemonicParsing="false" text="0" GridPane.rowIndex="4" />
+            <Button fx:id="point" minWidth="-Infinity" mnemonicParsing="false" text="." GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Button fx:id="add" minWidth="-Infinity" mnemonicParsing="false" text="+" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+            <Button fx:id="equals" minWidth="-Infinity" mnemonicParsing="false" text="=" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+            <!-- Aggiungi altri bottoni e posizionamenti qui -->
+         </children>
+      </GridPane>
+   </children>
+   <padding>
+      <Insets top="15.0" />
+   </padding>
+</VBox>
