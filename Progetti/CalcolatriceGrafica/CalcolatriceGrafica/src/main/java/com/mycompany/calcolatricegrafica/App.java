@@ -17,11 +17,6 @@ public class App extends Application
         
         Controller c = loader.getController();
         
-        System.out.println(c);
-        
-        /*        c.getDivide().setOnAction((ActionEvent event) -> {
-        System.out.println("button clicked");
-        });*/
         
         stage.setScene(new Scene(loader.load()));
         stage.setTitle("Calcolatrice");
