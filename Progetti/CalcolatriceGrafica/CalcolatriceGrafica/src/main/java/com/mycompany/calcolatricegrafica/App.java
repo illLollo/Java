@@ -6,11 +6,8 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import javafx.event.ActionEvent;
 
-/**
- * JavaFX App
- */
+
 public class App extends Application 
 {
     @Override
@@ -26,7 +23,8 @@ public class App extends Application
         System.out.println("button clicked");
         });*/
         
-        stage.setScene(new Scene(loader.load(), 640, 480));
+        stage.setScene(new Scene(loader.load()));
+        stage.setTitle("Calcolatrice");
         stage.show();
     }
 

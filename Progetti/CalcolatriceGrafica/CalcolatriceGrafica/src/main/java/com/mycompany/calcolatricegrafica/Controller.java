@@ -1,75 +1,78 @@
 package com.mycompany.calcolatricegrafica;
-
-
-import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
+import java.util.HashSet;
+import javafx.event.ActionEvent;
+import javafx.scene.text.Text;
 
 public class Controller 
 {
-    @FXML
-    private Button radq;
-    @FXML
-    private Button square;
-    @FXML
-    private Button cancel;
-    @FXML
-    private Button delete;
-    @FXML
-    private Button number_7;
-    @FXML
-    private Button number_8;
-    @FXML
-    private Button number_9;
-    @FXML
-    private Button divide;
-    @FXML
-    private Button number_4;
-    @FXML
-    private Button number_5;
-    @FXML
-    private Button number_6;
-    @FXML
-    private Button multiply;
-    @FXML
-    private Button number_1;
-    @FXML
-    private Button number_2;
-    @FXML
-    private Button number_3;
-    @FXML
-    private Button subtract;
-    @FXML
-    private Button number_0;
-    @FXML
-    private Button point;
-    @FXML
-    private Button add;
-    @FXML
-    private Button equals;
-    @FXML
-    private TextField result;
+    private Text result;
     
-    
-    public Button getRadq() { return this.radq; } 
-    public Button getSquare() { return this.square; } 
-    public Button getCancel() { return this.cancel; } 
-    public Button getDelete() { return this.delete; } 
-    public Button getNumber_7() { return this.number_7; } 
-    public Button getNumber_8() { return this.number_8; } 
-    public Button getNumber_9() { return this.number_9; } 
-    public Button getDivide() { return this.divide; } 
-    public Button getNumber_4() { return this.number_4; } 
-    public Button getNumber_5() { return this.number_5; } 
-    public Button getNumber_6() { return this.number_6; } 
-    public Button getMultiply() { return this.multiply; } 
-    public Button getNumber_1() { return this.number_1; } 
-    public Button getNumber_2() { return this.number_2; } 
-    public Button getNumber_3() { return this.number_3; } 
-    public Button getSubtract() { return this.subtract; } 
-    public Button getNumber_0() { return this.number_0; } 
-    public Button getPoint() { return this.point; } 
-    public Button getAdd() { return this.add; } 
-    public Button getEquals() { return this.equals; } 
-    public TextField getResult() { return this.result; } 
+    public void calculate(ActionEvent e) {
+        System.out.println("calcola");
+    }
+    public void button_1(ActionEvent e) 
+    {
+        result.setText(result.getText().equals("0") ? "1" : (result.getText() + "1"));
+        
+    }
+    public void button_2(ActionEvent e) 
+    {
+        
+    }
+    public void button_3(ActionEvent e) 
+    {
+        
+    }
+    public void button_4(ActionEvent e) 
+    {
+        
+    }
+    public void button_5(ActionEvent e) 
+    {
+        
+    }
+    public void button_6(ActionEvent e) 
+    {
+        
+    }
+    public void button_7(ActionEvent e) 
+    {
+        
+    }
+    public void button_8(ActionEvent e) 
+    {
+        
+    }
+    public void button_9(ActionEvent e) 
+    {
+        
+    }
+    public void button_0(ActionEvent e) 
+    {
+        
+    }
+    public void button_add(ActionEvent e) 
+    {
+        
+    }
+    public void button_subtract(ActionEvent e) 
+    {
+        
+    }
+    public void button_multiply(ActionEvent e) 
+    {
+        
+    }
+    public void button_divide(ActionEvent e) 
+    {
+        
+    }
+    public void button_square(ActionEvent e) 
+    {
+        
+    }
+    public void button_sqrt(ActionEvent e) 
+    {
+        
+    }
 }
