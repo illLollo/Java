@@ -6,8 +6,7 @@ import javafx.scene.text.Text;
 public class Controller 
 {
     private Operazione op;
-    private String a = null;
-    private String b = null;
+    private Double a = null;
     
     @FXML
     private Text result;
@@ -16,18 +15,22 @@ public class Controller
     {
         result.setText(result.getText().equals("0") ? text : (result.getText() + text));
     }
+    private Double execCalc(Double lhs, Double rhs)
+    {
+        op.setA(lhs);
+        op.setB(rhs);
+        return op.calcola();
+    }
     
     public void calculate(ActionEvent e) 
     {
-        if (op.getB() == null) op.setB(Double.valueOf(result.getText()));
-        if (op != null && op.getA() != null && op.getB() != null)
-        {
-            Double value = op.calcola();
-            
-            result.setText(value.toString());
-            op.setA(value);
-            op.setB(null);
-        }
+       if (a == null || op == null) return;
+       
+        System.out.println("A: " + a);
+        System.out.println("GETTEXT: "  + result.getText());
+       
+       result.setText(this.execCalc(a, Double.valueOf(result.getText())).toString());  
+       a = null;
     }
     public void button_1(ActionEvent e) 
     {
@@ -78,43 +81,78 @@ public class Controller
         this.setText("0");
     }
     public void button_add(ActionEvent e) 
-    {
-        if (op == null) op = new Addizione();
+    {        
+        if (!(op instanceof Addizione)) op = new Addizione();
         
-        if (op.getA() == null) 
+        if (a == null) 
         {
-            op.setA(Double.valueOf(result.getText()));
+            a = Double.valueOf(result.getText());
             result.setText("0");
-        }
-        else if (op.getB() == null && result.getText().equals("0")) this.calculate(e);
-        else 
-        {
-            op.setB(Double.valueOf(result.getText()));
-            result.setText("0");    
+            return;
         }
         
-        System.out.println("A: " + op.getA());
-        System.out.println("B: " + op.getB());
-        
+        a = this.execCalc(a, Double.valueOf(result.getText()));  
+        result.setText("0");
     }
     public void button_subtract(ActionEvent e) 
     {
+        if (!(op instanceof Sottrazione)) op = new Sottrazione();
         
+        if (a == null) 
+        {
+            a = Double.valueOf(result.getText());
+            result.setText("0");
+            return;
+        }
+        
+        a = this.execCalc(a, Double.valueOf(result.getText()));  
+        result.setText("0");
     }
     public void button_multiply(ActionEvent e) 
     {
+        if (!(op instanceof Moltiplicazione)) op = new Moltiplicazione();
         
+        if (a == null) 
+        {
+            a = Double.valueOf(result.getText());
+            result.setText("0");
+            return;
+        }
+        
+        a = this.execCalc(a, Double.valueOf(result.getText()));  
+        result.setText("0");
     }
     public void button_divide(ActionEvent e) 
     {
+        if (!(op instanceof Divisione)) op = new Divisione();
+        
+        if (a == null) 
+        {
+            a = Double.valueOf(result.getText());
+            result.setText("0");
+            return;
+        }
+        
+        a = this.execCalc(a, Double.valueOf(result.getText()));  
+        result.setText("0");
         
     }
     public void button_square(ActionEvent e) 
     {
+        if (Double.valueOf(result.getText()).equals(0.0)) return;
         
+        result.setText(new Potenza(Double.valueOf(result.getText()), Double.valueOf(2)).calcola().toString());
     }
     public void button_sqrt(ActionEvent e) 
     {
+        if (Double.valueOf(result.getText()).equals(0.0)) return;
         
+        result.setText(new Radice(Double.valueOf(result.getText())).calcola().toString());
+    }
+    public void cancelAll(ActionEvent e)
+    {
+        result.setText("0");
+        op = null;
+        a = null;
     }
 }
