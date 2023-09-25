@@ -15,8 +15,7 @@ public class App extends Application
         FXMLLoader loader = new FXMLLoader(getClass().getResource("primary.fxml"));
         
         Controller c = loader.getController();
-        
-        
+       
         stage.setScene(new Scene(loader.load()));
         stage.setTitle("Calcolatrice");
         stage.setResizable(false);

@@ -10,5 +10,6 @@ public final class Divisione extends Operazione
     { 
         if (this.getB() == 0) throw new ArithmeticException("Impossibile dividere per 0!");
         return this.getB() == 0 ? 0.0 : this.getA() / this.getB(); 
+        
     }
 }
