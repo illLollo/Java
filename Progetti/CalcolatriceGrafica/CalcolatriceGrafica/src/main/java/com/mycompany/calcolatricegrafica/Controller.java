@@ -11,9 +11,13 @@ public class Controller
     @FXML
     private Text result;
     
-    private void setText(String text)
-    {
-        result.setText(result.getText().equals("0") ? text : (result.getText() + text));
+    private void setText(String text) 
+    { 
+        try
+        {
+            result.setText(Double.valueOf(result.getText()).equals(0.0) ? text : (result.getText() + text));
+        }
+        catch (NumberFormatException e) { result.setText(text); }
     }
     private Double execCalc(Double lhs, Double rhs) throws ArithmeticException
     {
@@ -30,13 +34,12 @@ public class Controller
             result.setText("0");
             return;
         }
-        
         try 
         {
             a = this.execCalc(a, Double.valueOf(result.getText()));  
+            result.setText("0");
         }
         catch (ArithmeticException e) { result.setText(e.getMessage()); }
-        result.setText("0");
     }
     public void calculate(ActionEvent e) 
     {
@@ -52,30 +55,41 @@ public class Controller
     public void delete(ActionEvent e)
     {
         String text = result.getText();
+                
+        if (Double.valueOf(text).equals(0.0)) 
+        {
+            result.setText("0");
+            return;
+        }
+
+        try 
+        { 
+            Double.valueOf(text); 
+            result.setText(text.substring(0, text.length() - 1));
+        }
+        catch (NumberFormatException ex) { result.setText("0"); }
         
-        if (text.length() == 1) result.setText("0");
-        else result.setText(text.substring(0, text.length() - 1));
     }
     
     public void button_add(ActionEvent e) 
     {        
-        if (!(op instanceof Addizione)) op = new Addizione();
         this.recursiveOperations();
+        if (!(op instanceof Addizione)) op = new Addizione();
     }
     public void button_subtract(ActionEvent e) 
     {
-        if (!(op instanceof Sottrazione)) op = new Sottrazione();
         this.recursiveOperations();
+        if (!(op instanceof Sottrazione)) op = new Sottrazione();
     }
     public void button_multiply(ActionEvent e) 
     {
-        if (!(op instanceof Moltiplicazione)) op = new Moltiplicazione();
         this.recursiveOperations();
+        if (!(op instanceof Moltiplicazione)) op = new Moltiplicazione();
     }
     public void button_divide(ActionEvent e) 
     {
-        if (!(op instanceof Divisione)) op = new Divisione();
         this.recursiveOperations();
+        if (!(op instanceof Divisione)) op = new Divisione();
     }
     public void button_square(ActionEvent e) 
     {
