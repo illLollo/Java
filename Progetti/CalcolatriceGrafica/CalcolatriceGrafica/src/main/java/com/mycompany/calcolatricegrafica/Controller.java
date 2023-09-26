@@ -55,8 +55,8 @@ public class Controller
     public void delete(ActionEvent e)
     {
         String text = result.getText();
-                
-        if (Double.valueOf(text).equals(0.0)) 
+        
+        if (text.length() == 1 || Double.valueOf(text).equals(0.0)) 
         {
             result.setText("0");
             return;

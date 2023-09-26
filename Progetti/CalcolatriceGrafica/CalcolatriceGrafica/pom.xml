@@ -36,11 +36,7 @@
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>0.0.4</version>
                 <configuration>
-                    <archive>
-                        <manifest>
-                            <mainClass>com.mycompany.calcolatricegrafica.App</mainClass>
-                        </manifest>
-                    </archive>
+                    <mainClass>com.mycompany.calcolatricegrafica.App</mainClass>
                 </configuration>
                 <executions>
                     <execution>
