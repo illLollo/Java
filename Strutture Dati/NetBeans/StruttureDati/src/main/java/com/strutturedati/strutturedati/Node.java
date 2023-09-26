@@ -1,6 +1,6 @@
 package com.strutturedati.strutturedati;
 
-public class Node<T>
+public final class Node<T>
 {
     private T data;
     private Node<T> previous;

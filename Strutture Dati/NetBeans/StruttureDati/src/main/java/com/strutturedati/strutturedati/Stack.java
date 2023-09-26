@@ -3,7 +3,7 @@ package com.strutturedati.strutturedati;
 import java.util.Arrays;
 import java.util.Iterator;
 
-public class Stack<T> implements List<T>
+public final class Stack<T> implements List<T>
 {
     private T[] buffer;
     private int size;

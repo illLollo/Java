@@ -2,7 +2,7 @@ package com.strutturedati.strutturedati;
 
 import java.util.Iterator;
 
-public class LinkedVector <T> implements List<T>  {
+public final class LinkedVector <T> implements List<T>  {
 
     private transient Node<T> first;
     private transient Node<T> last;

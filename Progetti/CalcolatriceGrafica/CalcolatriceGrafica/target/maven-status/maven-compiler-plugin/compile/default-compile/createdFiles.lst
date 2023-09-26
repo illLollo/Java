@@ -1,0 +1,10 @@
+com\mycompany\calcolatricegrafica\Moltiplicazione.class
+com\mycompany\calcolatricegrafica\Addizione.class
+com\mycompany\calcolatricegrafica\Potenza.class
+module-info.class
+com\mycompany\calcolatricegrafica\Controller.class
+com\mycompany\calcolatricegrafica\Sottrazione.class
+com\mycompany\calcolatricegrafica\App.class
+com\mycompany\calcolatricegrafica\Divisione.class
+com\mycompany\calcolatricegrafica\Operazione.class
+com\mycompany\calcolatricegrafica\Radice.class

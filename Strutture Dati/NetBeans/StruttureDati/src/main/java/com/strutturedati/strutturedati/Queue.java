@@ -2,7 +2,7 @@ package com.strutturedati.strutturedati;
 
 import java.util.Iterator;
 
-public class Queue<T> implements List<T>
+public final class Queue<T> implements List<T>
 {
     private T[] buffer;
     private int size;

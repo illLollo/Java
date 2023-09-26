@@ -3,7 +3,7 @@ package com.strutturedati.strutturedati;
 import java.util.Arrays;
 import java.util.Iterator;
 
-public class VectorList<T> implements List<T> {
+public final class VectorList<T> implements List<T> {
 
     private T[] buffer = null;
     private int size = 0;
