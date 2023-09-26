@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="4572b8ef-4736-44af-bc04-721ba438a974" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Progetti/CalcolatriceGrafica/CalcolatriceGrafica/src/main/java/com/mycompany/calcolatricegrafica/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Progetti/CalcolatriceGrafica/CalcolatriceGrafica/src/main/java/com/mycompany/calcolatricegrafica/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Utilities.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ElementNotInArrayException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/EmptyArrayException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/LinkedVector.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/List.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Node.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Queue.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Stack.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/VectorList.java" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectId" id="2VwKn0eBfiCOBklGQJFJBTDwUI2" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="4572b8ef-4736-44af-bc04-721ba438a974" name="Changes" comment="" />
+      <created>1695741866191</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1695741866191</updated>
+    </task>
+    <servers />
+  </component>
+</project>

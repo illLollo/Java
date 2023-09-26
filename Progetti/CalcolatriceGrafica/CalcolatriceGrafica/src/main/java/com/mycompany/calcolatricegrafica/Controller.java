@@ -108,7 +108,6 @@ public class Controller
         a = null;
     }
     
-    
     public void button_1(ActionEvent e) { this.setText("1"); }
     public void button_2(ActionEvent e) { this.setText("2"); }
     public void button_3(ActionEvent e) { this.setText("3"); }
@@ -118,5 +117,5 @@ public class Controller
     public void button_7(ActionEvent e) { this.setText("7"); }
     public void button_8(ActionEvent e) { this.setText("8"); }
     public void button_9(ActionEvent e) { this.setText("9"); }
-    public void button_0(ActionEvent e) { if (result.equals("0")) return; this.setText("0"); }
+    public void button_0(ActionEvent e) { if (result.getText().equals("0")) return; this.setText("0"); }
 }
