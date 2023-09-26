@@ -1,11 +1,11 @@
 com\esercizi\calcolatrice\Operazione.class
 com\esercizi\calcolatrice\Sottrazione.class
 com\esercizi\calcolatrice\Divisione.class
-com\esercizi\calcolatrice\Moltiplicazione.class
 com\esercizi\calcolatrice\Calcolatrice$1.class
+com\esercizi\calcolatrice\Moltiplicazione.class
 com\esercizi\calcolatrice\Main.class
 com\esercizi\calcolatrice\Operazioni.class
-com\esercizi\calcolatrice\Radice.class
 com\esercizi\calcolatrice\Addizione.class
+com\esercizi\calcolatrice\Radice.class
 com\esercizi\calcolatrice\Potenza.class
 com\esercizi\calcolatrice\Calcolatrice.class
