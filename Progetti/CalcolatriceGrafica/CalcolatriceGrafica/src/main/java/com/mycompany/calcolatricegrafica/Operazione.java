@@ -14,6 +14,6 @@ public abstract class Operazione
     protected void setA(Double a) { this.a = a; }
     protected void setB(Double b) { this.b = b; }
     
-    public abstract Double calcola();
+    public abstract Double calcola() throws DivideByZeroException;
 }
 
