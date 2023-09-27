@@ -10,6 +10,7 @@ public final class InputUtils
     InputUtils() { input = new Scanner(System.in); }
     InputUtils(InputStream is) { input = new Scanner(is); }
     
+    public long getLongInRange(long min, long max) { return this.getLongInRange("", min, max); }
     public long getLongInRange(String prompt, long min, long max) 
     {
         System.out.print(prompt);
@@ -27,6 +28,7 @@ public final class InputUtils
         return v;
     }
 
+    public long getValidLong() { return this.getValidLong(""); } 
     public long getValidLong(String prompt) 
     {
         System.out.print(prompt);
@@ -37,6 +39,7 @@ public final class InputUtils
         }
         return input.nextLong();
     }
+    public int getIntInRange(int min, int max) { return this.getIntInRange("", min, max); }
     public int getIntInRange(String prompt, int min, int max) 
     {
         System.out.print(prompt);
@@ -54,6 +57,7 @@ public final class InputUtils
         return v;
     }
 
+    public int getValidInt() { return this.getValidInt(""); }
     public int getValidInt(String prompt) 
     {
         System.out.print(prompt);
@@ -65,6 +69,7 @@ public final class InputUtils
         return input.nextInt();
     }
     
+    public short getShortInRange(short min, short max) { return this.getShortInRange("", min, max); }
     public short getShortInRange(String prompt, short min, short max) 
     {
         System.out.print(prompt);
@@ -82,6 +87,7 @@ public final class InputUtils
         return v;
     }
 
+    public short getValidShort() { return this.getValidShort(""); }
     public short getValidShort(String prompt) 
     {
         System.out.print(prompt);
@@ -93,6 +99,7 @@ public final class InputUtils
         }
         return input.nextShort();
     }
+    public double getDoubleInRange(double min, double max) { return this.getDoubleInRange("", min, max); }
     public double getDoubleInRange(String prompt, double min, double max) 
     {
         System.out.print(prompt);
@@ -110,6 +117,7 @@ public final class InputUtils
         return v;
     }
 
+    public double getValidDouble() { return this.getValidDouble(""); } 
     public double getValidDouble(String prompt) 
     {
         System.out.print(prompt);
@@ -120,6 +128,7 @@ public final class InputUtils
         }
         return input.nextDouble();
     }
+    public double getFloatInRange(float min, float max) { return this.getFloatInRange("", min, max); } 
     public double getFloatInRange(String prompt, float min, float max) 
     {
         System.out.print(prompt);
@@ -137,6 +146,7 @@ public final class InputUtils
         return v;
     }
 
+    public float getValidFloat() { return this.getValidFloat(""); } 
     public float getValidFloat(String prompt) 
     {
         System.out.print(prompt);
