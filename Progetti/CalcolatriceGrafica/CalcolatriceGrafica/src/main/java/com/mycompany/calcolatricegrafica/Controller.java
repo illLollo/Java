@@ -55,16 +55,15 @@ public class Controller
     public void delete(ActionEvent e)
     {
         String text = result.getText();
-        
-        if (text.length() == 1 || Double.valueOf(text).equals(0.0)) 
+                
+        try
         {
-            result.setText("0");
-            return;
-        }
-
-        try 
-        { 
-            Double.valueOf(text); 
+            if (text.length() == 1 || Double.valueOf(text).equals(0.0)) 
+            {
+                result.setText("0");
+                return;
+            }
+            
             result.setText(text.substring(0, text.length() - 1));
         }
         catch (NumberFormatException ex) { result.setText("0"); }

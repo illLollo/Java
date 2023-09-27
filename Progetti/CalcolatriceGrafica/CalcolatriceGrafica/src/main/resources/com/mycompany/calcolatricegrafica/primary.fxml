@@ -5,7 +5,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="402.0" prefWidth="312.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.calcolatricegrafica.Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="402.0" prefWidth="312.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.calcolatricegrafica.Controller">
    <children>
       <Text layoutX="90.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Calcolatrice">
          <font>
@@ -14,27 +14,27 @@
       </Text>
       <Text fx:id="result" layoutX="20.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="RIGHT" wrappingWidth="272.7998046875">
          <font>
-            <Font size="26.0" />
+            <Font size="20.0" />
          </font>
       </Text>
-      <Button layoutX="38.0" layoutY="139.0" mnemonicParsing="false" onAction="#button_1" text="1" />
-      <Button layoutX="104.0" layoutY="139.0" mnemonicParsing="false" onAction="#button_2" text="2" />
-      <Button layoutX="170.0" layoutY="139.0" mnemonicParsing="false" onAction="#button_3" text="3" />
-      <Button layoutX="235.0" layoutY="139.0" mnemonicParsing="false" onAction="#button_4" text="4" />
-      <Button layoutX="38.0" layoutY="189.0" mnemonicParsing="false" onAction="#button_5" text="5" />
-      <Button layoutX="104.0" layoutY="189.0" mnemonicParsing="false" onAction="#button_6" text="6" />
-      <Button layoutX="170.0" layoutY="189.0" mnemonicParsing="false" onAction="#button_7" text="7" />
-      <Button layoutX="235.0" layoutY="189.0" mnemonicParsing="false" onAction="#button_8" text="8" />
-      <Button layoutX="39.0" layoutY="244.0" mnemonicParsing="false" onAction="#button_divide" text="/" />
-      <Button layoutX="105.0" layoutY="244.0" mnemonicParsing="false" onAction="#button_subtract" text="-" />
-      <Button layoutX="171.0" layoutY="244.0" mnemonicParsing="false" onAction="#button_multiply" text="*" />
-      <Button layoutX="234.0" layoutY="244.0" mnemonicParsing="false" onAction="#button_add" text="+" />
-      <Button layoutX="38.0" layoutY="294.0" mnemonicParsing="false" onAction="#button_9" text="9" />
-      <Button layoutX="104.0" layoutY="294.0" mnemonicParsing="false" onAction="#button_0" text="0" />
-      <Button layoutX="160.0" layoutY="294.0" mnemonicParsing="false" onAction="#button_sqrt" text="SQRT" />
-      <Button layoutX="216.0" layoutY="294.0" mnemonicParsing="false" onAction="#button_square" text="SQUARE" />
-      <Button layoutX="49.0" layoutY="346.0" mnemonicParsing="false" onAction="#calculate" text="=" />
-      <Button layoutX="179.0" layoutY="346.0" mnemonicParsing="false" onAction="#delete" text="DELETE" />
-      <Button layoutX="115.0" layoutY="346.0" mnemonicParsing="false" onAction="#cancelAll" text="C" />
+      <Button layoutX="38.0" layoutY="170.0" mnemonicParsing="false" onAction="#button_1" text="1" />
+      <Button layoutX="104.0" layoutY="170.0" mnemonicParsing="false" onAction="#button_2" text="2" />
+      <Button layoutX="170.0" layoutY="170.0" mnemonicParsing="false" onAction="#button_3" text="3" />
+      <Button layoutX="38.0" layoutY="223.0" mnemonicParsing="false" onAction="#button_4" text="4" />
+      <Button layoutX="104.0" layoutY="223.0" mnemonicParsing="false" onAction="#button_5" text="5" />
+      <Button layoutX="170.0" layoutY="223.0" mnemonicParsing="false" onAction="#button_6" text="6" />
+      <Button layoutX="38.0" layoutY="280.0" mnemonicParsing="false" onAction="#button_7" text="7" />
+      <Button layoutX="104.0" layoutY="280.0" mnemonicParsing="false" onAction="#button_8" text="8" />
+      <Button layoutX="236.0" layoutY="170.0" mnemonicParsing="false" onAction="#button_divide" text="/" />
+      <Button layoutX="237.0" layoutY="280.0" mnemonicParsing="false" onAction="#button_subtract" text="-" />
+      <Button layoutX="237.0" layoutY="223.0" mnemonicParsing="false" onAction="#button_multiply" text="*" />
+      <Button layoutX="234.0" layoutY="332.0" mnemonicParsing="false" onAction="#button_add" text="+" />
+      <Button layoutX="171.0" layoutY="280.0" mnemonicParsing="false" onAction="#button_9" text="9" />
+      <Button layoutX="104.0" layoutY="332.0" mnemonicParsing="false" onAction="#button_0" text="0" />
+      <Button layoutX="40.0" layoutY="128.0" mnemonicParsing="false" onAction="#button_sqrt" text="SQRT" />
+      <Button layoutX="104.0" layoutY="128.0" mnemonicParsing="false" onAction="#button_square" text="SQUARE" />
+      <Button layoutX="169.0" layoutY="332.0" mnemonicParsing="false" onAction="#calculate" text="=" />
+      <Button layoutX="195.0" layoutY="128.0" mnemonicParsing="false" onAction="#delete" text="DELETE" />
+      <Button layoutX="38.0" layoutY="332.0" mnemonicParsing="false" onAction="#cancelAll" text="C" />
    </children>
 </AnchorPane>
