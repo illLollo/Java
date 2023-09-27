@@ -1,5 +1,6 @@
 package com.strutturedati.strutturedati;
 
+import java.util.Arrays;
 import java.util.Iterator;
 
 public final class LinkedVector <T> implements List<T>  {
@@ -194,5 +195,15 @@ public final class LinkedVector <T> implements List<T>  {
                 return temp;
             }
         };
+    }
+
+    @Override
+    public void sort() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void parallelSort() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

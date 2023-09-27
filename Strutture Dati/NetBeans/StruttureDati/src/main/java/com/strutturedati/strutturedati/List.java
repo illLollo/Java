@@ -11,8 +11,11 @@ public interface List<T> extends Iterable<T>
     int size();
     boolean isEmpty();
     int indexOf(T value) throws EmptyArrayException, ElementNotInArrayException;
+    @Override
     String toString();
     void print();
     void clear();
+    void sort();
+    void parallelSort();
 }
 

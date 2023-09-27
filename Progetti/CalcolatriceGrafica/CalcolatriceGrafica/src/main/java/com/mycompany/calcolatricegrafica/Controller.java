@@ -5,11 +5,13 @@ import javafx.scene.text.Text;
 
 public class Controller 
 {
-    private Operazione op;
+    public Operazione op;
     private Double a;
     
     @FXML
     private Text result;
+    
+
     
     private void setText(String text) 
     { 

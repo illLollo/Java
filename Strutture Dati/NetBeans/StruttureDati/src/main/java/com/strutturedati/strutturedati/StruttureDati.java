@@ -1,5 +1,7 @@
 package com.strutturedati.strutturedati;
 
+import java.util.Arrays;
+
 public class StruttureDati 
 {
 
