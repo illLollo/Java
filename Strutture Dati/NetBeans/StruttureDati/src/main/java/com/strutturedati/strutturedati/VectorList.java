@@ -169,4 +169,15 @@ public final class VectorList<T> implements List<T> {
             }
         };
     }
+    @Override
+    public void sort()
+    {
+        Arrays.sort(this.buffer);
+    }
+    
+    @Override
+    public void parallelSort()
+    {
+        //Arrays.parallelSort(this.buffer);
+    }
 }

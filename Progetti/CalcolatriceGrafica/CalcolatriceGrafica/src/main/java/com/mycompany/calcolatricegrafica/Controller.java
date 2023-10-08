@@ -5,11 +5,13 @@ import javafx.scene.text.Text;
 
 public class Controller 
 {
-    private Operazione op;
+    public Operazione op;
     private Double a;
     
     @FXML
     private Text result;
+    
+
     
     private void setText(String text) 
     { 
@@ -19,7 +21,7 @@ public class Controller
         }
         catch (NumberFormatException e) { result.setText(text); }
     }
-    private Double execCalc(Double lhs, Double rhs) throws ArithmeticException
+    private Double execCalc(Double lhs, Double rhs) throws DivideByZeroException
     {
         op.setA(lhs);
         op.setB(rhs);
@@ -39,7 +41,7 @@ public class Controller
             a = this.execCalc(a, Double.valueOf(result.getText()));  
             result.setText("0");
         }
-        catch (ArithmeticException e) { result.setText(e.getMessage()); }
+        catch (DivideByZeroException e) { result.setText(e.getMessage()); }
     }
     public void calculate(ActionEvent e) 
     {
@@ -49,22 +51,21 @@ public class Controller
        {
             result.setText(this.execCalc(a, Double.valueOf(result.getText())).toString());  
        }
-       catch (ArithmeticException exception) { result.setText(exception.getMessage()); }
+       catch (DivideByZeroException exception) { result.setText(exception.getMessage()); }
        a = null;
     }
     public void delete(ActionEvent e)
     {
         String text = result.getText();
-        
-        if (text.length() == 1 || Double.valueOf(text).equals(0.0)) 
+                
+        try
         {
-            result.setText("0");
-            return;
-        }
-
-        try 
-        { 
-            Double.valueOf(text); 
+            if (text.length() == 1 || Double.valueOf(text).equals(0.0)) 
+            {
+                result.setText("0");
+                return;
+            }
+            
             result.setText(text.substring(0, text.length() - 1));
         }
         catch (NumberFormatException ex) { result.setText("0"); }

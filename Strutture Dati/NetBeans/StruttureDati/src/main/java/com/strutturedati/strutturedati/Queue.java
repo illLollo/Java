@@ -1,5 +1,6 @@
 package com.strutturedati.strutturedati;
 
+import java.util.Arrays;
 import java.util.Iterator;
 
 public final class Queue<T> implements List<T>
@@ -167,5 +168,10 @@ public final class Queue<T> implements List<T>
             }
         };
     }
+    @Override
+    public void sort() { Arrays.sort(this.buffer); }
+    
+    @Override 
+    public void parallelSort() { /*Arrays.parallelSort(this.buffer); */ }
 }
 
