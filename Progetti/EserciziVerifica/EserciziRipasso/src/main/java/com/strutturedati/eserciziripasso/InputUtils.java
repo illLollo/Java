@@ -1,3 +1,5 @@
+package com.strutturedati.eserciziripasso;
+
 import java.util.Scanner;
 
 public abstract class InputUtils

@@ -5,17 +5,19 @@ import java.util.Iterator;
 
 public final class VectorList<T> implements List<T> {
 
-    private T[] buffer = null;
-    private int size = 0;
+    private T[] buffer;
+    private int size;
     private int capacity;
 
     VectorList()
     {
+        System.out.println("default costruttore chiamato");
         this.capacity = 10;
         this.buffer = (T[]) new Object[capacity];
     }
     VectorList(int initialSize)
     {
+        System.out.println("costruttore 2 chiamato");
         this.capacity = (initialSize == 0 ? 10 : initialSize);
         this.buffer = (T[]) new Object[capacity];
     }
