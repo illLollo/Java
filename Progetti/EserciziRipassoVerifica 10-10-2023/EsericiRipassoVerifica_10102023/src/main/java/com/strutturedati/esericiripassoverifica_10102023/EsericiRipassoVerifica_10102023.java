@@ -3,9 +3,8 @@ package com.strutturedati.esericiripassoverifica_10102023;
 import java.time.LocalDate;
 import java.util.Scanner;
 
-public class EsericiRipassoVerifica_10102023 
+public class EsericiRipassoVerifica_10102023
 {
-    
     private static final String[] dow = {"Lunedi", "Martedi", "Mercoledi", "Giovedi", "Venerdi", "Sabato", "Domenica"}; 
     
     public static void main(String[] args) 
@@ -21,7 +20,6 @@ public class EsericiRipassoVerifica_10102023
             System.out.print("Hai inserito un giorno sbagliato, riprova: ");
         
         System.out.println("Giorno corretto, oggi è " + dow[today]);
-   
     }
     
     public static char[] stringToCharArray(String s)

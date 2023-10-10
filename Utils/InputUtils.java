@@ -1,10 +1,16 @@
+package com.strutturedati.esericiripassoverifica_10102023;
+
+import java.io.InputStream;
 import java.util.Scanner;
 
-public abstract class InputUtils
+public abstract class InputUtils 
 {
-    private static final Scanner input = new Scanner(System.in);
+    private static Scanner input = new Scanner(System.in);
     
     private InputUtils() {}
+    
+    public static void setSource(InputStream source) { input = new Scanner(source); }
+    public static void setScanner(Scanner sc) { input = sc; }
         
     public static long getLongInRange() { return getLongInRange("Inserisci un long: ", Long.MIN_VALUE, Long.MAX_VALUE); }
     public static long getLongInRange(String prompt, long min, long max) 
@@ -52,7 +58,7 @@ public abstract class InputUtils
 
         return v;
     }
-
+    
     public static int getValidInt() { return getValidInt("Inserisci un int: "); }
     public static int getValidInt(String prompt) 
     {
