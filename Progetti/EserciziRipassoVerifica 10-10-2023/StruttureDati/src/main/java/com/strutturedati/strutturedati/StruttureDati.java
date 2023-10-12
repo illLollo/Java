@@ -1,7 +1,11 @@
 package com.strutturedati.strutturedati;
 
+<<<<<<< HEAD
 import java.util.Scanner;
 
+=======
+import java.util.Arrays;
+>>>>>>> 07e2cf5f59e40f5b686669867ad58e78e216a60a
 
 public class StruttureDati 
 {

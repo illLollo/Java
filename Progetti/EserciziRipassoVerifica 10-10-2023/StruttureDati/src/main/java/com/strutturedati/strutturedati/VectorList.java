@@ -3,7 +3,7 @@ package com.strutturedati.strutturedati;
 import java.util.Arrays;
 import java.util.Iterator;
 
-public final class VectorList<T extends Comparable<T>> implements List<T> {
+public final class VectorList<T> implements List<T> {
 
     private T[] buffer;
     private int size;
@@ -178,6 +178,6 @@ public final class VectorList<T extends Comparable<T>> implements List<T> {
     @Override
     public void parallelSort()
     {
-        Arrays.parallelSort(this.buffer);
+        //Arrays.parallelSort(this.buffer);
     }
 }
