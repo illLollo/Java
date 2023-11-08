@@ -5,20 +5,20 @@ import java.util.Scanner;
  *
  * @author Administrator
  */
-public class Tris implements Runnable
+public class Tris
 {
     private Player p1;
     private Player p2;
-    private final GameTable table;
+    private GameTable table;
     private Turn turn;
     private static final Scanner sc = new Scanner(System.in);
+    private boolean started;
+    private Player winner;
+    private static int nMoves;
     
     public Tris()
     {
-        this.table = new GameTable(3, 3);
-        this.p1 = null;
-        this.p2 = null;
-        this.turn = null;
+        this(null, null);
     }
     public Tris(Player p1, Player p2)
     {
@@ -26,108 +26,92 @@ public class Tris implements Runnable
         this.p1 = p1;
         this.p2 = p2;
         this.turn = new Turn<>(this.p1, this.p2);
+        this.started = false;
+        this.winner = null;
+        this.nMoves = 0;
     }
-    
-    public void play() throws NoPlayersException
+    public void startGame() throws NoPlayersException
     {
         if (this.p1 == null || this.p2 == null) throw new NoPlayersException();
+        this.started = true;
+    }
+    public boolean isStarted()
+    {
+        return this.started;
+    }
+    public void makeMove(int cellNumber) throws InvalidMoveException
+    {
+        if (!this.isStarted())
+            throw new GameNotStartedException("Gioco non ancora iniziato!");
         
-        InputUtils.setScanner(sc);
+        this.nMoves++;
         
-        System.out.println("\t\tGIOCO DEL TRIS");
+        final Cell selected = this.table.getCell(cellNumber);
+        final Player current = (Player) this.turn.getCurrent();
         
-        System.out.println(this.turn.getCurrent() + " comincerai tu!");
-        System.out.println("Quando sarà il tuo turno dovrai dirmi il numero della casella che vorrai marcare, inserendo il numero in input!");
+        if (!selected.isEmpty()) 
+            throw new InvalidMoveException("Cella occupata dal giocatore: " + current);
+       
+        selected.setOwnership(current);
+        this.turn.switchTurn();
+        this.checkWinner();
         
-        for (int i = 0; i < 9; i++)
-        {
-            this.table.render();
-            
-            final Player current = (Player) this.turn.getCurrent();
-            final Cell selected = this.askCell(current);
-            
-            selected.setOwnership(current);
-            selected.setSymbol(current.getCode());
-          
-            final Player winner = this.checkWinner();
-            
-            if (winner != null)
-            {
-                System.out.println("Il vincitore è " + winner);
-                return;
-            }
-            this.turn.switchTurn();
-            System.out.println(this.turn.getCurrent() + " ora è il tuo turno!");
-        }
-        System.out.println("PAREGGIO!");
+        if (this.getWinner() != null || this.nMoves == 9)
+            this.started = false;
+    }
+    public void stopGame()
+    {
+        if (!this.isStarted())
+            throw new GameNotStartedException("Gioco non ancora iniziato!");
+        
+        this.started = false;
+        this.table = new GameTable(3,3);
+        this.turn = new Turn<>(this.p1, this.p2);
     }
     public void setP1(Player p)
     {
+        if (p == null) return;
         this.p1 = p;
+    }
+    public Turn getTurn()
+    {
+        return this.turn;
     }
     public void setP2(Player p)
     {
+        if (p == null) return;
         this.p2 = p;
     }
-    
-    private Cell askCell(Player p)
-    {       
-        boolean validCell = true;
-        
-        Cell cell = null;
-        
-        do
-        {
-            cell = this.table.getCell(InputUtils.getIntInRange(p.getName() + " inserisci il numero della casella che vuoi rendere tua 0-8: ", 0, 8));
-            
-            if (!cell.isEmpty()) 
-            {
-                validCell = false;
-                System.out.println("La cella è già occupata dal giocatore: " + cell.getOwnership());
-            }
-            else validCell = true;
-        }
-        while (!validCell);
-        
-        return cell;
+    public GameTable getTable()
+    {
+        return this.table;
     }
-    public Player checkWinner()
-    { 
+    private void checkWinner()
+    {
         for (int i = 0; i < this.table.getNRows(); i++)
         {
             Cell cc1 = this.table.getCell(0 + (i * 3));
             Cell cc2 = this.table.getCell(1 + (i * 3));
             Cell cc3 = this.table.getCell(2 + (i * 3));
             
-            if (cc1.equals(cc2) && cc1.equals(cc3)) return cc1.getOwnership();
+            if (cc1.equals(cc2) && cc1.equals(cc3)) this.winner = cc1.getOwnership();
             
             Cell cr1 = this.table.getCell(i);
             Cell cr2 = this.table.getCell(i + 3);
             Cell cr3 = this.table.getCell(i + 6);
         
-            if (cr1.equals(cr2) && cr1.equals(cr3)) return cr1.getOwnership();
+            if (cr1.equals(cr2) && cr1.equals(cr3)) this.winner = cr1.getOwnership();
             
             
             if  (this.table.getCell(0).equals(this.table.getCell(4)) && this.table.getCell(0).equals(this.table.getCell(8))) 
-                    return this.table.getCell(0).getOwnership();
+                    this.winner = this.table.getCell(0).getOwnership();
             
             if  (this.table.getCell(2).equals(this.table.getCell(4)) && this.table.getCell(2).equals(this.table.getCell(6))) 
-                    return this.table.getCell(2).getOwnership();
-        }
-        return null;
+                    this.winner = this.table.getCell(2).getOwnership();
+        }    
     }
-
-    @Override
-    public void run() 
-    {
-        try 
-        {
-            this.play();
-            
-        }
-        catch (final NoPlayersException e)
-        {
-            System.err.println("Non puoi giocare senza aver prima definito i giocatori!");
-        }
+    public Player getWinner()
+    { 
+        return this.winner;
     }
 }

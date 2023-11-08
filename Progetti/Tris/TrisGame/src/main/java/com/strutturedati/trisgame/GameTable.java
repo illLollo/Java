@@ -62,8 +62,10 @@ public class GameTable
             
         return count;
     }
-    public Cell getCell(int cellNumber)
+    public Cell getCell(int cellNumber) throws InvalidMoveException
     {
+        if (cellNumber < 0 || cellNumber > (this.rows * this.cols) - 1) throw new InvalidMoveException("Indice non compreso tra i limiti della tabella di gioco [0," + ((this.rows * this.cols) - 1) + "]");
+        
         int row = cellNumber / this.matrix.length;
         int col = cellNumber - (this.matrix.length * row); 
         

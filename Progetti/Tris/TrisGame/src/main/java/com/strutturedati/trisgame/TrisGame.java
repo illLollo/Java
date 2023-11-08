@@ -24,13 +24,18 @@ public class TrisGame {
         
         final Tris t = new Tris(p1, p2);
         
-        try
+        t.startGame();
+        System.out.println("Inizia " + t.getTurn().getCurrent());
+        
+        while (t.isStarted() && t.getWinner() == null)
         {
-            t.play();
+            t.getTable().render();
+            t.makeMove(InputUtils.getIntInRange(t.getTurn().getCurrent() + " fai la tua mossa: ", 0, 8));     
         }
-        catch (final NoPlayersException e)
-        {
-            System.err.println("Non puoi avviare una partita senza aver prima impostato i giocatori!");
-        }
+        
+        if (t.getWinner() == null)
+            System.out.println("PAREGGIO");
+        else 
+            System.out.println("Il vincitore è: " + t.getWinner());
     }
 }

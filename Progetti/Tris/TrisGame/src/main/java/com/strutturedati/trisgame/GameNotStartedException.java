@@ -6,16 +6,16 @@ package com.strutturedati.trisgame;
 
 /**
  *
- * @author Lorenzo
+ * @author gambaro.lorenzo
  */
-public class NoPlayersException extends RuntimeException
+public class GameNotStartedException extends RuntimeException
 {
-    public NoPlayersException(String message)
+    public GameNotStartedException(String message)
     {
         super(message);
     }
-    public NoPlayersException()
+    public GameNotStartedException()
     {
-        super("There aren't enough players to play!");
+        super("Game not started yet!");
     }
 }

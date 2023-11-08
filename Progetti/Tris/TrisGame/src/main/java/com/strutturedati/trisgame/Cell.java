@@ -28,7 +28,10 @@ public class Cell<T>
     
     public T getSymbol() { return this.symbol; }
     
-    public void setOwnership(Player p) { this.ownership = p; }
+    public void setOwnership(Player p) { 
+        this.ownership = p; 
+        this.symbol = (T) p.getCode();
+    }
     
     public void setSymbol(T symbol) { this.symbol = symbol;}
     

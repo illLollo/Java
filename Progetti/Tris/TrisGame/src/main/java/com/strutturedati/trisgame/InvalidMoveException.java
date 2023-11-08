@@ -6,16 +6,16 @@ package com.strutturedati.trisgame;
 
 /**
  *
- * @author Lorenzo
+ * @author gambaro.lorenzo
  */
-public class NoPlayersException extends RuntimeException
+public class InvalidMoveException extends RuntimeException
 {
-    public NoPlayersException(String message)
+    public InvalidMoveException(String message)
     {
         super(message);
     }
-    public NoPlayersException()
+    public InvalidMoveException()
     {
-        super("There aren't enough players to play!");
+        super("Invalid move done!");
     }
 }
