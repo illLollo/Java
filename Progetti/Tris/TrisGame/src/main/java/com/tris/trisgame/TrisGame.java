@@ -32,15 +32,11 @@ public class TrisGame {
         while (t.isStarted() && t.getWinner() == null)
         {
             t.getTable().render();
-            try
-            {
-                t.makeMove(InputUtils.getIntInRange(t.getTurn().getCurrent() + " fai la tua mossa: ", 0, 8));     
                 
-            }
-            catch (final InvalidMoveException e)
-            {
-                System.err.println(e.getMessage() + ", riprova: ");
-            }
+            int cell = InputUtils.getIntInRange(t.getTurn().getCurrent() + " fai la tua mossa: ", 0, 8);
+            
+            if (t.getTable().getCell(cell).getOwnership() != null)
+                t.makeMove(cell);     
         }
         
         t.getTable().render();

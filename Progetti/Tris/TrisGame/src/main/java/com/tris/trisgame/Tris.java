@@ -1,4 +1,5 @@
 package com.tris.trisgame;
+import java.util.Objects;
 import java.util.Scanner;
 
 /**
@@ -16,15 +17,11 @@ public class Tris
     private Player winner;
     private static int nMoves;
     
-    public Tris()
-    {
-        this(null, null);
-    }
     public Tris(Player p1, Player p2)
     {
         this.table = new GameTable(3, 3);
-        this.p1 = p1;
-        this.p2 = p2;
+        this.p1 = Objects.requireNonNull(p1);
+        this.p2 = Objects.requireNonNull(p2);
         this.turn = new Turn<>(this.p1, this.p2);
         this.started = false;
         this.winner = null;
@@ -44,7 +41,6 @@ public class Tris
         if (!this.isStarted())
             throw new GameNotStartedException("Gioco non ancora iniziato!");
         
-        this.nMoves++;
         
         final Cell selected = this.table.getCell(cellNumber);
         final Player current = (Player) this.turn.getCurrent();
@@ -52,13 +48,16 @@ public class Tris
         if (!selected.isEmpty()) 
             throw new InvalidMoveException("Cella occupata dal giocatore: " + current);
        
+        this.nMoves++;
+        
         selected.setOwnership(current);
         this.turn.switchTurn();
         this.checkWinner();
         
-        if (this.getWinner() != null || this.nMoves == 9)
+        if (this.getWinner() != null || this.nMoves >= 9)
             this.started = false;
     }
+    //aggiungere un trymove
     public void stopGame()
     {
         if (!this.isStarted())
@@ -68,19 +67,9 @@ public class Tris
         this.table = new GameTable(3,3);
         this.turn = new Turn<>(this.p1, this.p2);
     }
-    public void setP1(Player p)
-    {
-        if (p == null) return;
-        this.p1 = p;
-    }
     public Turn getTurn()
     {
         return this.turn;
-    }
-    public void setP2(Player p)
-    {
-        if (p == null) return;
-        this.p2 = p;
     }
     public GameTable getTable()
     {
