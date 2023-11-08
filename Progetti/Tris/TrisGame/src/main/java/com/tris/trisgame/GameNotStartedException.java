@@ -2,20 +2,20 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.strutturedati.trisgame;
+package com.tris.trisgame;
 
 /**
  *
  * @author gambaro.lorenzo
  */
-public class InvalidMoveException extends RuntimeException
+public class GameNotStartedException extends RuntimeException
 {
-    public InvalidMoveException(String message)
+    public GameNotStartedException(String message)
     {
         super(message);
     }
-    public InvalidMoveException()
+    public GameNotStartedException()
     {
-        super("Invalid move done!");
+        super("Game not started yet!");
     }
 }

@@ -2,20 +2,20 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.strutturedati.trisgame;
+package com.tris.trisgame;
 
 /**
  *
- * @author Lorenzo
+ * @author gambaro.lorenzo
  */
-public class NoPlayersException extends RuntimeException
+public class InvalidMoveException extends RuntimeException
 {
-    public NoPlayersException(String message)
+    public InvalidMoveException(String message)
     {
         super(message);
     }
-    public NoPlayersException()
+    public InvalidMoveException()
     {
-        super("There aren't enough players to play!");
+        super("Invalid move done!");
     }
 }

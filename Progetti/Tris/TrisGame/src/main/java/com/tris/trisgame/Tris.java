@@ -1,4 +1,4 @@
-package com.strutturedati.trisgame;
+package com.tris.trisgame;
 import java.util.Scanner;
 
 /**

@@ -2,20 +2,20 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.strutturedati.trisgame;
+package com.tris.trisgame;
 
 /**
  *
- * @author gambaro.lorenzo
+ * @author Lorenzo
  */
-public class GameNotStartedException extends RuntimeException
+public class NoPlayersException extends RuntimeException
 {
-    public GameNotStartedException(String message)
+    public NoPlayersException(String message)
     {
         super(message);
     }
-    public GameNotStartedException()
+    public NoPlayersException()
     {
-        super("Game not started yet!");
+        super("There aren't enough players to play!");
     }
 }

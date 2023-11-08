@@ -2,19 +2,21 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  */
 
-package com.strutturedati.trisgame;
+package com.tris.trisgame;
 
 import java.util.Scanner;
 
 /**
  *
- * @author Lorenzo
+ * @author gambaro.lorenzo
  */
 public class TrisGame {
 
     public static void main(String[] args) 
     {
         Scanner sc = new Scanner(System.in);
+        
+        System.out.println("\t\tGIOCO DEL TRIS");
         
         System.out.println("Giocatore 1, inserisci il tuo nome: ");
         final Player p1 = new Player<>(sc.nextLine(), 'X');
@@ -32,6 +34,8 @@ public class TrisGame {
             t.getTable().render();
             t.makeMove(InputUtils.getIntInRange(t.getTurn().getCurrent() + " fai la tua mossa: ", 0, 8));     
         }
+        
+        t.getTable().render();
         
         if (t.getWinner() == null)
             System.out.println("PAREGGIO");
