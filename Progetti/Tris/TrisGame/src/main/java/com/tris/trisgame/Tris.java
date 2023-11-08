@@ -15,7 +15,7 @@ public class Tris
     private static final Scanner sc = new Scanner(System.in);
     private boolean started;
     private Player winner;
-    private static int nMoves;
+    private int nMoves;
     
     public Tris(Player p1, Player p2)
     {
@@ -36,14 +36,13 @@ public class Tris
     {
         return this.started;
     }
-    public void makeMove(int cellNumber) throws InvalidMoveException
+    public void makeMove(int cellNumber)
     {
         if (!this.isStarted())
             throw new GameNotStartedException("Gioco non ancora iniziato!");
         
-        
-        final Cell selected = this.table.getCell(cellNumber);
-        final Player current = (Player) this.turn.getCurrent();
+        final Cell selected = this.getTable().getCell(cellNumber);
+        final Player current = (Player) this.getTurn().getCurrent();
         
         if (!selected.isEmpty()) 
             throw new InvalidMoveException("Cella occupata dal giocatore: " + current);
@@ -51,11 +50,26 @@ public class Tris
         this.nMoves++;
         
         selected.setOwnership(current);
-        this.turn.switchTurn();
+        this.getTurn().switchTurn();
         this.checkWinner();
         
         if (this.getWinner() != null || this.nMoves >= 9)
             this.started = false;
+    }
+    public boolean tryMove(int cellNumber) throws InvalidMoveException 
+    {
+        if (!this.isStarted())
+            throw new GameNotStartedException("Gioco non ancora iniziato!");
+        
+        try
+        {
+            final Cell selected = this.getTable().getCell(cellNumber);
+            return selected.isEmpty();
+        }
+        catch (final InvalidMoveException e)
+        {
+            return false;
+        }
     }
     //aggiungere un trymove
     public void stopGame()

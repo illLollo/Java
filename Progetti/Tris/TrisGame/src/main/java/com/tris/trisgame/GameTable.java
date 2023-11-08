@@ -25,28 +25,35 @@ public class GameTable
                 matrix1[j] = new Cell<>("-");
     }
     
-    public void render()
-    {
-        for (int i = 0; i < this.matrix.length; i++)
-        {
-            int chars = 0;
-            
-            for (int j = 0; j < this.matrix[i].length; j++) 
-            {
-                chars += countDigits(this.matrix[i].length);
-                System.out.print(this.matrix[i][j]);
-                if (j < this.matrix.length - 1) 
-                {
-                    System.out.print(" | ");
-                    chars += 3;
-                }
-            }
-            System.out.println();
-            for (int j = 0; j < chars && i != this.matrix.length - 1; j++) 
-                System.out.print("_");
-            System.out.println();
-        }
-    }
+//    @Override
+//    public void render() {
+//        if (this.render != null)
+//            this.render.render();
+//        else
+//            for (int i = 0; i < this.matrix.length; i++)
+//            {
+//                int chars = 0;
+//
+//                for (int j = 0; j < this.matrix[i].length; j++) 
+//                {
+//                    chars += countDigits(this.matrix[i].length);
+//                    System.out.print(this.matrix[i][j]);
+//                    
+//                    if (j < this.matrix.length - 1) 
+//                    {
+//                        System.out.print(" | ");
+//                        chars += 3;
+//                    }
+//                }
+//                System.out.println();
+//
+//                for (int j = 0; j < chars && i != this.matrix.length - 1; j++) 
+//                    System.out.print("_");
+//
+//                System.out.println();
+//            }
+//    }
+
     private static int countDigits(int num)
     {
         if (num == 0) return 1;
