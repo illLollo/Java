@@ -27,9 +27,19 @@ public class Tris
         this.winner = null;
         this.nMoves = 0;
     }
+    public Tris()
+    {
+        this.table = new GameTable(3,3);
+        this.p1 = null;
+        this.p2 = null;
+        this.turn = null;
+        this.started = false;
+        this.winner = null;
+        this.nMoves = 0;
+    }
     public void startGame() throws NoPlayersException
     {
-        if (this.p1 == null || this.p2 == null) throw new NoPlayersException();
+        if (this.p1 == null || this.p2 == null || this.turn == null) throw new NoPlayersException();
         this.started = true;
     }
     public boolean isStarted()
@@ -116,5 +126,17 @@ public class Tris
     public Player getWinner()
     { 
         return this.winner;
+    }
+    public void setP1(Player p)
+    {
+        if (p != null && !p.equals(this.p2))
+            this.p1 = p;
+        this.turn = new Turn<>(this.p1, this.p2);
+    }
+    public void setP2(Player p)
+    {
+        if (p != null && !p.equals(this.p1))
+            this.p2 = p;
+        this.turn = new Turn<>(this.p1, this.p2);
     }
 }
