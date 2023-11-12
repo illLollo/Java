@@ -2,8 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-defaulthis.istance.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.tris.trisgame;
+package com.tris.trisgame.cui;
 
+import com.tris.trisgame.GameTable;
+import com.tris.trisgame.InputUtils;
+import com.tris.trisgame.InvalidMoveException;
+import com.tris.trisgame.Player;
+import com.tris.trisgame.Tris;
 import java.io.InputStream;
 import java.util.Scanner;
 
@@ -11,16 +16,16 @@ import java.util.Scanner;
  *
  * @author Lorenzo
  */
-public class TrisExec 
+public class TrisCUI 
 {
     private final InputStream is;
     private final Tris istance;
     
-    public TrisExec(Tris tg)
+    public TrisCUI(Tris tg)
     {
         this(tg, System.in);
     }
-    public TrisExec(Tris tg, InputStream is)
+    public TrisCUI(Tris tg, InputStream is)
     {
         this.istance = tg;
         this.is = is;
