@@ -4,6 +4,8 @@
 
 package com.crono.cronometro;
 
+import java.util.Arrays;
+
 /**
  *
  * @author Administrator
@@ -15,9 +17,15 @@ public class CronometroMain {
         final Chronometer ch = new Chronometer();
         ch.start();
         
-        Thread.sleep(1000);
-        ch.lapse();
+        for (int i = 0; i < 10; i++)
+        {
+            Thread.sleep(1000);
+            ch.lapse();
+            System.out.println(ch.getElapsed());
+        }
         
         System.out.println(ch);
+        
+        System.out.println(Arrays.toString(ch.getLapses()));
     }
 }

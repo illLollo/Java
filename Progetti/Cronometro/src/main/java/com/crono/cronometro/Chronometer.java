@@ -64,6 +64,15 @@ public final class Chronometer
             throw new IllegalChronometerStateException("Chronometer not started yet!");
         return Chronometer.convertToSeconds(System.nanoTime() - this.lastTime);
     }
+    public double[] getLapses()
+    {
+        double[] lapses = new double[this.lapses.size()];
+        
+        for (int i = 0; i < this.lapses.size(); i++)
+            lapses[i] = this.lapses.get(i);
+        
+        return lapses;
+    }
     public boolean isRunning() { return this.isRunning; }
     
     @Override 
