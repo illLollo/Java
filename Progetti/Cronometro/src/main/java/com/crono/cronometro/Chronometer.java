@@ -99,5 +99,16 @@ public final class Chronometer
         this.lastTime = 0l;
         this.restarted = true;
     }
+    @Override
+    public boolean equals(Object other)
+    {
+        if (other == null)
+            return false;
+        
+        if (other instanceof Chronometer c2)
+            return this.isRunning == c2.isRunning && this.lastTime == c2.lastTime && this.restarted == c2.restarted && this.lapses.equals(c2.lapses);
+        
+        return false;
+    }
     private static double convertToSeconds(long millis) { return millis / 1000000000.0d; }
 }
