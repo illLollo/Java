@@ -1,7 +1,5 @@
 package com.tris.trisgame;
 import java.util.Objects;
-import java.util.Scanner;
-
 /**
  *
  * @author Administrator
@@ -12,7 +10,6 @@ public class Tris
     private Player p2;
     private GameTable table;
     private Turn turn;
-    private static final Scanner sc = new Scanner(System.in);
     private boolean started;
     private Player winner;
     private int nMoves;
@@ -39,12 +36,18 @@ public class Tris
     }
     public void startGame() throws NoPlayersException
     {
-        if (this.p1 == null || this.p2 == null || this.turn == null) throw new NoPlayersException();
+        if (this.p1 == null || this.p2 == null || this.turn == null) 
+            throw new NoPlayersException();
+        
         this.started = true;
     }
     public boolean isStarted()
     {
         return this.started;
+    }
+    public int getNMoves()
+    {
+        return this.nMoves;
     }
     public void makeMove(int cellNumber)
     {

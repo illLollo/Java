@@ -4,6 +4,7 @@
  */
 package com.tris.trisgame.cui;
 
+import com.tris.trisai.TrisAI;
 import com.tris.trisgame.GameTable;
 import com.tris.trisgame.InputUtils;
 import com.tris.trisgame.InvalidMoveException;
@@ -16,7 +17,7 @@ import java.util.Scanner;
  *
  * @author Lorenzo
  */
-public class TrisCUI 
+public class TrisCUI
 {
     private final InputStream is;
     private final Tris istance;
@@ -59,7 +60,7 @@ public class TrisCUI
         
         System.out.println("\n");
     }
-    public void play()
+    public void play2Players()
     {
         Scanner sc = new Scanner(this.is);
         
@@ -79,6 +80,57 @@ public class TrisCUI
             this.printGameTable(this.istance.getTable());
                 
             int cell = InputUtils.getIntInRange(this.istance.getTurn().getCurrent() + " fai la tua mossa: ", 0, 8);
+            
+            try
+            {
+                if (this.istance.tryMove(cell))
+                    this.istance.makeMove(cell);
+                else
+                    System.err.println("Cella occupata da un altro giocatore: " + this.istance.getTable().getCell(cell).getOwnership());
+            }
+            catch (final InvalidMoveException e)
+            {
+                System.err.println("L'indice della cella che hai inserito è all'esteno dei limiti: [0," + ((this.istance.getTable().getNCols() * this.istance.getTable().getNRows()) - 1) + "]"); 
+            }
+        }
+        
+        this.printGameTable(this.istance.getTable());
+        
+        if (this.istance.getWinner() == null)
+            System.out.println("PAREGGIO");
+        else 
+            System.out.println("Il vincitore è " + this.istance.getWinner());
+    }
+    public void playVSAI()
+    {
+        Scanner sc = new Scanner(this.is);
+        
+        System.out.println("\t\tGIOCO DEL TRIS");
+        
+        System.out.println("Giocatore 1, inserisci il tuo nome: ");
+        this.istance.setP1(new Player<>(sc.nextLine(), 'X'));
+        
+        final TrisAI bot = new TrisAI<>(this.istance, "Tris BOT", "O");
+        
+        System.out.println("Giocatore 2, inserisci il tuo nome: " + bot.getName());
+        this.istance.setP2(bot);
+        
+        this.istance.startGame();
+        System.out.println("Inizia " + this.istance.getTurn().getCurrent());
+        
+        while (this.istance.isStarted() && this.istance.getWinner() == null)
+        {
+            this.printGameTable(this.istance.getTable());
+                
+            int cell = 0;
+            
+            if (this.istance.getTurn().getCurrent() instanceof TrisAI ta)
+            {
+                cell = ta.chooseNumber();
+                System.out.println(this.istance.getTurn().getCurrent() + " fai la tua mossa: " + cell);
+            }
+            else
+                cell = InputUtils.getIntInRange(this.istance.getTurn().getCurrent() + " fai la tua mossa: ", 0, 8);
             
             try
             {
