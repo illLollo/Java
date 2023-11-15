@@ -13,7 +13,7 @@ public class TrisGame {
 
     public static void main(String[] args) throws IOException 
     {
-        new TrisCUI(new Tris()).playVSAI();
+//        new TrisCUI(new Tris()).playVSAI();
     }
 }
 

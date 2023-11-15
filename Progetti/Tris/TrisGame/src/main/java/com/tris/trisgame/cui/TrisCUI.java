@@ -118,7 +118,7 @@ public class TrisCUI
         
         while (this.istance.isStarted() && this.istance.getWinner() == null)
         {
-            this.printGameTable(this.istance.getTable());
+            printGameTable(this.istance.getTable());
                 
             int cell = 0;
             
@@ -141,7 +141,7 @@ public class TrisCUI
             }
         }
         
-        this.printGameTable(this.istance.getTable());
+        printGameTable(this.istance.getTable());
         
         if (this.istance.getWinner() == null)
             System.out.println("PAREGGIO");
