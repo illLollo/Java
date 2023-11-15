@@ -7,15 +7,16 @@ import java.util.Random;
 /**
  *
  * @author gambaro.lorenzo
+ * @param <T>
  */
 public class TrisAI<T> extends Player<T>
 {
     private final Tris game;
     private static final Random rnd = new Random();
     
-    public TrisAI(Tris t, String name, T code)
+    public TrisAI(final Tris t, final String name, final T code)
     {
-        super(name, code);
+        super(name, code, t);
         this.game = t;
     }
     public int chooseNumber()

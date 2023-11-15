@@ -31,7 +31,7 @@ public class TrisCUI
         this.istance = tg;
         this.is = is;
     }
-    private void printGameTable(GameTable t)
+    private static void printGameTable(GameTable t)
     {
         int sum = 0;
         System.out.println();
@@ -67,25 +67,23 @@ public class TrisCUI
         System.out.println("\t\tGIOCO DEL TRIS");
         
         System.out.println("Giocatore 1, inserisci il tuo nome: ");
-        this.istance.setP1(new Player<>(sc.nextLine(), 'X'));
+        this.istance.setP1(new Player<>(sc.nextLine(), 'X', this.istance));
         
         System.out.println("Giocatore 2, inserisci il tuo nome: ");
-        this.istance.setP2(new Player<>(sc.nextLine(), 'O'));
+        this.istance.setP2(new Player<>(sc.nextLine(), 'O',  this.istance));
         
         this.istance.startGame();
         System.out.println("Inizia " + this.istance.getTurn().getCurrent());
         
         while (this.istance.isStarted() && this.istance.getWinner() == null)
         {
-            this.printGameTable(this.istance.getTable());
-                
+            printGameTable(this.istance.getTable());
+            
             int cell = InputUtils.getIntInRange(this.istance.getTurn().getCurrent() + " fai la tua mossa: ", 0, 8);
             
             try
             {
-                if (this.istance.tryMove(cell))
-                    this.istance.makeMove(cell);
-                else
+                if (!((Player)this.istance.getTurn().getCurrent()).chooseMove(cell))
                     System.err.println("Cella occupata da un altro giocatore: " + this.istance.getTable().getCell(cell).getOwnership());
             }
             catch (final InvalidMoveException e)
@@ -94,7 +92,7 @@ public class TrisCUI
             }
         }
         
-        this.printGameTable(this.istance.getTable());
+        printGameTable(this.istance.getTable());
         
         if (this.istance.getWinner() == null)
             System.out.println("PAREGGIO");
@@ -108,9 +106,9 @@ public class TrisCUI
         System.out.println("\t\tGIOCO DEL TRIS");
         
         System.out.println("Giocatore 1, inserisci il tuo nome: ");
-        this.istance.setP1(new Player<>(sc.nextLine(), 'X'));
+        this.istance.setP1(new Player<>(sc.nextLine(), 'X', this.istance));
         
-        final TrisAI bot = new TrisAI<>(this.istance, "Tris BOT", "O");
+        final TrisAI bot = new TrisAI<>(this.istance, "Tris BOT", 'O');
         
         System.out.println("Giocatore 2, inserisci il tuo nome: " + bot.getName());
         this.istance.setP2(bot);
@@ -134,9 +132,7 @@ public class TrisCUI
             
             try
             {
-                if (this.istance.tryMove(cell))
-                    this.istance.makeMove(cell);
-                else
+                if (!((Player)this.istance.getTurn().getCurrent()).chooseMove(cell))
                     System.err.println("Cella occupata da un altro giocatore: " + this.istance.getTable().getCell(cell).getOwnership());
             }
             catch (final InvalidMoveException e)

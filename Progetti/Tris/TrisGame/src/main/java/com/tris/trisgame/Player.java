@@ -13,13 +13,13 @@ public class Player<T>
 {
     private String name;
     private T code;
+    private final Tris game;
     
-    public Player() {}
-    
-    public Player(String name, T code)
+    public Player(final String name, final T code, final Tris game)
     {
         this.name = name;
         this.code = code;
+        this.game = game;
     }
     
     public String getName() { return this.name; }
@@ -36,6 +36,16 @@ public class Player<T>
         
         if (other instanceof Player p)
             return p.getCode() == this.getCode() && p.getName().equals(this.getName());
+        
+        return false;
+    }
+    public boolean chooseMove(int index) throws InvalidMoveException
+    {
+            if (this.game.tryMove(index))
+            {
+                this.game.makeMove(index);
+                return true;
+            }
         
         return false;
     }
