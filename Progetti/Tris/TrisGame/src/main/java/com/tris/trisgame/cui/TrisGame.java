@@ -4,16 +4,16 @@
 
 package com.tris.trisgame.cui;
 import com.tris.trisgame.Tris;
-import java.io.IOException;
+
 /**
  *
  * @author gambaro.lorenzo
  */
 public class TrisGame {
 
-    public static void main(String[] args) throws IOException 
+    public static void main(String[] args)
     {
-//        new TrisCUI(new Tris()).playVSAI();
+        new TrisCUI(new Tris()).playVSAI();
     }
 }
 
