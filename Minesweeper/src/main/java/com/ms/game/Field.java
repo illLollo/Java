@@ -25,13 +25,17 @@ public class Field
         
         for (int x = 0; x < rows; x++)
             for (int y = 0; y < cols; y++)
-                this.gametable[x][y] = new Cell(x, y, false);
+                this.gametable[x][y] = new Cell(x, y, false, this);
         
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < Math.min(rows, cols); i++)
         {
             final Cell c = this.spawnRandomBomb();
 //            System.out.println("XY: " + c.getX() + " - " + c.getY());
-            this.incementAdiacents(c.getX(), c.getY());
+            for (Cell cell : c.getAdiacents())
+            {
+                if (cell != null)
+                    cell.increaseAdiacent(1);
+            }
         }
     }
     public int getNRows() { return this.rows; }
@@ -68,21 +72,6 @@ public class Field
         
         return this.getCell(x, y);
     }
-    private void incementAdiacents(int x, int y)
-    {
-//        System.out.println("INITIAL X: " + (x - 1));
-//        System.out.println("FINAL X: " + (x + 1));
-//        System.out.println("INITIAL Y: " + (y - 1));
-//        System.out.println("FINAL Y: " + (y + 1));
-        
-        for (int i = (x - 1) >= 0 ? (x - 1) : 0; i <= x + 1 && i < cols; i++)
-        {
-            for (int j = (y - 1) >= 0 ? (y - 1) : 0; j <= y + 1 && j < rows; j++)
-            {
-//                System.out.println("CELL: " + i + " - " + j);
-                this.getCell(i, j).increaseAdiacent(1);
-            }
-        }
-    }
+    
     
 }
