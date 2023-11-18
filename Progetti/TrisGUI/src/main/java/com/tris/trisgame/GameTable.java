@@ -76,11 +76,11 @@ public class GameTable
         int row = cellNumber / this.matrix.length;
         int col = cellNumber - (this.matrix.length * row); 
         
-        return this.getCell(row, col);
+        return this.matrix[row][col];
     }
     public Cell getCell(int row, int col) throws InvalidMoveException
     {
-        if (row < 0 || row >= this.rows || col < 0 || col >= this.cols ) throw new InvalidMoveException("Indice non compreso tra i limiti della tabella di gioco [0," + ((this.rows * this.cols) - 1) + "]");
+        if (row < 0 || row >= this.rows || col < 0 || col >= this.cols) throw new InvalidMoveException("Indice non compreso tra i limiti della tabella di gioco [0," + ((this.rows * this.cols) - 1) + "]");
         
         return this.matrix[row][col];
     }

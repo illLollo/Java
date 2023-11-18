@@ -1,0 +1,14 @@
+com\tris\trisgame\InputUtils.class
+com\tris\trisai\TrisAI.class
+com\tris\trisgame\Player.class
+com\tris\trisgame\Turn.class
+com\tris\trisgame\InvalidMoveException.class
+com\tris\trisgui\GameController.class
+module-info.class
+com\tris\trisgame\Cell.class
+com\tris\trisgame\GameTable.class
+com\tris\trisgui\SecondaryController.class
+com\tris\trisgame\GameNotStartedException.class
+com\tris\trisgui\App.class
+com\tris\trisgame\NoPlayersException.class
+com\tris\trisgame\Tris.class
