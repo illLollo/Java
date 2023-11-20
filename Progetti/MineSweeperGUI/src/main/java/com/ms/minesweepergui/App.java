@@ -1,4 +1,4 @@
-package com.tris.trisgui;
+package com.ms.minesweepergui;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -17,10 +17,10 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("Configure"), 640, 480);
+        scene = new Scene(loadFXML("primary"), 450, 400);
         stage.setScene(scene);
-        stage.setResizable(false);
-        stage.setTitle("Tris Game");
+        stage.setResizable(true);
+        stage.setTitle("MineSweeper");
         stage.show();
     }
 

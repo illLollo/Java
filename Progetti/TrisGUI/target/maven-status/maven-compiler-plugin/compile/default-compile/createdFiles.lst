@@ -1,5 +1,4 @@
 com\tris\trisgame\InputUtils.class
-com\tris\trisai\TrisAI.class
 com\tris\trisgame\Player.class
 com\tris\trisgame\Turn.class
 com\tris\trisgame\InvalidMoveException.class
