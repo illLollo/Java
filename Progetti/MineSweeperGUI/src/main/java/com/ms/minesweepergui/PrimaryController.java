@@ -27,7 +27,6 @@ public class PrimaryController implements Initializable {
     {
         this.gameIstance = new MineSweeper(10, 10);
         
-      
        for (int row = 0; row < this.gameIstance.getField().getNRows(); row++)
            for (int col = 0; col < this.gameIstance.getField().getNCols(); col++)
            {
@@ -58,6 +57,7 @@ public class PrimaryController implements Initializable {
                             this.showAllBombs();
                             final Alert exc = new Alert(Alert.AlertType.WARNING);
                             exc.setHeaderText("Hai perso");
+                            exc.setTitle("Hai perso!");
                             exc.setContentText("Sei esploso!");
                             exc.showAndWait();
                             
@@ -74,8 +74,21 @@ public class PrimaryController implements Initializable {
                    printField(this.gameIstance.getField());
                    System.out.println("\n\n");
                    
+                   if (!this.gameIstance.isStarted())
+                   {
+                        this.showAllBombs();
+                        final Alert exc = new Alert(Alert.AlertType.CONFIRMATION);
+                        exc.setHeaderText("Hai Vinto");
+                        exc.setTitle("Hai Vinto!");
+                        exc.setContentText("Hai scoperto tutte le caselle senza beccare bombe!");
+                        exc.showAndWait();
+
+                        this.gamegrid.getChildren().clear();
+                        this.initialize(url, rb);
+                   }
                });
            }
+       
        this.gameIstance.start();
 //       printField(this.gameIstance.getField());
   }
