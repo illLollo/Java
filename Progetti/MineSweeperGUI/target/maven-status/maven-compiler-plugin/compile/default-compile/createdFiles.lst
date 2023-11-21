@@ -4,8 +4,8 @@ com\ms\game\Player.class
 com\ms\game\Field.class
 com\ms\minesweepergui\App.class
 com\ms\game\IllegalMoveException.class
-com\ms\minesweepergui\Component.class
 com\ms\game\IllegalStateException.class
+com\ms\minesweepergui\Card.class
 module-info.class
 com\ms\game\MineSweeper.class
 com\ms\game\Cell.class

@@ -11,13 +11,13 @@ import javafx.scene.Node;
  *
  * @author Administrator
  */
-public class Component
+public class Card
 {
     private final Node node;
     private final int row;
     private final int col;
     
-    public Component(final Node node, final int row, final int col)
+    public Card(final Node node, final int row, final int col)
     {
         this.node = node;
         this.row = row;

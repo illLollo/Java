@@ -1,7 +1,6 @@
 C:\Users\Administrator\Desktop\Java\Progetti\MineSweeperGUI\src\main\java\com\ms\game\IllegalStateException.java
 C:\Users\Administrator\Desktop\Java\Progetti\MineSweeperGUI\src\main\java\com\ms\minesweepergui\SecondaryController.java
 C:\Users\Administrator\Desktop\Java\Progetti\MineSweeperGUI\src\main\java\com\ms\minesweepergui\App.java
-C:\Users\Administrator\Desktop\Java\Progetti\MineSweeperGUI\src\main\java\com\ms\minesweepergui\Component.java
 C:\Users\Administrator\Desktop\Java\Progetti\MineSweeperGUI\src\main\java\com\ms\game\Cell.java
 C:\Users\Administrator\Desktop\Java\Progetti\MineSweeperGUI\src\main\java\com\ms\game\Field.java
 C:\Users\Administrator\Desktop\Java\Progetti\MineSweeperGUI\src\main\java\com\ms\game\IllegalMoveException.java
@@ -10,3 +9,4 @@ C:\Users\Administrator\Desktop\Java\Progetti\MineSweeperGUI\src\main\java\com\ms
 C:\Users\Administrator\Desktop\Java\Progetti\MineSweeperGUI\src\main\java\com\ms\game\BombFoundException.java
 C:\Users\Administrator\Desktop\Java\Progetti\MineSweeperGUI\src\main\java\com\ms\game\MineSweeper.java
 C:\Users\Administrator\Desktop\Java\Progetti\MineSweeperGUI\src\main\java\module-info.java
+C:\Users\Administrator\Desktop\Java\Progetti\MineSweeperGUI\src\main\java\com\ms\minesweepergui\Card.java

@@ -6,7 +6,6 @@ import com.ms.game.Field;
 import com.ms.game.MineSweeper;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Queue;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -18,7 +17,8 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 
-public class PrimaryController implements Initializable {
+public class PrimaryController implements Initializable 
+{
 
     @FXML
     private GridPane gamegrid;
@@ -56,7 +56,7 @@ public class PrimaryController implements Initializable {
                         }
                         catch (final BombFoundException e) 
                         {
-                            this.showAllBombs(this.gamegrid, this.gameIstance);
+                            showAllBombs(this.gamegrid, this.gameIstance);
                             getAlert(Alert.AlertType.WARNING, "Hai perso", "Hai perso!", "Sei esploso!")
                                     .showAndWait();
 
@@ -73,7 +73,7 @@ public class PrimaryController implements Initializable {
                     
                     if (!this.gameIstance.isStarted()) 
                     {
-                        this.showAllBombs(this.gamegrid, this.gameIstance);
+                        showAllBombs(this.gamegrid, this.gameIstance);
                         getAlert(Alert.AlertType.INFORMATION, "Hai Vinto", "Hai Vinto!", "Hai scoperto tutte le caselle senza beccare bombe!")
                                 .showAndWait();
 
@@ -119,9 +119,9 @@ public class PrimaryController implements Initializable {
 
     private static void showAllBombs(GridPane gamegrid, final MineSweeper gameIstance) 
     {
-        //USARE LA CLASSE COMPONENT PER ARGINARE IL PROBLEMA DELL'ORDINAMENTO DEI BUTTON NELL'OBSERVABLE LIST getChildren();
+        //USARE LA CLASSE CARD PER ARGINARE IL PROBLEMA DELL'ORDINAMENTO DEI BUTTON NELL'OBSERVABLE LIST getChildren();
 
-        final ArrayList<Component> toAdd = new ArrayList<>();
+        final ArrayList<Card> toAdd = new ArrayList<>();
         final ArrayList<Node> toRemove = new ArrayList<>();
 
         for (int i = 0; i < gamegrid.getChildren().size(); i++) 
@@ -135,14 +135,16 @@ public class PrimaryController implements Initializable {
                 final Label label = new Label("   B   ");
                 label.setTextFill(Color.RED);
 
-                toAdd.add(new Component(label, col, row));
+                toAdd.add(new Card(label, col, row));
                 toRemove.add(node);
             }
         }
-        for (final Node n : toRemove)
-            gamegrid.getChildren().remove(n);
-        for (final Component component : toAdd)
-            gamegrid.add(component.getNode(), component.getRow(), component.getCol());
+        for (int i = 0; i < toRemove.size(); i++)
+        {
+            gamegrid.getChildren().remove(toRemove.get(i));
+            final Card c = toAdd.get(i);
+            gamegrid.add(c.getNode(), c.getRow(), c.getCol());
+        }
     }
     public static void printField(Field f) 
     {
