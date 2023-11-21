@@ -55,17 +55,14 @@ public class Cell
         
 //        return false;
     }
-    @Override
-    public String toString()
+    public String getValue()
     {
-        
         if (this.isFlag)
             return "F";
         if (this.isBomb)
             return "B";
         if (!this.isShowing())
             return "X";
-        
         
         return new StringBuilder().append(this.adiacentBombs).toString();
     }
