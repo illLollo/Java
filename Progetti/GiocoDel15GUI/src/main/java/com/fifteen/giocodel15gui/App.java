@@ -1,4 +1,4 @@
-package com.giocodel15;
+package com.fifteen.giocodel15gui;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

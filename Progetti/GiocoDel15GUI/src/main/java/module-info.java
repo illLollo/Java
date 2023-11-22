@@ -1,7 +1,7 @@
-module com.giocodel15 {
+module com.fifteen.giocodel15gui {
     requires javafx.controls;
     requires javafx.fxml;
 
-    opens com.giocodel15 to javafx.fxml;
-    exports com.giocodel15;
+    opens com.fifteen.giocodel15gui to javafx.fxml;
+    exports com.fifteen.giocodel15gui;
 }

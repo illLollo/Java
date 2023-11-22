@@ -1,4 +1,4 @@
-package com.giocodel15;
+package com.fifteen.giocodel15gui;
 
 import java.io.IOException;
 import javafx.fxml.FXML;
