@@ -1,6 +1,5 @@
 com\ms\minesweepergui\PrimaryController.class
 com\ms\game\BombFoundException.class
-com\ms\game\Player.class
 com\ms\game\Field.class
 com\ms\minesweepergui\App.class
 com\ms\game\IllegalMoveException.class

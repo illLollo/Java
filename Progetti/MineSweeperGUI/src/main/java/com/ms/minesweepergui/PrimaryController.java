@@ -27,7 +27,7 @@ public class PrimaryController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb) 
     {
-        this.gameIstance = new MineSweeper(10, 10);
+        this.gameIstance = new MineSweeper(15, 15);
 
         for (int row = 0; row < this.gameIstance.getField().getNRows(); row++) 
             for (int col = 0; col < this.gameIstance.getField().getNCols(); col++) 
@@ -105,7 +105,7 @@ public class PrimaryController implements Initializable
                 try
                 {
                     final Button btn = (Button) node;
-                    final Label label = new Label("   " + cell.getValue() + "   ");
+                    final Label label = new Label("     " + cell.getValue() + "     ");
 
                     gamegrid.add(label, col, row);
                     nodes.add(btn);

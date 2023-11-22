@@ -22,7 +22,7 @@ public class MineSweeper
        this.rows = dim1;
        this.cols = dim2;
     }
-    public MineSweeper(Player p)
+    public MineSweeper()
     {
         this(10, 10);
     }

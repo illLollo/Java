@@ -68,7 +68,7 @@ public class GameController implements Initializable {
                     {
                         if (winner != null)
                         {
-                            endGame.setHeaderText("Il vincitore è: " + winner.getCode());
+                            endGame.setHeaderText("Il vincitore è: " + winner.getCode() + ": \"" + winner.getName() + "\"");
                         }
                         else
                             endGame.setHeaderText("Abbiamo un pareggio!");

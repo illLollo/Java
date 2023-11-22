@@ -29,14 +29,14 @@ public class Field
             for (int col = 0; col < cols; col++)
                 this.gametable[row][col] = new Cell(row, col, false, this);
         
-        for (int i = 0; i < Math.min(rows, cols); i++)
+        for (int i = 0; i < Math.ceil((rows * cols) / 5); i++)
         {
             final Cell c = this.spawnRandomBomb();
 //            System.out.println("XY: " + c.getX() + " - " + c.getY());
             for (Cell cell : c.getAdiacents())
                 cell.increaseAdiacent(1);
         }
-        System.out.println("TOTALBOMBS: " + Math.min(rows, cols));
+        System.out.println("TOTALBOMBS: " + Math.ceil((rows * cols) / 5));
     }
     public int getNRows() { return this.rows; }
     public int getNCols() { return this.cols; }
