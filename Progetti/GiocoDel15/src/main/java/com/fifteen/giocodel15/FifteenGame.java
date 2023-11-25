@@ -34,7 +34,7 @@ public final class FifteenGame
     public boolean tryMove(int row, int col)
     {
        final Card current = this.gametable.getCell(row, col);
-       for (final Card ad : this.gametable.getCellAdiacents(current))
+       for (final Card ad : current.getAdiacents())
            if (ad.getValue() == 0) 
                return true;
        return false;
@@ -45,7 +45,7 @@ public final class FifteenGame
         for (int i = 0; i < times; i++)
         {
             final Card empty = this.gametable.getEmpty();
-            final Card[] emptyAdiacents = this.gametable.getCellAdiacents(empty);
+            final Card[] emptyAdiacents = empty.getAdiacents();
             
             int index = rnd.nextInt(emptyAdiacents.length);
             

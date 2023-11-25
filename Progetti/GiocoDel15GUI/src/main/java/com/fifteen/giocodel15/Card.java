@@ -13,6 +13,7 @@ public class Card
     private final int row;
     private final int col;
     private int value;
+    private Card[] adiacents;
     
     public Card(final int x, final int y, final int value)
     {
@@ -47,4 +48,6 @@ public class Card
     public int getRow() { return this.row; }
     public int getCol() { return this.col; }
     public int getValue() { return this.value; }
+    public Card[] getAdiacents() { return this.adiacents; }
+    public void setAdiacents(final Card[] adiacents) { this.adiacents = adiacents; }
 }

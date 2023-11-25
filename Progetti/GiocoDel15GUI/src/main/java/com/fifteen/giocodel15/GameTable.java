@@ -28,6 +28,10 @@ public class GameTable
 //                if (row != rows - 1 || col != cols - 1)
                     this.matrix[row][col] = new Card(row, col, (col + (row * this.cols) + 1) % (this.rows * this.cols));
         this.empty = this.matrix[rows - 1][cols  - 1];
+        
+        for (int row = 0; row < this.rows; row++)
+            for (int col = 0; col < this.cols; col++)
+                this.matrix[row][col].setAdiacents(this.getCellAdiacents(this.matrix[row][col]));
     }
     public GameTable()
     {
@@ -55,7 +59,7 @@ public class GameTable
     public int getNRows() { return this.rows; }
     public int getNCols() { return this.cols; }
     
-    public Card[] getCellAdiacents(final Card c)
+    private Card[] getCellAdiacents(final Card c)
     {
         final Card[] adiacents = new Card[4];
         
