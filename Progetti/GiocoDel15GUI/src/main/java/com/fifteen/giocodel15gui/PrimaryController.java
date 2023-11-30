@@ -31,11 +31,13 @@ public class PrimaryController implements Initializable
                 if (this.game.getTable().getCell(row, col).getValue() != 0)
                 {
                     final Button btn = new Button(this.game.getTable().getCell(row, col).getValue() + "");
+                    btn.setStyle("-fx-font: 15 arial");
                     this.gamegrid.add(btn, col, row);
                     
                     btn.setOnAction((final ActionEvent e) -> 
                     {
                         final Button current = (Button) e.getSource();
+                        
                         
                         int btnRow = GridPane.getRowIndex(current);
                         int btnCol = GridPane.getColumnIndex(current);
