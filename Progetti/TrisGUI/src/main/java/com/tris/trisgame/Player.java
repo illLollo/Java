@@ -13,9 +13,9 @@ public class Player<T>
 {
     private String name;
     private T code;
-    private final Tris game;
+    private final TrisGame game;
     
-    public Player(final String name, final T code, final Tris game)
+    public Player(final String name, final T code, final TrisGame game)
     {
         this.name = name;
         this.code = code;
@@ -45,21 +45,11 @@ public class Player<T>
         }
 //        if (other instanceof Player p)
     }
-    public boolean chooseMove(int index) throws InvalidMoveException
-    {
-            if (this.game.tryMove(index))
-            {
-                this.game.makeMove(index);
-                return true;
-            }
-        
-        return false;
-    }
     public boolean chooseMove(int row, int col) throws InvalidMoveException
     {
             if (this.game.tryMove(row, col))
             {
-                this.game.makeMove(row, col);
+                this.game.move(row, col);
                 return true;
             }
         

@@ -1,186 +1,26 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
+ */
 package com.tris.trisgame;
-import java.util.Objects;
+
 /**
  *
  * @author Administrator
  */
-public class Tris
+public interface Tris 
 {
-    private Player p1;
-    private Player p2;
-    private GameTable table;
-    private Turn turn;
-    private boolean started;
-    private Player winner;
-    private int nMoves;
+    int COLS = 3;
+    int ROWS = 3;
     
-    public Tris(Player p1, Player p2)
-    {
-        this.table = new GameTable(3, 3);
-        this.p1 = Objects.requireNonNull(p1);
-        this.p2 = Objects.requireNonNull(p2);
-        this.turn = new Turn<>(this.p1, this.p2);
-        this.started = false;
-        this.winner = null;
-        this.nMoves = 0;
-    }
-    public Tris()
-    {
-        this.table = new GameTable(3,3);
-        this.p1 = null;
-        this.p2 = null;
-        this.turn = null;
-        this.started = false;
-        this.winner = null;
-        this.nMoves = 0;
-    }
-    public void startGame() throws NoPlayersException
-    {
-        if (this.p1 == null || this.p2 == null || this.turn == null) 
-            throw new NoPlayersException();
-        
-        this.started = true;
-    }
-    public boolean isStarted()
-    {
-        return this.started;
-    }
-    public int getNMoves()
-    {
-        return this.nMoves;
-    }
-    public void makeMove(int cellNumber)
-    {
-        if (!this.isStarted())
-            throw new GameNotStartedException("Gioco non ancora iniziato!");
-        
-        final Cell selected = this.getTable().getCell(cellNumber);
-        final Player current = (Player) this.getTurn().getCurrent();
-        
-        if (!selected.isEmpty()) 
-            throw new InvalidMoveException("Cella occupata dal giocatore: " + current);
-       
-        this.nMoves++;
-        
-        selected.setOwnership(current);
-        this.getTurn().switchTurn();
-        this.checkWinner();
-        
-        if (this.getWinner() != null || this.nMoves >= 9)
-            this.started = false;
-    }
-    public void makeMove(int row, int col)
-    {
-        if (!this.isStarted())
-            throw new GameNotStartedException("Gioco non ancora iniziato!");
-        
-        final Cell selected = this.getTable().getCell(row, col);
-        final Player current = (Player) this.getTurn().getCurrent();
-        
-        if (!selected.isEmpty()) 
-            throw new InvalidMoveException("Cella occupata dal giocatore: " + current);
-       
-        this.nMoves++;
-        
-        selected.setOwnership(current);
-        this.getTurn().switchTurn();
-        this.checkWinner();
-        
-        if (this.getWinner() != null || this.nMoves >= 9)
-            this.started = false;
-    }
-    public boolean tryMove(int cellNumber) throws InvalidMoveException 
-    {
-        if (!this.isStarted())
-            throw new GameNotStartedException("Gioco non ancora iniziato!");
-        
-        try
-        {
-            final Cell selected = this.getTable().getCell(cellNumber);
-            return selected.isEmpty();
-        }
-        catch (final InvalidMoveException e)
-        {
-            return false;
-        }
-    }
-    public boolean tryMove(int cellRow, int cellCol) throws InvalidMoveException 
-    {
-        if (!this.isStarted())
-            throw new GameNotStartedException("Gioco non ancora iniziato!");
-        
-        try
-        {
-            final Cell selected = this.getTable().getCell(cellRow, cellCol);
-            return selected.isEmpty();
-        }
-        catch (final InvalidMoveException e)
-        {
-            return false;
-        }
-    }
-    //aggiungere un trymove
-    public void stopGame()
-    {
-        if (!this.isStarted())
-            throw new GameNotStartedException("Gioco non ancora iniziato!");
-        
-        this.reset();
-    }
-    public void reset()
-    {
-        this.started = false;
-        this.table = new GameTable(3, 3);
-        this.turn = new Turn<>(this.p1, this.p2);
-        this.winner = null;
-        this.nMoves = 0;
-    }
-    public Turn getTurn()
-    {
-        return this.turn;
-    }
-    public GameTable getTable()
-    {
-        return this.table;
-    }
-    private void checkWinner()
-    {
-        for (int i = 0; i < this.table.getNRows(); i++)
-        {
-            Cell cc1 = this.table.getCell(0 + (i * 3));
-            Cell cc2 = this.table.getCell(1 + (i * 3));
-            Cell cc3 = this.table.getCell(2 + (i * 3));
-            
-            if (cc1.equals(cc2) && cc1.equals(cc3)) this.winner = cc1.getOwnership();
-            
-            Cell cr1 = this.table.getCell(i);
-            Cell cr2 = this.table.getCell(i + 3);
-            Cell cr3 = this.table.getCell(i + 6);
-        
-            if (cr1.equals(cr2) && cr1.equals(cr3)) this.winner = cr1.getOwnership();
-            
-            
-            if  (this.table.getCell(0).equals(this.table.getCell(4)) && this.table.getCell(0).equals(this.table.getCell(8))) 
-                    this.winner = this.table.getCell(0).getOwnership();
-            
-            if  (this.table.getCell(2).equals(this.table.getCell(4)) && this.table.getCell(2).equals(this.table.getCell(6))) 
-                    this.winner = this.table.getCell(2).getOwnership();
-        }    
-    }
-    public Player getWinner()
-    { 
-        return this.winner;
-    }
-    public void setP1(Player p)
-    {
-        if (p != null && !p.equals(this.p2))
-            this.p1 = p;
-        this.turn = new Turn<>(this.p1, this.p2);
-    }
-    public void setP2(Player p)
-    {
-        if (p != null && !p.equals(this.p1))
-            this.p2 = p;
-        this.turn = new Turn<>(this.p1, this.p2);
-    }
+    boolean isOver();
+    void move(int row, int col);
+    boolean tryMove(int row, int col);
+    void start();
+    void stop();
+    void reset();
+    boolean isStarted();
+    Turn getTurn();
+    Player getWinner();
+    Cell getCell(int row, int col);
 }

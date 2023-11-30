@@ -2,7 +2,7 @@ package com.tris.trisgui;
 
 import com.tris.trisgame.GameTable;
 import com.tris.trisgame.InvalidMoveException;
-import com.tris.trisgame.Tris;
+import com.tris.trisgame.TrisGame;
 import javafx.fxml.FXML;
 import javafx.scene.layout.GridPane;
 import com.tris.trisgame.Player;
@@ -19,18 +19,18 @@ public class GameController implements Initializable {
     @FXML
     private GridPane gamegrid;
    
-    private Tris game;
+    private TrisGame game;
     
 
     @Override
     public void initialize(URL url, ResourceBundle rb) 
     {
-        this.game = new Tris();   
+        this.game = new TrisGame();   
         
         this.game.setP1(new Player<>("Giocatore 1", 'X', this.game));
         this.game.setP2(new Player<>("Giocatore 2", 'O', this.game));
 
-        this.game.startGame();
+        this.game.start();
         
         for (int i = 0; i < this.gamegrid.getChildren().size(); i++) {
             if (this.gamegrid.getChildren().get(i) instanceof Button) 
@@ -117,7 +117,7 @@ public class GameController implements Initializable {
         {
             ((Button) child).setText("");
             this.game.reset();
-            this.game.startGame();
+            this.game.start();
         }
     }
     
