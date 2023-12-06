@@ -32,11 +32,9 @@ public class Field
         for (int i = 0; i < Math.ceil((rows * cols) / 5); i++)
         {
             final Cell c = this.spawnRandomBomb();
-//            System.out.println("XY: " + c.getX() + " - " + c.getY());
             for (Cell cell : c.getAdiacents())
                 cell.increaseAdiacent(1);
         }
-        System.out.println("TOTALBOMBS: " + Math.ceil((rows * cols) / 5));
     }
     public int getNRows() { return this.rows; }
     public int getNCols() { return this.cols; }
@@ -72,10 +70,4 @@ public class Field
         
         return this.getCell(x, y);
     }
-    private static int getRandIntInRange(int min, int max)
-    {
-        return min + rnd.nextInt(max - min);
-    }
-    
-    
 }

@@ -1,7 +1,7 @@
 package com.fifteen.giocodel15gui;
 
 import com.fifteen.giocodel15.Card;
-import com.fifteen.giocodel15.FifteenGame;
+import com.fifteen.giocodel15.FifteenGameExecutor;
 import com.fifteen.giocodel15.GameTable;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -16,14 +16,13 @@ public class PrimaryController implements Initializable
 {
     @FXML
     private GridPane gamegrid;
-    private FifteenGame game;
+    private FifteenGameExecutor game;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) 
     {
         this.gamegrid.getChildren().clear();
-        this.game = new FifteenGame();
-        this.game.randomInitialize(1000);
+        this.game = new FifteenGameExecutor();
         
         for (int row = 0; row < this.game.getTable().getRows(); row++)
             for (int col = 0; col < this.game.getTable().getCols(); col++)

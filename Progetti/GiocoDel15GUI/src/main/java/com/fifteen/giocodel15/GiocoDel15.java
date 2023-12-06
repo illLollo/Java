@@ -15,11 +15,10 @@ public class GiocoDel15 {
 
    public static void main(String[] args) 
     {
-        final FifteenGame game = new FifteenGame();
+        final FifteenGameExecutor game = new FifteenGameExecutor();
         final Scanner sc = new Scanner(System.in);
         
 //        printGameMatrix(game.getTable());
-        game.randomInitialize(1);
         
         printGameMatrix(game.getTable());
         

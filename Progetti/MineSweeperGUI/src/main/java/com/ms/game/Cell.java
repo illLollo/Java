@@ -4,7 +4,6 @@
  */
 package com.ms.game;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
@@ -16,9 +15,9 @@ public class Cell
     private boolean isBomb;
     public boolean isFlag;
     private int adiacentBombs;
-    private int x;
-    private int y;
-    private Field gamefield;
+    private final int x;
+    private final int y;
+    private final Field gamefield;
     private boolean isShowing;
     
     public Cell(int x, int y, boolean isBomb, final Field field)
@@ -51,9 +50,6 @@ public class Cell
         {
             return false;
         }
-//        if (other instanceof Cell c2)
-        
-//        return false;
     }
     public String getValue()
     {

@@ -3,7 +3,7 @@ package com.ms.minesweepergui;
 import com.ms.game.BombFoundException;
 import com.ms.game.Cell;
 import com.ms.game.Field;
-import com.ms.game.MineSweeper;
+import com.ms.game.MineSweeperGame;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -22,12 +22,12 @@ public class PrimaryController implements Initializable
 
     @FXML
     private GridPane gamegrid;
-    private MineSweeper gameIstance;
+    private MineSweeperGame gameIstance;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) 
     {
-        this.gameIstance = new MineSweeper(15, 15);
+        this.gameIstance = new MineSweeperGame(15, 15);
 
         for (int row = 0; row < this.gameIstance.getField().getNRows(); row++) 
             for (int col = 0; col < this.gameIstance.getField().getNCols(); col++) 
@@ -87,7 +87,7 @@ public class PrimaryController implements Initializable
         this.gameIstance.start();
     }
 
-    private static void updateGrid(final GridPane gamegrid, final MineSweeper gameIstance) 
+    private static void updateGrid(final GridPane gamegrid, final MineSweeperGame gameIstance) 
     {
         final ArrayList<Node> nodes = new ArrayList<>();
 
@@ -117,7 +117,7 @@ public class PrimaryController implements Initializable
             gamegrid.getChildren().remove(node);
     }
 
-    private static void showAllBombs(GridPane gamegrid, final MineSweeper gameIstance) 
+    private static void showAllBombs(GridPane gamegrid, final MineSweeperGame gameIstance) 
     {
         //USARE LA CLASSE CARD PER ARGINARE IL PROBLEMA DELL'ORDINAMENTO DEI BUTTON NELL'OBSERVABLE LIST getChildren();
 
