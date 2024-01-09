@@ -6,12 +6,16 @@ package com.carta.cartaconto;
 
 /**
  *
- * @author gambaro.lorenzo
+ * @author Administrator
  */
 public class CartaConto {
 
     public static void main(String[] args) 
     {
-        System.out.println(Banca.generateBankCode());
+        final Banca b = new Banca("Centromarca Banca", "IT", 'X', "30", "36190", "08749");
+        
+        final Conto c = b.newConto("171804");
+        
+        System.out.println(c.getIban());
     }
 }

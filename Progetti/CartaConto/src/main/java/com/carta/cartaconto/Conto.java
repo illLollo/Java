@@ -5,6 +5,7 @@
 package com.carta.cartaconto;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 /**
  *
@@ -12,14 +13,21 @@ import java.time.LocalDate;
  */
 public class Conto 
 {
-    private String iban;
+    private Iban iban;
     private LocalDate openingDate;
     private String beneficiaryCode;
     
+    public Conto(final Iban iban, final LocalDate openingDate, final String beneficiaryCode)
+    {
+        this.iban = Objects.requireNonNull(iban);
+        this.openingDate = Objects.requireNonNull(openingDate);
+        this.beneficiaryCode = Objects.requireNonNull(beneficiaryCode);
+    }
     public Conto(final String iban, final LocalDate openingDate, final String beneficiaryCode)
     {
-        this.iban = iban;
-        this.openingDate = openingDate;
-        this.beneficiaryCode = beneficiaryCode;
+        this(new Iban(iban), openingDate, beneficiaryCode);
     }
+    public Iban getIban() { return this.iban; }
+    public LocalDate getOpeningDate() { return this.openingDate; }
+    public String beneficiaryCode() { return this.beneficiaryCode; }
 }
