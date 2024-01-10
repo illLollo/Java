@@ -15,14 +15,16 @@ public class Indirizzo
     private final String via;
     private final String numero;
     private final String cap;
+    private final String comune;
     private final String provincia;
     
-    public Indirizzo(final String via, final String numero, final String cap, final String provincia)
+    public Indirizzo(final String via, final String numero, final String cap, final String comune, final String provincia)
     {
         this.via = Objects.requireNonNull(via);
         this.numero = Objects.requireNonNull(numero);
         this.cap = Objects.requireNonNull(cap);
         this.provincia = Objects.requireNonNull(provincia);
+        this.comune = Objects.requireNonNull(comune);
     }
 
     public String getVia() {
@@ -39,6 +41,10 @@ public class Indirizzo
 
     public String getProvincia() {
         return provincia;
+    }
+
+    public String getComune() {
+        return comune;
     }
     
 }

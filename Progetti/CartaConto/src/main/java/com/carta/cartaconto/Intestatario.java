@@ -10,7 +10,7 @@ import java.util.Objects;
  *
  * @author gambaro.lorenzo
  */
-public class Intestatario 
+public class Intestatario implements Comparable
 {
     private String cf;
     private String cognome;
@@ -22,7 +22,6 @@ public class Intestatario
     
     public Intestatario(final String cf, final String cognome, final String nome, final LocalDate birthDate, final Indirizzo address, final String phoneNumber, final String email)
     {
-        
         if (cf == null)
             throw new NullPointerException("Fiscal code cannot be null!");
         if (!cf.matches("^[A-Za-z]{6}[0-9]{2}[A-Za-z]{1}[0-9]{2}[A-Za-z]{1}[0-9]{3}[A-Za-z]{1}$"))
@@ -78,4 +77,17 @@ public class Intestatario
     public void setAddress(final Indirizzo address) {
         this.address = address;
     } 
+
+    @Override
+    public int compareTo(Object o) 
+    {
+        if (o instanceof Intestatario i)
+            return i.getCf().compareTo(this.getCf());
+        return -1;
+    }
+    @Override 
+    public String toString()
+    {
+        return new StringBuilder(this.cognome).append(' ').append(this.nome).toString();
+    }
 }

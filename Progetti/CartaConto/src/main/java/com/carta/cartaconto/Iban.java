@@ -14,7 +14,6 @@ public class Iban
     
     public Iban(final String iban)
     {
-        System.out.println("IBAN: " + iban);
         if (iban == null)
             throw new NullPointerException("Iban String givenis null!");
         
@@ -54,5 +53,11 @@ public class Iban
     public String getAccountNumber()
     {
         return this.code.substring(13);
+    }
+    
+    @Override
+    public String toString()
+    {
+        return this.code;
     }
 }

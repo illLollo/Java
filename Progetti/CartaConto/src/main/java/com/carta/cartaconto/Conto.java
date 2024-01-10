@@ -5,9 +5,10 @@
 package com.carta.cartaconto;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
+import java.util.TreeSet;
 
 /**
  *
@@ -15,21 +16,29 @@ import java.util.Objects;
  */
 public class Conto 
 {
+    private Set<Intestatario> intestatari;
     private Iban iban;
     private LocalDate openingDate;
     private String beneficiaryCode;
-    private List<Movimento> movimenti;
+    private Set<Movimento> movimenti;
     
-    public Conto(final Iban iban, final LocalDate openingDate, final String beneficiaryCode)
+    public Conto(final Intestatario[] intestatari, final Iban iban, final LocalDate openingDate, final String beneficiaryCode)
     {
+        if (intestatari == null)
+            throw new NullPointerException("Cannot be no intestataries!");
+        this.intestatari = new TreeSet<>();
+        
+        for (final Intestatario temp : intestatari)
+            this.intestatari.add(temp);
+        
         this.iban = Objects.requireNonNull(iban);
         this.openingDate = Objects.requireNonNull(openingDate);
         this.beneficiaryCode = Objects.requireNonNull(beneficiaryCode);
-        this.movimenti = new ArrayList<>();
+        this.movimenti = new TreeSet<>();
     }
-    public Conto(final String iban, final LocalDate openingDate, final String beneficiaryCode)
+    public Conto(final Intestatario[] intestatari, final String iban, final LocalDate openingDate, final String beneficiaryCode)
     {
-        this(new Iban(iban), openingDate, beneficiaryCode);
+        this(intestatari, new Iban(iban), openingDate, beneficiaryCode);
     }
     public Iban getIban() { return this.iban; }
     public LocalDate getOpeningDate() { return this.openingDate; }
@@ -39,11 +48,11 @@ public class Conto
     {
         double sum = 0;
         for (final Movimento temp : this.movimenti)
-            sum += temp.getCost();
+            sum += temp.getImporto();
         
         return sum;
     }
-    public List<Movimento> getOperazioni()
+    public Set<Movimento> getOperazioni()
     {
         return this.movimenti;
     }
@@ -51,6 +60,13 @@ public class Conto
     {
         if (m == null)
             throw new NullPointerException("The operation cannot be null!");
-        this.movimenti.add(m);
+        
+        if (!movimenti.contains(m))
+            this.movimenti.add(m);
+    }
+    @Override
+    public String toString()
+    {
+        return new StringBuilder("Conto: ").append(this.iban).append("\n[\n\tIntestatari: ").append(this.intestatari).append("\n\tIban: ").append(this.iban).append(",\n\tOpening Date: ").append(this.openingDate).append(",\n\tBeneficiary Code: ").append(this.beneficiaryCode).append(",\n\tMovimenti:\n ").append(this.movimenti).append("\n}").toString();
     }
 }

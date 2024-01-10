@@ -14,14 +14,14 @@ public abstract class TipoMovimento
     private final String descr;
     
     private final long daysAfter;
-    private final double cost;
+    private final double taxes;
     
-    protected TipoMovimento(final long code, final String descr, final long daysAfter, final double cost)
+    protected TipoMovimento(final long code, final String descr, final long daysAfter, final double taxes)
     {
         this.code = code;
         this.descr = descr;
         this.daysAfter = daysAfter;
-        this.cost = cost;               
+        this.taxes = taxes;               
     }
 
     public long getCode() {
@@ -37,6 +37,6 @@ public abstract class TipoMovimento
     }
 
     public double getCost() {
-        return cost;
+        return taxes;
     }
 }

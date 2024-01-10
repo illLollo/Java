@@ -20,10 +20,9 @@ public class Banca
     private final char nationalLetter;
     private final String cab;
     private final String abi;
-    
     private final List<Conto> conti;
     
-    public Banca(final String name, final String location, final char nationalLetter, final String checkDigits, final String cab, final String abi)
+    public Banca(final String name, final String location, final char nationalLetter, final String checkDigits, final String abi, final String cab)
     {
         this.name = Objects.requireNonNull(name);
         
@@ -63,9 +62,12 @@ public class Banca
         
         this.conti = new ArrayList<>();
     }
-    public Conto newConto(final String beneficiaryCode)
+    public Conto newConto(final Intestatario[] intestatari, final String beneficiaryCode)
     {
-        return new Conto(new Iban(generateIban(beneficiaryCode)), LocalDate.now(), beneficiaryCode);
+        final Conto c = new Conto(intestatari, generateIban(beneficiaryCode), LocalDate.now(), beneficiaryCode);
+        this.conti.add(c);
+        
+        return c;
     }
     private Iban generateIban(final String beneficiaryCode)
     {
@@ -98,4 +100,28 @@ public class Banca
 //        return sb.toString();
 //    }
 
+    public String getName() {
+        return name;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public String getCheckDigits() {
+        return checkDigits;
+    }
+
+    public char getNationalLetter() {
+        return nationalLetter;
+    }
+
+    public String getCab() {
+        return cab;
+    }
+
+    public String getAbi() {
+        return abi;
+    }
+    
 }
