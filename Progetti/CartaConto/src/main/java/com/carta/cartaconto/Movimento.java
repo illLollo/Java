@@ -30,4 +30,25 @@ public class Movimento extends TipoMovimento
         this.iban = iban;
         this.importo = importo;
     }
+
+    public long getId() {
+        return id;
+    }
+
+    public LocalDate getOperationDate() {
+        return operationDate;
+    }
+
+    public LocalDate getValuteDate() {
+        return valuteDate;
+    }
+
+    public String getIban() {
+        return iban;
+    }
+
+    public double getImporto() {
+        return importo;
+    }
+    
 }

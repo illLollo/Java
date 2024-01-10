@@ -31,11 +31,11 @@ public class Banca
             throw new IllegalArgumentException("Location characters not valid!");
         
         for (int i = 0; i < location.length(); i++)
-            if (!isUpperCaseLetter(location.charAt(i)))
+            if (!Utils.isUpperCaseLetter(location.charAt(i)))
                 throw new IllegalArgumentException("Location characters not valid!");
         this.location = Objects.requireNonNull(location);
         
-        if (!isUpperCaseLetter(nationalLetter))
+        if (!Utils.isUpperCaseLetter(nationalLetter))
             throw new IllegalArgumentException("National code not valid!");
         this.nationalLetter = nationalLetter;
         
@@ -43,21 +43,21 @@ public class Banca
             throw new IllegalArgumentException("Check digits not valid!");
         
         for (int i = 0; i < checkDigits.length(); i++)
-            if (!isDigit(checkDigits.charAt(i)))
+            if (!Utils.isDigit(checkDigits.charAt(i)))
                 throw new IllegalArgumentException("Chech digits not valid!");
         this.checkDigits = Objects.requireNonNull(checkDigits);
         
         if (cab.length() != 5)
             throw new IllegalArgumentException("Cab code not valid!");
         for (int i = 0; i < cab.length(); i++)
-            if (!isDigit(cab.charAt(i)) && !isUpperCaseLetter(cab.charAt(i)) && isLowerCaseLetter(cab.charAt(i)))
+            if (!Utils.isDigit(cab.charAt(i)) && !Utils.isUpperCaseLetter(cab.charAt(i)) && !Utils.isLowerCaseLetter(cab.charAt(i)))
                 throw new IllegalArgumentException("Cab code not valid!");
         this.cab = Objects.requireNonNull(cab);
         
         if (abi.length() != 5)
             throw new IllegalArgumentException("Abi code not valid!");
         for (int i = 0; i < abi.length(); i++)
-            if (!isDigit(abi.charAt(i)) && !isUpperCaseLetter(abi.charAt(i)) && !isLowerCaseLetter(abi.charAt(i)))
+            if (!Utils.isDigit(abi.charAt(i)) && !Utils.isUpperCaseLetter(abi.charAt(i)) && !!Utils.isLowerCaseLetter(abi.charAt(i)))
                 throw new IllegalArgumentException("Abi code not valid!");
         this.abi = Objects.requireNonNull(abi);
         
@@ -97,16 +97,5 @@ public class Banca
 //        }
 //        return sb.toString();
 //    }
-    private static boolean isDigit(final char c)
-    {
-        return c >= '0' && c <= '9';
-    }
-    private static boolean isLowerCaseLetter(final char c)
-    {
-        return c >= 'a' && c <= 'z';
-    }
-    private static boolean isUpperCaseLetter(final char c)
-    {
-        return c >= 'A' && c <= 'Z';
-    }
+
 }

@@ -4,14 +4,41 @@
  */
 package com.carta.cartaconto;
 
+import java.util.Objects;
+
 /**
  *
  * @author gambaro.lorenzo
  */
 public class Indirizzo 
 {
-    private String via;
-    private String numero;
-    private String cap;
-    private String provincia;
+    private final String via;
+    private final String numero;
+    private final String cap;
+    private final String provincia;
+    
+    public Indirizzo(final String via, final String numero, final String cap, final String provincia)
+    {
+        this.via = Objects.requireNonNull(via);
+        this.numero = Objects.requireNonNull(numero);
+        this.cap = Objects.requireNonNull(cap);
+        this.provincia = Objects.requireNonNull(provincia);
+    }
+
+    public String getVia() {
+        return via;
+    }
+
+    public String getNumero() {
+        return numero;
+    }
+
+    public String getCap() {
+        return cap;
+    }
+
+    public String getProvincia() {
+        return provincia;
+    }
+    
 }

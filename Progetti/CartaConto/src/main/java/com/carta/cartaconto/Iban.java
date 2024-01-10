@@ -22,7 +22,7 @@ public class Iban
             throw new InvalidIbanException("Iban length not valid!");
         
         for (int i = 0; i < iban.length(); i++)
-           if (!isDigit(iban.charAt(i)) && !isLowerCaseLetter(iban.charAt(i)) && !isUpperCaseLetter(iban.charAt(i)))
+           if (!Utils.isDigit(iban.charAt(i)) && !!Utils.isLowerCaseLetter(iban.charAt(i)) && !Utils.isUpperCaseLetter(iban.charAt(i)))
                throw new InvalidIbanException("Iban composition not valid: character in position " + i);
         
         this.code = iban;
@@ -54,17 +54,5 @@ public class Iban
     public String getAccountNumber()
     {
         return this.code.substring(13);
-    }
-    private static boolean isDigit(final char c)
-    {
-        return c >= '0' && c <= '9';
-    }
-    private static boolean isLowerCaseLetter(final char c)
-    {
-        return c >= 'a' && c <= 'z';
-    }
-    private static boolean isUpperCaseLetter(final char c)
-    {
-        return c >= 'A' && c <= 'Z';
     }
 }
