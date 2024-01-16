@@ -100,13 +100,11 @@ public final class ArrayStackDLA<E> implements Stack<E>
     {
         this.capacity += 20;
         this.buffer = Arrays.copyOf(this.buffer, this.capacity);
-        System.out.println("aumento");
     }
     private void shrink()
     {
         this.capacity /= 2;
         this.buffer = Arrays.copyOf(this.buffer, this.capacity);
-        System.out.println("diminuisco");
         
     }
     
