@@ -5,6 +5,7 @@
 package com.carta.cartaconto;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -14,13 +15,13 @@ import java.util.TreeSet;
  *
  * @author gambaro.lorenzo
  */
-public class Conto 
+public class Conto implements Comparable<Conto>
 {
     private Set<Intestatario> intestatari;
     private Iban iban;
     private LocalDate openingDate;
     private String beneficiaryCode;
-    private Set<Movimento> movimenti;
+    private List<Movimento> movimenti;
     
     public Conto(final Intestatario[] intestatari, final Iban iban, final LocalDate openingDate, final String beneficiaryCode)
     {
@@ -34,7 +35,7 @@ public class Conto
         this.iban = Objects.requireNonNull(iban);
         this.openingDate = Objects.requireNonNull(openingDate);
         this.beneficiaryCode = Objects.requireNonNull(beneficiaryCode);
-        this.movimenti = new TreeSet<>();
+        this.movimenti = new ArrayList<>();
     }
     public Conto(final Intestatario[] intestatari, final String iban, final LocalDate openingDate, final String beneficiaryCode)
     {
@@ -52,7 +53,7 @@ public class Conto
         
         return sum;
     }
-    public Set<Movimento> getOperazioni()
+    public List<Movimento> getOperazioni()
     {
         return this.movimenti;
     }
@@ -68,5 +69,16 @@ public class Conto
     public String toString()
     {
         return new StringBuilder("Conto: ").append(this.iban).append("\n[\n\tIntestatari: ").append(this.intestatari).append("\n\tIban: ").append(this.iban).append(",\n\tOpening Date: ").append(this.openingDate).append(",\n\tBeneficiary Code: ").append(this.beneficiaryCode).append(",\n\tMovimenti:\n ").append(this.movimenti).append("\n}").toString();
+    }
+
+    @Override
+    public int compareTo(Conto o) 
+    {
+        return this.getIban().compareTo(o.getIban());
+    }
+
+    public Set<Intestatario> getIntestatari() 
+    {
+        return this.intestatari;
     }
 }

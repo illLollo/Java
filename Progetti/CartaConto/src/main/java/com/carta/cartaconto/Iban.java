@@ -8,7 +8,7 @@ package com.carta.cartaconto;
  *
  * @author Administrator
  */
-public class Iban 
+public class Iban implements Comparable<Iban>
 {
     private String code;
     
@@ -58,6 +58,16 @@ public class Iban
     @Override
     public String toString()
     {
+        return this.getCompleteIban();
+    }
+    public String getCompleteIban()
+    {
         return this.code;
     }
+
+    @Override
+    public int compareTo(Iban o) 
+    {
+        return this.code.compareTo(o.getCompleteIban());
+    } 
 }
