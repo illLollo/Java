@@ -12,7 +12,7 @@ public class CustomStack {
 
     public static void main(String[] args) 
     {
-        final Stack<String> st = new ArrayStackDLA<>();
+        final Stack<String> st = new ArrayStackDLA<>(1);
         
         st.push("123");
         st.push("456");

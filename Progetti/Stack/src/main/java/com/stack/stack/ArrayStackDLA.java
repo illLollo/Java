@@ -14,14 +14,12 @@ import java.util.Iterator;
 public final class ArrayStackDLA<E> implements Stack<E>
 {
     private int size;
-    private int capacity;
     private E[] buffer;
     
     public ArrayStackDLA(final int initialCapacity)
     {
         this.size = 0;
-        this.capacity = initialCapacity;
-        this.buffer = (E[]) new Object[this.capacity];
+        this.buffer = (E[]) new Object[initialCapacity];
     }
     public ArrayStackDLA() { this(16); }
     public ArrayStackDLA(final Stack<? extends E> st)
@@ -40,7 +38,7 @@ public final class ArrayStackDLA<E> implements Stack<E>
     @Override
     public int capacity() 
     {
-        return this.capacity;
+        return this.buffer.length;
     }
 
     @Override
@@ -60,7 +58,7 @@ public final class ArrayStackDLA<E> implements Stack<E>
         final E temp = this.buffer[this.size - 1];
         this.buffer[this.size--] = null;
         
-        if (this.size() == (this.capacity / 2) - 10)
+        if (this.size() == (this.capacity() / 2) - 10)
             shrink();
         
         return temp;
@@ -99,13 +97,11 @@ public final class ArrayStackDLA<E> implements Stack<E>
     }
     private void expand()
     {
-        this.capacity += 20;
-        this.buffer = Arrays.copyOf(this.buffer, this.capacity);
+        this.buffer = Arrays.copyOf(this.buffer, this.buffer.length + 20);
     }
     private void shrink()
     {
-        this.capacity /= 2;
-        this.buffer = Arrays.copyOf(this.buffer, this.capacity);
+        this.buffer = Arrays.copyOf(this.buffer, this.buffer.length + 20);
         
     }
     

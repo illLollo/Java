@@ -104,28 +104,6 @@ public class Banca
 
         return new Iban(sb.append(beneficiaryCode).toString());
     }
-//    public static String generateBankCode()
-//    {
-//        final Random rnd = new Random();
-//        final StringBuilder sb = new StringBuilder();
-//        
-//        for (int i = 0; i < 6; i++)
-//            sb.append((char)rnd.nextInt(65, 90));
-//        
-//        int index = 0;
-//        while (index < 5)
-//        {
-//            char code = (char) rnd.nextInt(48, 90);
-//            if ((code >= '0' && code <= '9') || (code >= 'A' && code <= 'Z'))
-//            {
-//                sb.append(code);
-//                ++index;
-//            }
-//                
-//        }
-//        return sb.toString();
-//    }
-
     public String getName() {
         return name;
     }
