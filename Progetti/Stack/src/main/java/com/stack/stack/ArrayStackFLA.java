@@ -25,7 +25,7 @@ public final class ArrayStackFLA<E> implements Stack<E>
     }
     public ArrayStackFLA()
     {
-        this(20);
+        this(16);
     }
     public ArrayStackFLA(final Stack<? extends E> st)
     {

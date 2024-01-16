@@ -23,7 +23,7 @@ public final class ArrayStackDLA<E> implements Stack<E>
         this.capacity = initialCapacity;
         this.buffer = (E[]) new Object[this.capacity];
     }
-    public ArrayStackDLA() { this(20); }
+    public ArrayStackDLA() { this(16); }
     public ArrayStackDLA(final Stack<? extends E> st)
     {
         this(st.capacity());
