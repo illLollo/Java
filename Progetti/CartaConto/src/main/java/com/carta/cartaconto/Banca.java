@@ -76,6 +76,14 @@ public class Banca
     }
     public Conto newConto(final Intestatario[] intestatari, final String beneficiaryCode)
     {
+        try
+        {
+            Integer.valueOf(beneficiaryCode);
+        }
+        catch (final NumberFormatException ex)
+        {
+            throw new IllegalArgumentException("Beneficiary code must be a sequence of numbers 0-9!");
+        }
         final Conto c = new Conto(intestatari, generateIban(beneficiaryCode), LocalDate.now(), beneficiaryCode);
         this.conti.add(c);
         
