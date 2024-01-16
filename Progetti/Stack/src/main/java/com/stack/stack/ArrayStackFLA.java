@@ -14,14 +14,12 @@ import java.util.Iterator;
 public final class ArrayStackFLA<E> implements Stack<E>
 {
     private int size;
-    private int capacity;
     private E[] buffer;
     
     public ArrayStackFLA(final int dim)
     {
-        this.capacity = dim;
         this.size = 0;
-        this.buffer = (E[]) new Object[this.capacity];
+        this.buffer = (E[]) new Object[dim];
     }
     public ArrayStackFLA()
     {
@@ -29,7 +27,7 @@ public final class ArrayStackFLA<E> implements Stack<E>
     }
     public ArrayStackFLA(final Stack<? extends E> st)
     {
-        this(st.capacity());
+        this(st.size());
         for (final var temp : st)
             this.push(temp);
     }
@@ -42,23 +40,27 @@ public final class ArrayStackFLA<E> implements Stack<E>
     @Override
     public int capacity() 
     {
-        return this.capacity;
+        return this.buffer.length;
     }
 
     @Override
     public void push(final E item) 
     {
         if (this.size() == this.capacity())
-        this.buffer[size++] = item;
+            throw new StackOperationException("Stack Full, cannot add!");
+        this.buffer[this.size++] = item;
     }
 
     @Override
     public E pop() 
     {
         if (this.size == 0)
-            throw new StackOperationException("Stack Empty");
+            throw new StackOperationException("Stack Empty, cannot remove!");
 
-        return this.buffer[(this.size--) - 1];
+        final E temp = this.buffer[this.size - 1];
+        this.buffer[this.size--] = null;
+        
+        return temp;
     }
     @Override
     public String toString()

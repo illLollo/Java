@@ -55,9 +55,10 @@ public final class ArrayStackDLA<E> implements Stack<E>
     public E pop()
     {
         if (this.size() == 0)
-            throw new StackOperationException("Stack empty!");
+            throw new StackOperationException("Stack Empty, cannot remove!");
         
-        final E temp = this.buffer[(this.size--) - 1];
+        final E temp = this.buffer[this.size - 1];
+        this.buffer[this.size--] = null;
         
         if (this.size() == (this.capacity / 2) - 10)
             shrink();

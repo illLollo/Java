@@ -35,5 +35,24 @@ public class CustomStack {
         
         System.out.println(st);
         System.out.println(st2);
+        
+        final Stack<Integer> st3 = new ArrayStackFLA<>(st2);
+        final Stack<Integer> st4 = new ArrayStackDLA<>(st3);
+        
+        System.out.println(st2);
+        
+        try 
+        {
+            st3.push(100);
+        }
+        catch (final StackOperationException ex)
+        {
+            System.err.println(ex.getMessage());
+        }
+        
+        st4.push(10);
+        
+        System.out.println(st3);
+        System.out.println(st4);
     }
 }
