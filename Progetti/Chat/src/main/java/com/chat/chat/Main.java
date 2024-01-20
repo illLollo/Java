@@ -4,44 +4,48 @@
  */
 package com.chat.chat;
 
+import com.chat.messanger.Messanger;
 import java.io.IOException;
+import java.net.DatagramPacket;
 import java.net.InetAddress;
 import java.net.SocketException;
+import java.util.Scanner;
 /**
  *
  * @author gambaro.lorenzo
  */
 public class Main 
 {
-    public static void main(String[] args) throws InterruptedException, IOException, ClassNotFoundException 
+    public static void main(String[] args) throws IOException, InterruptedException 
     {
-//        ByteArrayOutputStream str = new ByteArrayOutputStream();
-//        
-//        new ObjectOutputStream(str).writeObject(new Connection(InetAddress.getByName("server632.ddns.net"), 1010));
-//        
-//        final String obser = new String(str.toByteArray(), 0, str.toByteArray().length);
-//        System.out.println(obser);
-//        
-//        ByteArrayInputStream strIn = new ByteArrayInputStream(obser.getBytes());
-//        
-//        
-//        
-//        final Connection con = (Connection) new ObjectInputStream(strIn).readObject();
-        
-
-        try 
-        {
-            final Chat c = new Chat(95);
-            c.recive();
-            System.out.println("Listening on port: " + c.getPort());
+        try
+        {          
+            final Messanger c =  new Messanger(2233);
+            c.startReciving((final DatagramPacket packet) -> 
+            {
+                System.out.println(new String(packet.getData(), 0, packet.getLength())); 
+            });
+//            c.recive(param -> System.out.println("asd"));
+            final Scanner sc2 = new Scanner(System.in);
             
-            c.recive();
-//            c.send("ciao sono lollo", "localhost");
-//            c.send(new Connection(InetAddress.getLocalHost(), c.getPort()), "localhost");
+            StringBuilder sb = new StringBuilder();
+//
+            String line;
+            while (sc2.hasNextLine() && !(line = sc2.nextLine()).equals("END"))
+            {
+                c.send(line, InetAddress.getByName("lollohomeserver.ddns.net"));
+                Thread.sleep(1);
+            }
+            
+//            c.recive(f -> System.out.println(f));
         } 
-        catch (SocketException ex) 
+        catch (SocketException ex)
         {
-            ex.printStackTrace();
+            System.err.println("CPPP");
+        } 
+        catch (IOException ex) 
+        {
+            System.err.println("CPP");
         }
         
         

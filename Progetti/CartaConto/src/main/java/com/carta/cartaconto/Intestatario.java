@@ -12,10 +12,10 @@ import java.util.Objects;
  */
 public class Intestatario implements Comparable
 {
-    private String cf;
-    private String cognome;
-    private String nome;
-    private LocalDate birthdate;
+    private final String cf;
+    private final String cognome;;
+    private final String nome;
+    private final LocalDate birthdate;
     private Indirizzo address;
     private String phoneNumber;
     private String emailAddress;
@@ -77,6 +77,14 @@ public class Intestatario implements Comparable
     public void setAddress(final Indirizzo address) {
         this.address = address;
     } 
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public void setEmailAddress(String emailAddress) {
+        this.emailAddress = emailAddress;
+    }
 
     @Override
     public int compareTo(Object o) 

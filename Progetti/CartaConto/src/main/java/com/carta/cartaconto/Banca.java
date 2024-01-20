@@ -4,7 +4,6 @@
  */
 package com.carta.cartaconto;
 
-import java.util.ArrayList;
 import java.util.Objects;
 import java.time.LocalDate;
 import java.util.Comparator;
@@ -32,11 +31,11 @@ public class Banca
             throw new IllegalArgumentException("Location characters not valid!");
         
         for (int i = 0; i < location.length(); i++)
-            if (!Utils.isUpperCaseLetter(location.charAt(i)))
+            if (!Character.isUpperCase(location.charAt(i)))
                 throw new IllegalArgumentException("Location characters not valid!");
         this.location = Objects.requireNonNull(location);
         
-        if (!Utils.isUpperCaseLetter(nationalLetter))
+        if (!Character.isUpperCase(nationalLetter))
             throw new IllegalArgumentException("National code not valid!");
         this.nationalLetter = nationalLetter;
         
@@ -44,21 +43,21 @@ public class Banca
             throw new IllegalArgumentException("Check digits not valid!");
         
         for (int i = 0; i < checkDigits.length(); i++)
-            if (!Utils.isDigit(checkDigits.charAt(i)))
+            if (!Character.isDigit(checkDigits.charAt(i)))
                 throw new IllegalArgumentException("Chech digits not valid!");
         this.checkDigits = Objects.requireNonNull(checkDigits);
         
         if (cab.length() != 5)
             throw new IllegalArgumentException("Cab code not valid!");
         for (int i = 0; i < cab.length(); i++)
-            if (!Utils.isDigit(cab.charAt(i)) && !Utils.isUpperCaseLetter(cab.charAt(i)) && !Utils.isLowerCaseLetter(cab.charAt(i)))
+            if (!Character.isDigit(cab.charAt(i)) && !Character.isUpperCase(cab.charAt(i)) && !Character.isLowerCase(cab.charAt(i)))
                 throw new IllegalArgumentException("Cab code not valid!");
         this.cab = Objects.requireNonNull(cab);
         
         if (abi.length() != 5)
             throw new IllegalArgumentException("Abi code not valid!");
         for (int i = 0; i < abi.length(); i++)
-            if (!Utils.isDigit(abi.charAt(i)) && !Utils.isUpperCaseLetter(abi.charAt(i)) && !!Utils.isLowerCaseLetter(abi.charAt(i)))
+            if (!Character.isDigit(abi.charAt(i)) && !Character.isUpperCase(abi.charAt(i)) && !!Character.isLowerCase(abi.charAt(i)))
                 throw new IllegalArgumentException("Abi code not valid!");
         this.abi = Objects.requireNonNull(abi);
         
@@ -74,42 +73,35 @@ public class Banca
         
         this.conti = new TreeSet<>(cmp);
     }
-    public Conto newConto(final Intestatario[] intestatari, final String beneficiaryCode)
+    public Conto newConto(final Intestatario... intestatari)
     {
-        try
-        {
-            Integer.valueOf(beneficiaryCode);
-        }
-        catch (final NumberFormatException ex)
-        {
-            throw new IllegalArgumentException("Beneficiary code must be a sequence of numbers 0-9!");
-        }
-        final Conto c = new Conto(intestatari, generateIban(beneficiaryCode), LocalDate.now(), beneficiaryCode);
+        final Conto c = new Conto(generateIban(String.valueOf(this.conti.size() + 1)), LocalDate.now(), intestatari);
         this.conti.add(c);
         
         return c;
     }
-    public Conto newConto(final Intestatario intestatario, final String beneficiaryCode)
-    {
-        return this.newConto(new Intestatario[] {intestatario} , beneficiaryCode);
-    }
     public void extinguishConto(final Iban iban)
     {
         final Conto c = this.findConto(iban);
-        this.conti.remove(c);
+        
+        if (c == null)
+            throw new IllegalArgumentException("Account not found for iban " + iban.toString() + "!");
+        
+        if (c.isOpen())
+           c.extinguish();
     }
     public Conto findConto(final Iban iban)
     {
-        final Conto contotrovato = this.conti.stream().filter((final Conto c) -> iban.equals(c.getIban())).findFirst().orElse(null);
-        return contotrovato;
+        final Conto conto = this.conti.stream().filter((final Conto c) -> Objects.requireNonNull(iban).equals(c.getIban())).findFirst().orElse(null);
+        return conto;
     }
     private Iban generateIban(final String beneficiaryCode)
     {
         final StringBuilder sb = new StringBuilder(this.location).append(this.checkDigits).append(this.nationalLetter).append(this.abi).append(this.cab);
         
-        for (int i = 0; i < 27 - sb.length(); i++)
+        for (int i = 0; i < 12 - beneficiaryCode.length(); i++)
             sb.append(0);
-
+        
         return new Iban(sb.append(beneficiaryCode).toString());
     }
     public String getName() {
@@ -139,7 +131,16 @@ public class Banca
     @Override
     public String toString() 
     {
-        return "Banca{" + "name=" + name + ", location=" + location + ", checkDigits=" + checkDigits + ", nationalLetter=" + nationalLetter + ", cab=" + cab + ", abi=" + abi + ", conti=" + conti + '}';
+        final StringBuilder sb = new StringBuilder("Banca ").append(this.name).append(": {");
+        
+        sb.append("\n\tLocation: ").append(this.location);
+        sb.append("\n\tCheck Digits: ").append(this.checkDigits);
+        sb.append("\n\nNational Letter: ").append(this.nationalLetter);
+        sb.append("\n\nCAB: ").append(this.cab);
+        sb.append("\n\nABI: ").append(this.abi);
+        sb.append("\n\tConti: ").append(this.conti);
+        
+        return sb.toString();
     }
     
 

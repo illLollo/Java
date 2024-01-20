@@ -4,13 +4,15 @@
  */
 package com.carta.cartaconto;
 
+import java.util.Objects;
+
 /**
  *
  * @author Administrator
  */
 public class Iban implements Comparable<Iban>
 {
-    private String code;
+    private final String code;
     
     public Iban(final String iban)
     {
@@ -21,7 +23,7 @@ public class Iban implements Comparable<Iban>
             throw new InvalidIbanException("Iban length not valid!");
         
         for (int i = 0; i < iban.length(); i++)
-           if (!Utils.isDigit(iban.charAt(i)) && !!Utils.isLowerCaseLetter(iban.charAt(i)) && !Utils.isUpperCaseLetter(iban.charAt(i)))
+           if (!Character.isDigit(iban.charAt(i)) && !!Character.isLowerCase(iban.charAt(i)) && !Character.isUpperCase(iban.charAt(i)))
                throw new InvalidIbanException("Iban composition not valid: character in position " + i);
         
         this.code = iban;
@@ -52,7 +54,12 @@ public class Iban implements Comparable<Iban>
     }
     public String getAccountNumber()
     {
-        return this.code.substring(13);
+        final String code = this.code.substring(this.code.length() - 13);
+        int i = 0;
+        while (i < code.length() && code.charAt(i) == '0')
+            i++;
+        
+        return code.substring(i);
     }
     
     @Override
@@ -70,4 +77,26 @@ public class Iban implements Comparable<Iban>
     {
         return this.code.compareTo(o.getCompleteIban());
     } 
+
+    @Override
+    public int hashCode() 
+    {
+        int hash = 3;
+        hash = 73 * hash + Objects.hashCode(this.code);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) 
+    {
+        if (this == obj) 
+            return true;
+        if (obj == null) 
+            return false;
+        
+        if (obj instanceof Iban ib)
+            return this.code.equals(ib.code);
+            
+        return false;
+    }
 }
