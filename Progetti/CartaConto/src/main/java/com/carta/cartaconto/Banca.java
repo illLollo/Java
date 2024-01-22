@@ -4,6 +4,7 @@
  */
 package com.carta.cartaconto;
 
+import java.math.BigInteger;
 import java.util.Objects;
 import java.time.LocalDate;
 import java.util.Comparator;
@@ -17,13 +18,11 @@ public class Banca
 {
     private final String name;
     private final String location;
-    private final String checkDigits;
-    private final char nationalLetter;
     private final String cab;
     private final String abi;
     private final Set<Conto> conti;
     
-    public Banca(final String name, final String location, final char nationalLetter, final String checkDigits, final String abi, final String cab)
+    public Banca(final String name, final String location, final String abi, final String cab)
     {
         this.name = Objects.requireNonNull(name);
         
@@ -34,18 +33,6 @@ public class Banca
             if (!Character.isUpperCase(location.charAt(i)))
                 throw new IllegalArgumentException("Location characters not valid!");
         this.location = Objects.requireNonNull(location);
-        
-        if (!Character.isUpperCase(nationalLetter))
-            throw new IllegalArgumentException("National code not valid!");
-        this.nationalLetter = nationalLetter;
-        
-        if (checkDigits.length() != 2)
-            throw new IllegalArgumentException("Check digits not valid!");
-        
-        for (int i = 0; i < checkDigits.length(); i++)
-            if (!Character.isDigit(checkDigits.charAt(i)))
-                throw new IllegalArgumentException("Chech digits not valid!");
-        this.checkDigits = Objects.requireNonNull(checkDigits);
         
         if (cab.length() != 5)
             throw new IllegalArgumentException("Cab code not valid!");
@@ -75,7 +62,7 @@ public class Banca
     }
     public Conto newConto(final Intestatario... intestatari)
     {
-        final Conto c = new Conto(generateIban(String.valueOf(this.conti.size() + 1)), LocalDate.now(), intestatari);
+        final Conto c = new Conto(generateIban(this.location, this.abi, this.cab, String.valueOf(this.conti.size() + 1)), LocalDate.now(), intestatari);
         this.conti.add(c);
         
         return c;
@@ -95,14 +82,56 @@ public class Banca
         final Conto conto = this.conti.stream().filter((final Conto c) -> Objects.requireNonNull(iban).equals(c.getIban())).findFirst().orElse(null);
         return conto;
     }
-    private Iban generateIban(final String beneficiaryCode)
+    private static Iban generateIban(final String location, final String abi, final String cab, final String cc)
     {
-        final StringBuilder sb = new StringBuilder(this.location).append(this.checkDigits).append(this.nationalLetter).append(this.abi).append(this.cab);
+        final StringBuilder ccn = new StringBuilder();
         
-        for (int i = 0; i < 12 - beneficiaryCode.length(); i++)
-            sb.append(0);
+        for (int i = 0; i < 12 - cc.length(); i++)
+            ccn.append(0);
+        ccn.append(cc);
         
-        return new Iban(sb.append(beneficiaryCode).toString());
+        final StringBuilder bbanSb = new StringBuilder().append(calculateCIN(abi, cab, ccn.toString())).append(abi).append(cab).append(ccn.toString());
+                
+        return new Iban(new StringBuilder(location).append(calculateCheckDigits(location, bbanSb.toString())).append(bbanSb).toString());
+    }
+    private static char calculateCIN(final String abi, final String cab, final String ccn)
+    {
+        final String bban = new StringBuilder(abi).append(cab).append(ccn).toString();
+        
+        final String aa = "A0B1C2D3E4F5G6H7I8J9K#L#M#N#O#P#Q#R#S#T#U#V#W#X#Y#Z#-#.# #";
+        final String bb = "B1A0K#P#L#C2Q#D3R#E4V#O#S#F5T#G6U#H7M#I8N#J9W#Z#Y#X# #-#.#";
+        
+        int sum = 0;
+        
+        for (int i = 0; i < bban.length(); i += 2)
+        {
+            sum += Math.floorDiv(aa.indexOf(bban.charAt(i + 1)), 2);
+            sum += Math.floorDiv(bb.indexOf(bban.charAt(i)), 2);
+        }
+        sum -= Math.floor(sum / 26) * 26;
+        
+        return aa.charAt(sum * 2);
+    }
+    private static String calculateCheckDigits(final String countryCode, final String bban) 
+    {
+        String fakeIban = countryCode + "00" + bban;
+
+        fakeIban = fakeIban.toUpperCase();
+        fakeIban = fakeIban.substring(4) + fakeIban.substring(0, 4);
+        
+        final StringBuilder sb = new StringBuilder();
+        
+        for (char c : fakeIban.toCharArray())
+            if (Character.isLetter(c))
+                sb.append((int) c - 55);
+            else
+                sb.append(c);
+           
+
+        final BigInteger remainder = new BigInteger(sb.toString()).mod(BigInteger.valueOf(97));
+        final int checkDigits = 98 - remainder.intValue();
+
+        return String.format("%02d", checkDigits);
     }
     public String getName() {
         return name;
@@ -110,14 +139,6 @@ public class Banca
 
     public String getLocation() {
         return location;
-    }
-
-    public String getCheckDigits() {
-        return checkDigits;
-    }
-
-    public char getNationalLetter() {
-        return nationalLetter;
     }
 
     public String getCab() {
@@ -134,8 +155,6 @@ public class Banca
         final StringBuilder sb = new StringBuilder("Banca ").append(this.name).append(": {");
         
         sb.append("\n\tLocation: ").append(this.location);
-        sb.append("\n\tCheck Digits: ").append(this.checkDigits);
-        sb.append("\n\nNational Letter: ").append(this.nationalLetter);
         sb.append("\n\nCAB: ").append(this.cab);
         sb.append("\n\nABI: ").append(this.abi);
         sb.append("\n\tConti: ").append(this.conti);
