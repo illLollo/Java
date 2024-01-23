@@ -4,13 +4,14 @@
  */
 package com.carta.cartaconto;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 /**
  *
  * @author gambaro.lorenzo
  */
-public class Intestatario implements Comparable
+public class Intestatario implements Comparable, Serializable
 {
     private final String cf;
     private final String cognome;;

@@ -4,6 +4,7 @@
  */
 package com.carta.cartaconto;
 
+import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ import java.util.TreeSet;
  *
  * @author gambaro.lorenzo
  */
-public class Conto implements Comparable<Conto>, Extinguishable
+public class Conto implements Comparable<Conto>, Extinguishable, Serializable
 {
     private Set<Intestatario> intestatari;
     private Iban iban;
@@ -62,7 +63,7 @@ public class Conto implements Comparable<Conto>, Extinguishable
     {
         return this.movimenti;
     }
-    public void newOperazione(final TipoMovimento t, final double importo, final LocalDate valdate, final String desc)
+    public Movimento newOperazione(final TipoMovimento t, final double importo, final LocalDate valdate, final String desc)
     {
         if (!this.isOpen())
             throw new IllegalStateException("Cannot execute operation in a extinguished account!");
@@ -74,6 +75,7 @@ public class Conto implements Comparable<Conto>, Extinguishable
         
         this.movimenti.add(m);
         
+        return m;
     }
     @Override
     public String toString()

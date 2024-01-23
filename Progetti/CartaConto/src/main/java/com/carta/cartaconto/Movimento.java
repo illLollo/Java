@@ -4,6 +4,7 @@
  */
 package com.carta.cartaconto;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -12,10 +13,10 @@ import java.util.Objects;
  *
  * @author gambaro.lorenzo
  */
-public class Movimento implements Comparable<Movimento>
+public class Movimento implements Comparable<Movimento>, Serializable
 {
-    private static int globalNumber = 0;
-    private final int id;
+    private static long globalNumber = 0;
+    private final long id;
     private final LocalDate operationDate;
     private final LocalDate valuteDate;
     private final String descr;
@@ -68,8 +69,7 @@ public class Movimento implements Comparable<Movimento>
         final StringBuilder sb = new StringBuilder("Movimento: \n{\n\t");
         
         sb.append("Id: ").append(this.id);
-        sb.append("\n\tDescription: ").append(this.descr);
-        sb.append("\n\tType: ").append(this.type.getDesc());
+        sb.append("\n\tDescription: ").append(this.type.getDesc()).append(" -> ").append(this.descr);
         sb.append("\n\tOperation Date: ").append(this.operationDate);
         sb.append("\n\tValute Date: ").append(this.valuteDate);
         sb.append("\n\tIban: ").append(this.iban);
@@ -92,7 +92,7 @@ public class Movimento implements Comparable<Movimento>
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 79 * hash + this.id;
+        hash = (int) (79 * hash + this.id);
         hash = 79 * hash + Objects.hashCode(this.operationDate);
         hash = 79 * hash + Objects.hashCode(this.valuteDate);
         hash = 79 * hash + Objects.hashCode(this.descr);

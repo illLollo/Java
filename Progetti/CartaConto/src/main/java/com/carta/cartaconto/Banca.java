@@ -4,6 +4,7 @@
  */
 package com.carta.cartaconto;
 
+import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.Objects;
 import java.time.LocalDate;
@@ -14,7 +15,7 @@ import java.util.TreeSet;
  *
  * @author gambaro.lorenzo
  */
-public class Banca 
+public class Banca implements Serializable
 {
     private final String name;
     private final String location;

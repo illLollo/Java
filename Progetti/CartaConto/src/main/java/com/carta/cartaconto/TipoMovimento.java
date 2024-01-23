@@ -4,13 +4,14 @@
  */
 package com.carta.cartaconto;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 /**
  *
  * @author gambaro.lorenzo
  */
-public enum TipoMovimento
+public enum TipoMovimento implements Serializable
 {
     VERSAMENTO_CONTANTE(0, "Versamento Ordinario", 0.1, 1),
     PRELIEVO_CONTANTE(1, "Prelievo Contante", 0.1, -1),

@@ -4,13 +4,14 @@
  */
 package com.carta.cartaconto;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 /**
  *
  * @author gambaro.lorenzo
  */
-public class Indirizzo 
+public class Indirizzo implements Serializable
 {
     private final String via;
     private final String numero;
