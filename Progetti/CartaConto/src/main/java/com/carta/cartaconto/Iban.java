@@ -16,10 +16,7 @@ public class Iban implements Comparable<Iban>
     
     public Iban(final String iban)
     {
-        if (iban == null)
-            throw new NullPointerException("Iban String givenis null!");
-        
-        if (iban.length() != 27)
+        if (Objects.requireNonNull(iban).length() != 27)
             throw new InvalidIbanException("Iban length not valid!");
         
         for (int i = 0; i < iban.length(); i++)

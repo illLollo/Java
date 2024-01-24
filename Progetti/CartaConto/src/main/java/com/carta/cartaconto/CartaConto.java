@@ -15,10 +15,10 @@ import java.time.LocalDate;
  */
 public class CartaConto {
 
-    public static void main(String[] args) {
-
+    public static void main(String[] args) 
+    {
         final Banca b = new Banca("Intesa Sanpaolo", "IT", "03069", "01783");
-
+        
         try (final FileInputStream fis = new FileInputStream("people.ser"))
         {
             final ObjectInputStream ois = new ObjectInputStream(fis);

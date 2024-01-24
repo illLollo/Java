@@ -23,9 +23,7 @@ public class Intestatario implements Comparable, Serializable
     
     public Intestatario(final String cf, final String cognome, final String nome, final LocalDate birthDate, final Indirizzo address, final String phoneNumber, final String email)
     {
-        if (cf == null)
-            throw new NullPointerException("Fiscal code cannot be null!");
-        if (!cf.matches("^[A-Za-z]{6}[0-9]{2}[A-Za-z]{1}[0-9]{2}[A-Za-z]{1}[0-9]{3}[A-Za-z]{1}$"))
+        if (!Objects.requireNonNull(cf).matches("^[A-Za-z]{6}[0-9]{2}[A-Za-z]{1}[0-9]{2}[A-Za-z]{1}[0-9]{3}[A-Za-z]{1}$"))
             throw new IllegalArgumentException("Fiscal code not valid!");
         this.cf = cf;
         
@@ -34,56 +32,66 @@ public class Intestatario implements Comparable, Serializable
         this.birthdate = Objects.requireNonNull(birthDate);
         this.address = Objects.requireNonNull(address);
         
-        if (phoneNumber == null)
-            throw new NullPointerException("Phone number cannot be null!");
-        if (!phoneNumber.matches("^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\\s\\./0-9]*$"))
+        if (!Objects.requireNonNull(phoneNumber).matches("^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\\s\\./0-9]*$"))
             throw new IllegalArgumentException("Phone number not valid!");
         this.phoneNumber = phoneNumber;
         
-        if (email == null)
-            throw new NullPointerException("Email cannot be null!");
-        if (!email.matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$"))
+        if (!Objects.requireNonNull(email).matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$"))
             throw new IllegalArgumentException("Email not valid!");
         this.emailAddress = email;
     }
 
-    public String getCf() {
-        return cf;
+    public String getCf() 
+    {
+        return this.cf;
     }
 
-    public String getCognome() {
-        return cognome;
+    public String getCognome() 
+    {
+        return this.cognome;
     }
 
-    public String getNome() {
-        return nome;
+    public String getNome() 
+    {
+        return this.nome;
     }
 
-    public LocalDate getBirthdate() {
-        return birthdate;
+    public LocalDate getBirthdate() 
+    {
+        return this.birthdate;
     }
 
-    public Indirizzo getAddress() {
-        return address;
+    public Indirizzo getAddress() 
+    {
+        return this.address;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public String getPhoneNumber() 
+    {
+        return this.phoneNumber;
     }
 
-    public String getEmailAddress() {
-        return emailAddress;
+    public String getEmailAddress() 
+    {
+        return this.emailAddress;
     }
     
-    public void setAddress(final Indirizzo address) {
-        this.address = address;
+    public void setAddress(final Indirizzo address) 
+    {
+        this.address = Objects.requireNonNull(address);
     } 
 
-    public void setPhoneNumber(String phoneNumber) {
+    public void setPhoneNumber(final String phoneNumber) 
+    {
+        if (!Objects.requireNonNull(phoneNumber).matches("^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\\s\\./0-9]*$"))
+            throw new IllegalArgumentException("Phone number not valid!");
         this.phoneNumber = phoneNumber;
     }
 
-    public void setEmailAddress(String emailAddress) {
+    public void setEmailAddress(final String emailAddress) 
+    {
+        if (!Objects.requireNonNull(emailAddress).matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$"))
+            throw new IllegalArgumentException("Email not valid!");
         this.emailAddress = emailAddress;
     }
 

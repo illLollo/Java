@@ -27,27 +27,27 @@ public class Banca implements Serializable
     {
         this.name = Objects.requireNonNull(name);
         
-        if (location.length() != 2)
+        if (Objects.requireNonNull(location).length() != 2)
             throw new IllegalArgumentException("Location characters not valid!");
         
         for (int i = 0; i < location.length(); i++)
             if (!Character.isUpperCase(location.charAt(i)))
                 throw new IllegalArgumentException("Location characters not valid!");
-        this.location = Objects.requireNonNull(location);
+        this.location = location;
         
-        if (cab.length() != 5)
+        if (Objects.requireNonNull(cab).length() != 5)
             throw new IllegalArgumentException("Cab code not valid!");
         for (int i = 0; i < cab.length(); i++)
             if (!Character.isDigit(cab.charAt(i)) && !Character.isUpperCase(cab.charAt(i)) && !Character.isLowerCase(cab.charAt(i)))
                 throw new IllegalArgumentException("Cab code not valid!");
-        this.cab = Objects.requireNonNull(cab);
+        this.cab = cab;
         
-        if (abi.length() != 5)
+        if (Objects.requireNonNull(abi).length() != 5)
             throw new IllegalArgumentException("Abi code not valid!");
         for (int i = 0; i < abi.length(); i++)
             if (!Character.isDigit(abi.charAt(i)) && !Character.isUpperCase(abi.charAt(i)) && !!Character.isLowerCase(abi.charAt(i)))
                 throw new IllegalArgumentException("Abi code not valid!");
-        this.abi = Objects.requireNonNull(abi);
+        this.abi = abi;
         
         final Comparator<Conto> cmp = (final Conto lhs, final Conto rhs) -> 
         {
@@ -63,7 +63,7 @@ public class Banca implements Serializable
     }
     public Conto newConto(final Intestatario... intestatari)
     {
-        final Conto c = new Conto(generateIban(this.location, this.abi, this.cab, String.valueOf(this.conti.size() + 1)), LocalDate.now(), intestatari);
+        final Conto c = new Conto(generateIban(this.location, this.abi, this.cab, String.valueOf(this.conti.size() + 1)), LocalDate.now(), Objects.requireNonNull(intestatari));
         this.conti.add(c);
         
         return c;
@@ -80,24 +80,23 @@ public class Banca implements Serializable
     }
     public Conto findConto(final Iban iban)
     {
-        final Conto conto = this.conti.stream().filter((final Conto c) -> Objects.requireNonNull(iban).equals(c.getIban())).findFirst().orElse(null);
-        return conto;
+        return this.conti.stream().filter((final Conto c) -> Objects.requireNonNull(iban).equals(c.getIban())).findFirst().orElse(null);
     }
     private static Iban generateIban(final String location, final String abi, final String cab, final String cc)
     {
         final StringBuilder ccn = new StringBuilder();
         
-        for (int i = 0; i < 12 - cc.length(); i++)
+        for (int i = 0; i < 12 - Objects.requireNonNull(cc).length(); i++)
             ccn.append(0);
         ccn.append(cc);
         
-        final StringBuilder bbanSb = new StringBuilder().append(calculateCIN(abi, cab, ccn.toString())).append(abi).append(cab).append(ccn.toString());
+        final StringBuilder bbanSb = new StringBuilder().append(calculateCIN(Objects.requireNonNull(abi), Objects.requireNonNull(cab), ccn.toString())).append(abi).append(cab).append(ccn.toString());
                 
-        return new Iban(new StringBuilder(location).append(calculateCheckDigits(location, bbanSb.toString())).append(bbanSb).toString());
+        return new Iban(new StringBuilder(Objects.requireNonNull(location)).append(calculateCheckDigits(location, bbanSb.toString())).append(bbanSb).toString());
     }
     private static char calculateCIN(final String abi, final String cab, final String ccn)
     {
-        final String bban = new StringBuilder(abi).append(cab).append(ccn).toString();
+        final String bban = new StringBuilder(Objects.requireNonNull(abi)).append(Objects.requireNonNull(cab)).append(Objects.requireNonNull(ccn)).toString();
         
         final String aa = "A0B1C2D3E4F5G6H7I8J9K#L#M#N#O#P#Q#R#S#T#U#V#W#X#Y#Z#-#.# #";
         final String bb = "B1A0K#P#L#C2Q#D3R#E4V#O#S#F5T#G6U#H7M#I8N#J9W#Z#Y#X# #-#.#";
@@ -115,7 +114,7 @@ public class Banca implements Serializable
     }
     private static String calculateCheckDigits(final String countryCode, final String bban) 
     {
-        String fakeIban = countryCode + "00" + bban;
+        String fakeIban = Objects.requireNonNull(countryCode) + "00" + Objects.requireNonNull(bban);
 
         fakeIban = fakeIban.toUpperCase();
         fakeIban = fakeIban.substring(4) + fakeIban.substring(0, 4);
@@ -134,20 +133,24 @@ public class Banca implements Serializable
 
         return String.format("%02d", checkDigits);
     }
-    public String getName() {
-        return name;
+    public String getName()
+    {
+        return this.name;
     }
 
-    public String getLocation() {
-        return location;
+    public String getLocation()
+    {
+        return this.location;
     }
 
-    public String getCab() {
-        return cab;
+    public String getCab()
+    {
+        return this.cab;
     }
 
-    public String getAbi() {
-        return abi;
+    public String getAbi()
+    {
+        return this.abi;
     }
 
     @Override

@@ -33,19 +33,23 @@ public enum TipoMovimento implements Serializable
         this.amount = amount;
     }
 
-    public long getCode() {
-        return code;
+    public long getCode() 
+    {
+        return this.code;
     }
 
-    public double getCost() {
-        return cost;
+    public double getCost() 
+    {
+        return this.cost;
     }
 
-    public double getAmount() {
-        return amount;
+    public double getAmount() 
+    {
+        return this.amount;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getDesc() 
+    {
+        return this.desc;
     }  
 }

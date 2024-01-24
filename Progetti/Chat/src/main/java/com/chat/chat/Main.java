@@ -20,20 +20,31 @@ public class Main
     {
         try
         {          
-            final Messanger c =  new Messanger(2233);
+            final Scanner sc2 = new Scanner(System.in);
+            
+            System.out.println("Inserisci la porta alla quale vuoi connetterti: ");
+            
+            final Messanger c =  new Messanger(sc2.nextInt());
             c.startReciving((final DatagramPacket packet) -> 
             {
                 System.out.println(new String(packet.getData(), 0, packet.getLength())); 
             });
-//            c.recive(param -> System.out.println("asd"));
-            final Scanner sc2 = new Scanner(System.in);
+            sc2.nextLine();
+            System.out.println("Inserisci l'indirizzo al quale vuoi connetterti: ");
+            final String add = sc2.nextLine();
+            
+            System.out.println("Benvenuto nella chat, inserisci il tuo nome: ");
+            
             
             StringBuilder sb = new StringBuilder();
 //
+            final String name = sc2.nextLine();
+            System.out.println("Buona permanenza " + name + "!");
+            
             String line;
             while (sc2.hasNextLine() && !(line = sc2.nextLine()).equals("END"))
             {
-                c.send(line, InetAddress.getByName("lollohomeserver.ddns.net"));
+                c.send(name+ ": " + line, InetAddress.getByName(add));
                 Thread.sleep(1);
             }
             

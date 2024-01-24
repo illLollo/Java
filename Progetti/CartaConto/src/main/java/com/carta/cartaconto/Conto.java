@@ -27,11 +27,9 @@ public class Conto implements Comparable<Conto>, Extinguishable, Serializable
     
     public Conto(final Iban iban, final LocalDate openingDate, final Intestatario... intestatari)
     {
-        if (intestatari == null)
-            throw new NullPointerException("Cannot be no intestataries!");
         this.intestatari = new TreeSet<>();
         
-        for (final Intestatario temp : intestatari)
+        for (final Intestatario temp : Objects.requireNonNull(intestatari))
             this.intestatari.add(temp);
         
         this.iban = Objects.requireNonNull(iban);
@@ -67,9 +65,6 @@ public class Conto implements Comparable<Conto>, Extinguishable, Serializable
     {
         if (!this.isOpen())
             throw new IllegalStateException("Cannot execute operation in a extinguished account!");
-        
-        if (t == null)
-            throw new NullPointerException("The operation cannot be null!");
         
         final Movimento m = new Movimento(LocalDate.now(), Objects.requireNonNull(valdate), Objects.requireNonNull(desc), this.getIban(), importo, Objects.requireNonNull(t));
         

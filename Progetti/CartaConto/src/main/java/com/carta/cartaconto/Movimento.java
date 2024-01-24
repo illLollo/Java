@@ -26,9 +26,12 @@ public class Movimento implements Comparable<Movimento>, Serializable
 
     protected Movimento(final LocalDate operationDate, final LocalDate valuteDate, final String descr, final Iban iban, final double importo, final TipoMovimento t)
     {
-        this.id = globalNumber++;
         this.operationDate = Objects.requireNonNull(operationDate);
-        this.valuteDate = Objects.requireNonNull(valuteDate);
+        
+        if (Objects.requireNonNull(valuteDate).isBefore(operationDate))
+            throw new IllegalArgumentException("Valute date cannot be before operation date!");
+        
+        this.valuteDate = valuteDate;
         this.descr = Objects.requireNonNull(descr);
         this.iban = Objects.requireNonNull(iban);
         
@@ -37,30 +40,37 @@ public class Movimento implements Comparable<Movimento>, Serializable
         
         this.importo = importo;
         this.type = Objects.requireNonNull(t);
+        this.id = globalNumber++;
     }
 
-    public TipoMovimento getType() {
-        return type;
+    public TipoMovimento getType() 
+    {
+        return this.type;
     }
 
-    public long getId() {
-        return id;
+    public long getId() 
+    {
+        return this.id;
+    }
+    
+    public LocalDate getOperationDate() 
+    {
+        return this.operationDate;
     }
 
-    public LocalDate getOperationDate() {
-        return operationDate;
+    public LocalDate getValuteDate() 
+    {
+        return this.valuteDate;
+    }
+    
+    public Iban getIban() 
+    {
+        return this.iban;
     }
 
-    public LocalDate getValuteDate() {
-        return valuteDate;
-    }
-
-    public Iban getIban() {
-        return iban;
-    }
-
-    public double getImporto() {
-        return importo;
+    public double getImporto() 
+    {
+        return this.importo;
     }
     
     @Override

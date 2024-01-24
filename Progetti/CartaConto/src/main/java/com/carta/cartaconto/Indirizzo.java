@@ -28,24 +28,29 @@ public class Indirizzo implements Serializable
         this.comune = Objects.requireNonNull(comune);
     }
 
-    public String getVia() {
-        return via;
+    public String getVia() 
+    {
+        return this.via;
     }
 
-    public String getNumero() {
-        return numero;
+    public String getNumero() 
+    {
+        return this.numero;
     }
 
-    public String getCap() {
-        return cap;
+    public String getCap() 
+    {
+        return this.cap;
     }
 
-    public String getProvincia() {
-        return provincia;
+    public String getProvincia() 
+    {
+        return this.provincia;
     }
 
-    public String getComune() {
-        return comune;
+    public String getComune() 
+    {
+        return this.comune;
     }
     
 }
