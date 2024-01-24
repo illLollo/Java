@@ -25,15 +25,19 @@ public class Main
             {
                 System.out.println(new String(packet.getData(), 0, packet.getLength())); 
             });
-//            c.recive(param -> System.out.println("asd"));
+            System.out.println("Benvenuto nella chat, inserisci il tuo nome: ");
+            
             final Scanner sc2 = new Scanner(System.in);
             
             StringBuilder sb = new StringBuilder();
 //
+            final String name = sc2.nextLine();
+            System.out.println("Buona permanenza " + name + "!");
+            
             String line;
             while (sc2.hasNextLine() && !(line = sc2.nextLine()).equals("END"))
             {
-                c.send(line, InetAddress.getByName("lollohomeserver.ddns.net"));
+                c.send(line, InetAddress.getByName("192.168.4.255"));
                 Thread.sleep(1);
             }
             
