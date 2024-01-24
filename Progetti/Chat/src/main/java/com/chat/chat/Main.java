@@ -37,7 +37,7 @@ public class Main
             String line;
             while (sc2.hasNextLine() && !(line = sc2.nextLine()).equals("END"))
             {
-                c.send(line, InetAddress.getByName("192.168.4.255"));
+                c.send(name+ ": " + line, InetAddress.getByName("192.168.4.255"));
                 Thread.sleep(1);
             }
             
