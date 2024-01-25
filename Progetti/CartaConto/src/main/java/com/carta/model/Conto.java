@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.carta.cartaconto;
+package com.carta.model;
 
 import java.io.Serializable;
 import java.text.DecimalFormat;
@@ -25,7 +25,7 @@ public class Conto implements Comparable<Conto>, Extinguishable, Serializable
     private LocalDate closeDate;
     private List<Movimento> movimenti;
     
-    public Conto(final Iban iban, final LocalDate openingDate, final Intestatario... intestatari)
+    protected Conto(final Iban iban, final LocalDate openingDate, final Intestatario... intestatari)
     {
         this.intestatari = new TreeSet<>();
         
@@ -103,4 +103,21 @@ public class Conto implements Comparable<Conto>, Extinguishable, Serializable
         if (!this.isOpen())
             this.closeDate = LocalDate.now();
     }
+
+    @Override
+    public int hashCode() 
+    {
+        int hash = 5;
+        hash = 71 * hash + Objects.hashCode(this.iban);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) 
+    {
+        if (obj instanceof Conto c)
+            return c.getIban().equals(this.getIban());
+        return false;
+    }
+    
 }

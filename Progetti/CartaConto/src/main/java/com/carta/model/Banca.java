@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.carta.cartaconto;
+package com.carta.model;
 
 import java.io.Serializable;
 import java.math.BigInteger;
@@ -15,7 +15,7 @@ import java.util.TreeSet;
  *
  * @author gambaro.lorenzo
  */
-public class Banca implements Serializable
+public class Banca implements Comparable<Banca>, Serializable
 {
     private final String name;
     private final String location;
@@ -64,6 +64,8 @@ public class Banca implements Serializable
     public Conto newConto(final Intestatario... intestatari)
     {
         final Conto c = new Conto(generateIban(this.location, this.abi, this.cab, String.valueOf(this.conti.size() + 1)), LocalDate.now(), Objects.requireNonNull(intestatari));
+//        System.out.println(c);
+        
         this.conti.add(c);
         
         return c;
@@ -165,7 +167,32 @@ public class Banca implements Serializable
         
         return sb.toString();
     }
-    
 
-    
+    @Override
+    public int hashCode() 
+    {
+        int hash = 7;
+        hash = 29 * hash + Objects.hashCode(this.cab);
+        hash = 29 * hash + Objects.hashCode(this.abi);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) 
+    {
+        if (this == obj) 
+            return true;
+
+        if (obj instanceof Banca b)
+            return b.compareTo(this) == 0;
+        return false;
+    }
+
+    @Override
+    public int compareTo(Banca o) 
+    {
+        if (o == null)
+            return -1;
+        return o.getAbi().compareTo(this.getAbi()) + o.getCab().compareTo(this.getCab());
+    }
 }

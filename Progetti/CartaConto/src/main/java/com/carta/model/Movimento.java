@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.carta.cartaconto;
+package com.carta.model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -94,21 +94,13 @@ public class Movimento implements Comparable<Movimento>, Serializable
     {
         if (o == null)
             return -1;
-        if (this.type == o.type)
-            return this.iban.compareTo(o.iban);
-        return -1;
+        return Math.toIntExact(o.getId() - this.getId());
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
         hash = (int) (79 * hash + this.id);
-        hash = 79 * hash + Objects.hashCode(this.operationDate);
-        hash = 79 * hash + Objects.hashCode(this.valuteDate);
-        hash = 79 * hash + Objects.hashCode(this.descr);
-        hash = 79 * hash + Objects.hashCode(this.iban);
-        hash = 79 * hash + (int) (Double.doubleToLongBits(this.importo) ^ (Double.doubleToLongBits(this.importo) >>> 32));
-        hash = 79 * hash + Objects.hashCode(this.type);
         return hash;
     }
 
@@ -117,11 +109,8 @@ public class Movimento implements Comparable<Movimento>, Serializable
         if (this == obj)
             return true;
 
-        if (obj == null)
-            return false;
-
         if (obj instanceof Movimento mov)
-            return this.id == mov.id ;
+            return this.id == mov.id;
         
         return false;
     }

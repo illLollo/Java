@@ -1,8 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package com.carta.cartaconto;
+
+///*
+// * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+// * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+// */
+package com.carta.model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -14,7 +15,7 @@ import java.util.Objects;
 public class Intestatario implements Comparable, Serializable
 {
     private final String cf;
-    private final String cognome;;
+    private final String cognome;
     private final String nome;
     private final LocalDate birthdate;
     private Indirizzo address;
@@ -107,4 +108,25 @@ public class Intestatario implements Comparable, Serializable
     {
         return new StringBuilder(this.cognome).append(' ').append(this.nome).toString();
     }
+
+    @Override
+    public int hashCode() 
+    {
+        int hash = 3;
+        hash = 19 * hash + Objects.hashCode(this.cf);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) 
+    {
+        if (this == obj)
+            return true;
+        
+        if (obj instanceof Intestatario i)
+            return i.getCf().equals(this.getCf());
+        
+        return false;
+    }
 }
+

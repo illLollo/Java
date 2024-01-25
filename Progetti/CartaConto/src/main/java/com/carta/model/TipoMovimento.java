@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.carta.cartaconto;
+package com.carta.model;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -52,4 +52,16 @@ public enum TipoMovimento implements Serializable
     {
         return this.desc;
     }  
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Movimento ").append(this.desc).append(": { ");
+        sb.append("Code:").append(this.code).append(", ");
+        sb.append("Cost: ").append(this.cost).append(", ");
+        sb.append("Sign: ").append(this.amount > 0 ? "+" : "-");
+        sb.append(" }");
+        return sb.toString();
+    }
+    
 }

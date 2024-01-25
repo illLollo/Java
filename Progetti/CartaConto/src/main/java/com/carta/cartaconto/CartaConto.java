@@ -3,10 +3,17 @@
  */
 package com.carta.cartaconto;
 
+import com.carta.model.TipoMovimento;
+import com.carta.model.Conto;
+import com.carta.model.Intestatario;
+import com.carta.model.Banca;
+import com.carta.model.Indirizzo;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.time.LocalDate;
 
 /**
@@ -15,7 +22,7 @@ import java.time.LocalDate;
  */
 public class CartaConto {
 
-    public static void main(String[] args) 
+    public static void main(String[] args) throws FileNotFoundException, IOException, ClassNotFoundException 
     {
         final Banca b = new Banca("Intesa Sanpaolo", "IT", "03069", "01783");
         
@@ -45,4 +52,5 @@ public class CartaConto {
         
         System.out.println(b);
     }
+    
 }
