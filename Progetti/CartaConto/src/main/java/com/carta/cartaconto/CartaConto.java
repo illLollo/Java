@@ -7,13 +7,10 @@ import com.carta.model.TipoMovimento;
 import com.carta.model.Conto;
 import com.carta.model.Intestatario;
 import com.carta.model.Banca;
-import com.carta.model.Indirizzo;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.time.LocalDate;
 
 /**
