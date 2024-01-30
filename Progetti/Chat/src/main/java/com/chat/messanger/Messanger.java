@@ -19,29 +19,31 @@ import java.net.SocketException;
  */
 public class Messanger implements Closeable
 {
-    private DatagramSocket socket;
+    private DatagramSocket sendSocket;
+    private DatagramSocket listenSocket;
     private Boolean isReciving;
     private Thread recivingThread;
     private MessageReciver reciver;
     
     public Messanger(final int port) throws SocketException
     {
-        this.socket = new DatagramSocket(port);
+        this.listenSocket = new DatagramSocket(port);
+        this.sendSocket = new DatagramSocket();
         this.isReciving = false;
         this.recivingThread = null;
         this.reciver = null;
     }
     
-    public void send(final String message, final InetAddress address) throws IOException
+    public void send(final String message, final InetAddress address, final int port) throws IOException
     {
-        new Thread(new MessageSender(this.socket, address, message)).start();
+        this.sendSocket.send(new DatagramPacket(message.getBytes(), message.getBytes().length, address, port));
     }
     public void recive(final Callback<DatagramPacket> run)
     {
         if (this.isReciving())
             return;
         this.isReciving = true;
-        new Thread(new MessageReciver(this.socket, run, this.isReciving)).start();
+        new Thread(new MessageReciver(this.listenSocket, run, this.isReciving)).start();
     }
     public void startReciving(final Callback<DatagramPacket> run)
     {
@@ -53,7 +55,7 @@ public class Messanger implements Closeable
         {
             while (this.isReciving())
             {
-                this.reciver = new MessageReciver(this.socket, run, this.isReciving);
+                this.reciver = new MessageReciver(this.listenSocket, run, this.isReciving);
                 this.reciver.run();
             }   
             
@@ -68,13 +70,16 @@ public class Messanger implements Closeable
         this.isReciving = false;
        if (this.recivingThread != null)
            this.recivingThread.interrupt();
-       
-        try 
+
+        this.listenSocket.close();
+        try
         {
-            this.socket.send(new DatagramPacket(new byte[1], 0, InetAddress.getLocalHost(), this.socket.getLocalPort()));
-        
-        } catch (IOException ex) 
+            this.listenSocket = new DatagramSocket(this.listenSocket.getLocalPort());
+            
+        }
+        catch (final SocketException ex)
         {
+            ex.printStackTrace();
         }
     }
     public boolean isReciving() 
@@ -82,9 +87,9 @@ public class Messanger implements Closeable
         return this.isReciving;
     }
     
-    public int getPort()
+    public int getListenPort()
     {
-        return this.socket.getLocalPort();
+        return this.listenSocket.getLocalPort();
     }
 
     @Override
@@ -92,7 +97,8 @@ public class Messanger implements Closeable
     {
         if (this.isReciving())
             this.stopReciving();
-        this.socket.close();
+        this.listenSocket.close();
+        this.sendSocket.close();
     }
 }
 

@@ -23,8 +23,8 @@ public class Main
             final Scanner sc2 = new Scanner(System.in);
             
             System.out.println("Inserisci la porta alla quale vuoi connetterti: ");
-            
-            final Messanger c =  new Messanger(sc2.nextInt());
+            final int port = sc2.nextInt();
+            final Messanger c =  new Messanger(port);
             c.startReciving((final DatagramPacket packet) -> 
             {
                 System.out.println(new String(packet.getData(), 0, packet.getLength())); 
@@ -44,7 +44,7 @@ public class Main
             String line;
             while (sc2.hasNextLine() && !(line = sc2.nextLine()).equals("END"))
             {
-                c.send(name+ ": " + line, InetAddress.getByName(add));
+                c.send(name+ ": " + line, InetAddress.getByName(add), port);
                 Thread.sleep(1);
             }
             

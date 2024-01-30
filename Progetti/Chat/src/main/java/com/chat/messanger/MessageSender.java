@@ -20,12 +20,14 @@ public class MessageSender implements Runnable
     private final DatagramSocket socket;
     private final InetAddress address;
     private final String message;
+    private final int port;
     
-    public MessageSender(final DatagramSocket socket, final InetAddress address, final String message)
+    public MessageSender(final DatagramSocket socket, final InetAddress address, final String message, final int port)
     {
         this.socket = Objects.requireNonNull(socket);
         this.address = Objects.requireNonNull(address);
         this.message = Objects.requireNonNull(message);
+        this.port = port;
     }
     
     @Override
@@ -33,7 +35,7 @@ public class MessageSender implements Runnable
     {
         try 
         {
-            this.socket.send(new DatagramPacket(this.message.getBytes(), this.message.getBytes().length, this.address, this.socket.getLocalPort()));
+            this.socket.send(new DatagramPacket(this.message.getBytes(), this.message.getBytes().length, this.address, this.port));
             
         } catch (final IOException ex) 
         {
