@@ -48,7 +48,7 @@ public class EchoServerUDP
             while (!(line = sc.nextLine()).equals("END"))
             {
                 c.send(line, address, destPort);
-                Thread.sleep(1);  // per avere un flusso di dati semi-ordinato
+                Thread.sleep(1);  // per avere una corrispondenza semi-ordinata tra client e server
             }
             
             System.out.println("Smesso di inviare, rimango in ascolto!");
