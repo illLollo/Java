@@ -1,10 +1,10 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.chat.chat;
 
-import com.chat.messanger.ConnectionManager;
+package com.udp.echoserverudp;
+
+import com.udp.connectionmodel.ConnectionManager;
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.InetAddress;
@@ -12,11 +12,12 @@ import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+
 /**
  *
- * @author gambaro.lorenzo
+ * @author Lorenzo
  */
-public class Main 
+public class EchoServerUDP 
 {
     public static void main(String[] args)
     {
@@ -29,10 +30,6 @@ public class Main
             
             final ConnectionManager c = new ConnectionManager(listenPort);
             
-            c.startReciving((final DatagramPacket packet) -> 
-            {
-                System.out.println(new String(packet.getData(), 0, packet.getLength())); 
-            });
             
             sc.nextLine(); //clearing output
             
@@ -42,7 +39,12 @@ public class Main
             System.out.println("Inserisci la porta dell'indirizzo alla quale vuoi spedire i messaggi: ");
             final int destPort = sc.nextInt();
             
-            String line;
+            c.startReciving((final DatagramPacket packet) -> 
+            {
+                System.out.println(new String(packet.getData(), 0, packet.getLength())); 
+            });
+            
+            String line; 
             while (!(line = sc.nextLine()).equals("END"))
             {
                 c.send(line, address, destPort);

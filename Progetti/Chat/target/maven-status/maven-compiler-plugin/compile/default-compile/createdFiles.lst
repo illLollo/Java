@@ -1,5 +1,4 @@
 com\chat\messanger\Messanger.class
-com\chat\messanger\Callback.class
 com\chat\messanger\MessageReciver.class
 com\chat\messanger\MessageSender.class
 com\chat\chat\Main.class
