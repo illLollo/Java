@@ -4,11 +4,11 @@
 package com.carta.cartaconto;
 
 import com.carta.model.Banca;
+import com.carta.model.Iban;
+import com.carta.model.TipoUtente;
 import com.carta.model.User;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.ObjectInputStream;
 
 /**
  *
@@ -19,38 +19,18 @@ public class CartaConto {
     public static void main(String[] args) throws FileNotFoundException, IOException, ClassNotFoundException 
     {        
         final Banca b = new Banca("Intesa Sanpaolo", "IT", "03069", "01783");   
+        b.registerUser(new User("lorenzo", "12345", TipoUtente.DEFAULT_USER));
         
-        try (final FileInputStream fis = new FileInputStream("users.ser"))
-        {
-            final ObjectInputStream ois = new ObjectInputStream(fis);
-            
-            for (final User u : (User[]) ois.readObject())
-            {
-                if (b.login(u.getUsername(), u.getPassword()))
-                {
-//                    final Conto c =  b.newConto(new Intestatario(u.getUsername(), u.getPassword(), ));
-//                    c.newOperazione(TipoMovimento.BONIFICO_RICEVUTO, 1700, LocalDate.now(), "Stipendio Mensile");
-//                    c.newOperazione(TipoMovimento.PRELIEVO_CONTANTE, 130, LocalDate.now().plusDays(2), "Perlievio per spese");
-                }
-            }
-//                public Intestatario(final String username, final String password, final String cf, final String cognome, final String nome, final LocalDate birthDate, final Indirizzo address, final String phoneNumber, final String email)
+        System.out.println(b.login("lorenzo", "12345"));
 
-        }
-        catch (final ClassNotFoundException ex)
+        final User logged = b.login("lorenzo", "12345");
+        
+        if (logged != null)
         {
-            System.err.println("CANNOT CAST READED OBJECT!");
-        }
-        catch (final FileNotFoundException ex)
-        {
-            System.err.println("FILE NOT FOUND!");
-        }
-        catch (final IOException ex)
-        {
-            System.err.println("ERROR IN I/O FILE OPERATION!");
-            ex.printStackTrace();
+            
         }
         
-        System.out.println(b);
+        System.out.println(b.findConto(new Iban("IT30K1231123123123112123123")));
     }
 }
 

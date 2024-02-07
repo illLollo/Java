@@ -9,10 +9,9 @@ import java.math.BigInteger;
 import java.util.Objects;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.Map;
 /**
  *
  * @author gambaro.lorenzo
@@ -23,8 +22,8 @@ public class Banca implements Comparable<Banca>, Serializable
     private final String location;
     private final String cab;
     private final String abi;
-    private final Set<Conto> conti;
-    private final Set<User> utenti;
+    private final Map<Iban, Conto> conti;
+    private final Map<String, User> utenti;
     private final List<TipoMovimento> tipiMovimento;
     
     public Banca(final String name, final String location, final String abi, final String cab)
@@ -53,18 +52,8 @@ public class Banca implements Comparable<Banca>, Serializable
                 throw new IllegalArgumentException("Abi code not valid!");
         this.abi = abi;
         
-        final Comparator<Conto> cmp = (final Conto lhs, final Conto rhs) -> 
-        {
-            if (lhs == null && rhs == null)
-                return 0;
-            if (lhs == null)
-                return -1;
-            
-            return lhs.getIban().compareTo(rhs.getIban());
-        };
-        
-        this.conti = new TreeSet<>(cmp);
-        this.utenti = new TreeSet<>();
+        this.conti = new HashMap<>();
+        this.utenti = new HashMap<>();
         this.tipiMovimento = new ArrayList<>();
     }
     public TipoMovimento newTipoMovimento(final String desc, final double cost, final double amount)
@@ -85,20 +74,31 @@ public class Banca implements Comparable<Banca>, Serializable
     {
         final Conto c = new Conto(generateIban(this.location, this.abi, this.cab, String.valueOf(this.conti.size() + 1)), LocalDate.now(), Objects.requireNonNull(intestatari));
         
-        this.conti.add(c);
+        this.conti.put(c.getIban(), c);
         
-//        for (final Intestatario temp : intestatari)
-//            temp.addConto(c);
+        for (final Intestatario temp : intestatari)
+            temp.addConto(c);
         
         return c;
     }
     public void registerUser(final User u)
     {
-        this.utenti.add(Objects.requireNonNull(u));
+        if (!this.utenti.containsKey(Objects.requireNonNull(u).getUsername()))
+            this.utenti.put(u.getUsername(), u);
+        else
+            throw new IllegalArgumentException("User alreay registered!");
     }
-    public TipoUtente login(final String username, final String password)
+    public User login(final String username, final String password)
     {
-        if(this.utenti.contains(new User(Objects.requireNonNull(username), Objects.requireNonNull(password))))
+        final User u = this.utenti.get(Objects.requireNonNull(username));
+        
+        if (u == null)
+            return null;
+        
+        if (u.getPassword().equals(User.calcolaHash(password)))
+            return u;
+        
+        return null;
     }
     public void extinguishConto(final Iban iban)
     {
@@ -112,7 +112,7 @@ public class Banca implements Comparable<Banca>, Serializable
     }
     public Conto findConto(final Iban iban)
     {
-        return this.conti.stream().filter((final Conto c) -> Objects.requireNonNull(iban).equals(c.getIban())).findFirst().orElse(null);
+        return this.conti.get(iban);
     }
     private static Iban generateIban(final String location, final String abi, final String cab, final String cc)
     {

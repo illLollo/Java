@@ -22,9 +22,9 @@ public class Intestatario extends User implements Serializable
     private String phoneNumber;
     private String emailAddress;
     
-    public Intestatario(final String username, final String password, final String cf, final String cognome, final String nome, final LocalDate birthDate, final Indirizzo address, final String phoneNumber, final String email)
+    public Intestatario(final User u, final String cf, final String cognome, final String nome, final LocalDate birthDate, final Indirizzo address, final String phoneNumber, final String email)
     {
-        super(username, password, false);
+        super(Objects.requireNonNull(u.getUsername()), u.getPassword(), u.getType(), false);
         
         if (!Objects.requireNonNull(cf).matches("^[A-Za-z]{6}[0-9]{2}[A-Za-z]{1}[0-9]{2}[A-Za-z]{1}[0-9]{3}[A-Za-z]{1}$"))
             throw new IllegalArgumentException("Fiscal code not valid!");
