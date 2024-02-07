@@ -8,7 +8,9 @@ import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.Objects;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 /**
@@ -22,6 +24,8 @@ public class Banca implements Comparable<Banca>, Serializable
     private final String cab;
     private final String abi;
     private final Set<Conto> conti;
+    private final Set<User> utenti;
+    private final List<TipoMovimento> tipiMovimento;
     
     public Banca(final String name, final String location, final String abi, final String cab)
     {
@@ -60,15 +64,41 @@ public class Banca implements Comparable<Banca>, Serializable
         };
         
         this.conti = new TreeSet<>(cmp);
+        this.utenti = new TreeSet<>();
+        this.tipiMovimento = new ArrayList<>();
     }
+    public TipoMovimento newTipoMovimento(final String desc, final double cost, final double amount)
+    {
+        final TipoMovimento newMovimento = new TipoMovimento(desc, cost, amount);
+        
+        if (!this.tipiMovimento.contains(newMovimento))
+        {
+            this.tipiMovimento.add(newMovimento);
+            return newMovimento;
+        }
+        return null;
+    }
+    
+    public List<TipoMovimento> getTipiMovimento() { return this.tipiMovimento; }
+    
     public Conto newConto(final Intestatario... intestatari)
     {
         final Conto c = new Conto(generateIban(this.location, this.abi, this.cab, String.valueOf(this.conti.size() + 1)), LocalDate.now(), Objects.requireNonNull(intestatari));
-//        System.out.println(c);
         
         this.conti.add(c);
         
+//        for (final Intestatario temp : intestatari)
+//            temp.addConto(c);
+        
         return c;
+    }
+    public void registerUser(final User u)
+    {
+        this.utenti.add(Objects.requireNonNull(u));
+    }
+    public TipoUtente login(final String username, final String password)
+    {
+        if(this.utenti.contains(new User(Objects.requireNonNull(username), Objects.requireNonNull(password))))
     }
     public void extinguishConto(final Iban iban)
     {

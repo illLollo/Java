@@ -11,21 +11,17 @@ import java.util.Objects;
  *
  * @author gambaro.lorenzo
  */
-public enum TipoMovimento implements Serializable
-{
-    VERSAMENTO_CONTANTE(0, "Versamento Ordinario", 0.1, 1),
-    PRELIEVO_CONTANTE(1, "Prelievo Contante", 0.1, -1),
-    BONIFICO_ORDINARIO(2, "Bonifico Ordinario", 0.0, -1),
-    BONIFICO_RICEVUTO(3, "Bonifico Ricevuto", 0.0, 1);
-    
+public class TipoMovimento implements Serializable
+{   
+    private static long id = 0;
     private final long code;
     private final String desc;
     private final double cost;
     private final double amount;
     
-    private TipoMovimento(final long code, final String desc, final double cost, final double amount)
+    public TipoMovimento(final String desc, final double cost, final double amount)
     {
-        this.code = code;
+        this.code = id++;
         this.desc = Objects.requireNonNull(desc);
         this.cost = cost;
         if (amount < -1 || amount > 1)

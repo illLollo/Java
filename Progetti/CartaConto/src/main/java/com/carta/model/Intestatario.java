@@ -12,7 +12,7 @@ import java.util.Objects;
  *
  * @author gambaro.lorenzo
  */
-public class Intestatario implements Comparable, Serializable
+public class Intestatario extends User implements Serializable
 {
     private final String cf;
     private final String cognome;
@@ -22,8 +22,10 @@ public class Intestatario implements Comparable, Serializable
     private String phoneNumber;
     private String emailAddress;
     
-    public Intestatario(final String cf, final String cognome, final String nome, final LocalDate birthDate, final Indirizzo address, final String phoneNumber, final String email)
+    public Intestatario(final String username, final String password, final String cf, final String cognome, final String nome, final LocalDate birthDate, final Indirizzo address, final String phoneNumber, final String email)
     {
+        super(username, password, false);
+        
         if (!Objects.requireNonNull(cf).matches("^[A-Za-z]{6}[0-9]{2}[A-Za-z]{1}[0-9]{2}[A-Za-z]{1}[0-9]{3}[A-Za-z]{1}$"))
             throw new IllegalArgumentException("Fiscal code not valid!");
         this.cf = cf;
@@ -41,7 +43,16 @@ public class Intestatario implements Comparable, Serializable
             throw new IllegalArgumentException("Email not valid!");
         this.emailAddress = email;
     }
-
+    public void addConto(final Conto c)
+    {
+        for (final Intestatario temp : Objects.requireNonNull(c).getIntestatari())
+            if (temp.equals(this))
+            {
+                super.conti.add(c);
+                return;
+            }
+        throw new IllegalArgumentException("Given Conto does not belongs to this Intestatario!");
+    }
     public String getCf() 
     {
         return this.cf;
@@ -99,6 +110,8 @@ public class Intestatario implements Comparable, Serializable
     @Override
     public int compareTo(Object o) 
     {
+        if (o == this)
+            return 0;
         if (o instanceof Intestatario i)
             return i.getCf().compareTo(this.getCf());
         return -1;

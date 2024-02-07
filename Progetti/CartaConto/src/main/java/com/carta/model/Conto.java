@@ -19,11 +19,11 @@ import java.util.TreeSet;
  */
 public class Conto implements Comparable<Conto>, Extinguishable, Serializable
 {
-    private Set<Intestatario> intestatari;
-    private Iban iban;
-    private LocalDate openingDate;
+    private final Set<Intestatario> intestatari;
+    private final Iban iban;
+    private final LocalDate openingDate;
     private LocalDate closeDate;
-    private List<Movimento> movimenti;
+    private final List<Movimento> movimenti;
     
     protected Conto(final Iban iban, final LocalDate openingDate, final Intestatario... intestatari)
     {
