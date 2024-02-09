@@ -214,9 +214,8 @@ public class Banca implements Comparable<Banca>, Serializable
     {
         if (this == obj) 
             return true;
-
-        if (obj instanceof Banca b)
-            return b.compareTo(this) == 0;
+        if (getClass() == obj.getClass())
+            return ((Banca) obj).compareTo(this) == 0;
         return false;
     }
 

@@ -156,16 +156,21 @@ public class Intestatario implements Comparable<Intestatario>, Serializable
     }
 
     @Override
-    public boolean equals(Object obj) 
-    {
-        if (this == obj)
+    public boolean equals(Object obj) {
+        if (this == obj) {
             return true;
-        
-        if (obj instanceof Intestatario i)
-            return i.getCf().equals(this.getCf());
-        
-        return false;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Intestatario other = (Intestatario) obj;
+        return Objects.equals(this.cf, other.cf);
     }
+
+    
     protected static String calcolaHash(final String password) 
     {
         try 

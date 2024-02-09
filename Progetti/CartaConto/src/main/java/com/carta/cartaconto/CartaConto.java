@@ -5,10 +5,12 @@ package com.carta.cartaconto;
 
 import com.carta.model.Banca;
 import com.carta.model.Iban;
-import com.carta.model.TipoUtente;
-import com.carta.model.User;
+import com.carta.model.Indirizzo;
+import com.carta.model.Intestatario;
+import com.carta.model.TipoIntestatario;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.time.LocalDate;
 
 /**
  *
@@ -19,16 +21,14 @@ public class CartaConto {
     public static void main(String[] args) throws FileNotFoundException, IOException, ClassNotFoundException 
     {        
         final Banca b = new Banca("Intesa Sanpaolo", "IT", "03069", "01783");   
-        b.registerUser(new User("lorenzo", "12345", TipoUtente.DEFAULT_USER));
+        b.registerUser(new Intestatario("Lorenzo", "12345", TipoIntestatario.DEFAULT_USER, "GMBLNZ06T16F241E", "Gambaro", "Lorenzo", LocalDate.parse("12-16-2006"), new Indirizzo("Via Accoppè Fratte", "85 int. 2", "30035", "Mirano", "VE"),"3899369940", "lorygamba06@gmail.com"));
         
         System.out.println(b.login("lorenzo", "12345"));
 
-        final User logged = b.login("lorenzo", "12345");
+        final Intestatario logged = b.login("lorenzo", "12345");
         
-        if (logged != null)
-        {
-            
-        }
+        
+        
         
         System.out.println(b.findConto(new Iban("IT30K1231123123123112123123")));
     }

@@ -8,7 +8,7 @@ package com.carta.model;
  *
  * @author gambaro.lorenzo
  */
-public enum TipoUtente 
+public enum TipoIntestatario 
 {
     ADMIN,
     DEFAULT_USER
