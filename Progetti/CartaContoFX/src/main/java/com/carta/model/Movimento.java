@@ -17,30 +17,38 @@ public class Movimento implements Comparable<Movimento>, Serializable
 {
     private static long globalNumber = 0;
     private final long id;
+    private final Iban ibanRichiedente;
     private final LocalDate operationDate;
     private final LocalDate valuteDate;
-    private final String descr;
-    private final Iban iban;
+    public final String descr;
+    private final Iban ibanDestinatario;
     private final double importo;
     private final TipoMovimento type;
 
-    protected Movimento(final LocalDate operationDate, final LocalDate valuteDate, final String descr, final Iban iban, final double importo, final TipoMovimento t)
+    public Movimento(final long id, final Iban ibanRichiedente, final LocalDate operationDate, final LocalDate valuteDate, final String descr, final Iban ibanDestinatario, final double importo, final TipoMovimento type)
     {
+        this.id = id;
         this.operationDate = Objects.requireNonNull(operationDate);
         
         if (Objects.requireNonNull(valuteDate).isBefore(operationDate))
             throw new IllegalArgumentException("Valute date cannot be before operation date!");
         
-        this.valuteDate = valuteDate;
+        this.valuteDate = Objects.requireNonNull(valuteDate);
         this.descr = Objects.requireNonNull(descr);
-        this.iban = Objects.requireNonNull(iban);
+        this.ibanRichiedente = Objects.requireNonNull(ibanRichiedente);
+        this.ibanDestinatario = Objects.requireNonNull(ibanDestinatario);
         
         if (importo <= 0)
             throw new IllegalArgumentException("Import must be grater than 0");
         
         this.importo = importo;
-        this.type = Objects.requireNonNull(t);
-        this.id = globalNumber++;
+        this.type = Objects.requireNonNull(type);
+    }
+
+
+    public Movimento(final Iban ibanRichiedente, final LocalDate operationDate, final LocalDate valuteDate, final String descr, final Iban ibanDestinatario, final double importo, final TipoMovimento t)
+    {
+        this(globalNumber++, ibanRichiedente, operationDate, valuteDate, descr, ibanDestinatario, importo, t);
     }
 
     public TipoMovimento getType() 
@@ -62,15 +70,22 @@ public class Movimento implements Comparable<Movimento>, Serializable
     {
         return this.valuteDate;
     }
-    
-    public Iban getIban() 
+    public Iban getIbanRichiedente()
     {
-        return this.iban;
+        return this.ibanRichiedente;
+    }
+    public Iban getIbanDestinatario() 
+    {
+        return this.ibanDestinatario;
     }
 
     public double getImporto() 
     {
         return this.importo;
+    }
+
+    public String getDescr() {
+        return this.descr;
     }
     
     @Override
@@ -82,7 +97,8 @@ public class Movimento implements Comparable<Movimento>, Serializable
         sb.append("\n\tDescription: ").append(this.type.getDesc()).append(" -> ").append(this.descr);
         sb.append("\n\tOperation Date: ").append(this.operationDate);
         sb.append("\n\tValute Date: ").append(this.valuteDate);
-        sb.append("\n\tIban: ").append(this.iban);
+        sb.append("\n\tIban richiedente: ").append(this.ibanRichiedente);
+        sb.append("\n\tIban destinatario: ").append(this.ibanDestinatario);
         sb.append("\n\tImport: ").append(this.type.getAmount() > 0 ? "+" : "-").append(this.importo);
         sb.append("\n\tOperation Cost: ").append(this.type.getCost()).append("\n]");
         

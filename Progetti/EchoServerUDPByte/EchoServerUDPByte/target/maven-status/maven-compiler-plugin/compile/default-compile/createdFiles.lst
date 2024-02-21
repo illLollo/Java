@@ -1,4 +1,0 @@
-com\udp\connectionmodel\Callback.class
-com\udp\echoserverudp\EchoServerUDP.class
-com\udp\connectionmodel\ConnectionManager.class
-com\udp\connectionmodel\ConnectionListener.class

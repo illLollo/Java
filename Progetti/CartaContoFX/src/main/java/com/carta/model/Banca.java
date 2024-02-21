@@ -8,9 +8,7 @@ import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.Objects;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 /**
  *
@@ -24,51 +22,55 @@ public class Banca implements Comparable<Banca>, Serializable
     private final String abi;
     private final Map<Iban, Conto> conti;
     private final Map<String, Intestatario> utenti;
-    private final List<TipoMovimento> tipiMovimento;
+    private final Map<String, TipoMovimento> tipiMovimento;
     
-    public Banca(final String name, final String location, final String abi, final String cab)
+    public Banca(final String name, final String location, final String abi, final String cab, final Map<Iban, Conto> conti, final Map<String, Intestatario> utenti, final Map<String, TipoMovimento> tipiMovimento)
     {
         this.name = Objects.requireNonNull(name);
-        
+
         if (Objects.requireNonNull(location).length() != 2)
             throw new IllegalArgumentException("Location characters not valid!");
-        
+
         for (int i = 0; i < location.length(); i++)
             if (!Character.isUpperCase(location.charAt(i)))
                 throw new IllegalArgumentException("Location characters not valid!");
         this.location = location;
-        
+
         if (Objects.requireNonNull(cab).length() != 5)
             throw new IllegalArgumentException("Cab code not valid!");
         for (int i = 0; i < cab.length(); i++)
             if (!Character.isDigit(cab.charAt(i)) && !Character.isUpperCase(cab.charAt(i)) && !Character.isLowerCase(cab.charAt(i)))
                 throw new IllegalArgumentException("Cab code not valid!");
         this.cab = cab;
-        
+
         if (Objects.requireNonNull(abi).length() != 5)
             throw new IllegalArgumentException("Abi code not valid!");
         for (int i = 0; i < abi.length(); i++)
             if (!Character.isDigit(abi.charAt(i)) && !Character.isUpperCase(abi.charAt(i)) && !!Character.isLowerCase(abi.charAt(i)))
                 throw new IllegalArgumentException("Abi code not valid!");
         this.abi = abi;
-        
-        this.conti = new HashMap<>();
-        this.utenti = new HashMap<>();
-        this.tipiMovimento = new ArrayList<>();
+
+        this.conti = Objects.requireNonNull(conti);
+        this.utenti = Objects.requireNonNull(utenti);
+        this.tipiMovimento = Objects.requireNonNull(tipiMovimento);
+    }
+    public Banca(final String name, final String location, final String abi, final String cab)
+    {
+        this(name, location, abi, cab, new HashMap<>(), new HashMap<>(), new HashMap<>());
     }
     public TipoMovimento newTipoMovimento(final String desc, final double cost, final double amount)
     {
         final TipoMovimento newMovimento = new TipoMovimento(desc, cost, amount);
         
-        if (!this.tipiMovimento.contains(newMovimento))
+        if (!this.tipiMovimento.containsKey(desc))
         {
-            this.tipiMovimento.add(newMovimento);
+            this.tipiMovimento.put(desc, newMovimento);
             return newMovimento;
         }
         return null;
     }
     
-    public List<TipoMovimento> getTipiMovimento() { return this.tipiMovimento; }
+    public Map<String, TipoMovimento> getTipiMovimento() { return this.tipiMovimento; }
     
     public Conto newConto(final Intestatario... intestatari)
     {
@@ -91,13 +93,13 @@ public class Banca implements Comparable<Banca>, Serializable
             this.utenti.put(temp.getUsername(), temp);
         }
     }
-    public Intestatario login(final String username, final String password)
+    public Intestatario searchIntestatario(final String username, final String password)
     {
         final Intestatario found = this.utenti.get(Objects.requireNonNull(username));
         if (found == null)
             return null;
         
-        if (found.getHashedPassword().equals(Intestatario.calcolaHash(password)))
+        if (found.getHashedPassword().equals(password))
             return found;
         
         return null;

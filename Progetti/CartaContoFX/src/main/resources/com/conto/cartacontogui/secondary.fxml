@@ -1,17 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.conto.cartacontogui.SecondaryController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.conto.cartacontogui.MainPageController">
    <children>
-      <Label layoutX="245.0" layoutY="159.0" text="Sei Loggato!">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Label>
-      <Button fx:id="logoutBTN" layoutX="284.0" layoutY="38.0" mnemonicParsing="false" text="Logout" />
+      <Label fx:id="saldoLBL" layoutX="470.0" layoutY="26.0" text="Saldo:" />
+      <TableView fx:id="movimentiTABLE" layoutX="194.0" layoutY="75.0" prefHeight="326.0" prefWidth="404.0">
+        <columns>
+          <TableColumn prefWidth="212.0" text="Entrata" />
+          <TableColumn prefWidth="258.0" text="Uscita" />
+        </columns>
+      </TableView>
+      <Button fx:id="newmovimentoBTN" layoutX="230.0" layoutY="31.0" mnemonicParsing="false" text="Nuovo Moviemento" />
+      <ChoiceBox fx:id="contiSelector" layoutX="26.0" layoutY="88.0" prefWidth="150.0" />
    </children>
 </Pane>

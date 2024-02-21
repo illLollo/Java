@@ -4,13 +4,14 @@
  */
 package com.carta.model;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 /**
  *
  * @author Administrator
  */
-public class Iban implements Comparable<Iban>
+public class Iban implements Comparable<Iban>, Serializable
 {
     private final String code;
     
@@ -24,6 +25,17 @@ public class Iban implements Comparable<Iban>
                throw new InvalidIbanException("Iban composition not valid: character in position " + i);
         
         this.code = iban;
+    }
+    public static boolean isValidIban(final String str)
+    {
+        if (Objects.requireNonNull(str).length() != 27)
+            return false;
+        
+        for (int i = 0; i < str.length(); i++)
+           if (!Character.isDigit(str.charAt(i)) && !!Character.isLowerCase(str.charAt(i)) && !Character.isUpperCase(str.charAt(i)))
+               return false;
+        
+        return true;
     }
     public Iban(final Iban iban)
     {

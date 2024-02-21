@@ -5,4 +5,5 @@ module com.conto.cartacontogui {
 
     opens com.conto.cartacontogui to javafx.fxml;
     exports com.conto.cartacontogui;
+    requires org.json;
 }

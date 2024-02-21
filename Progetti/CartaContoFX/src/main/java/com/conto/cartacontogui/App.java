@@ -13,7 +13,7 @@ import java.io.IOException;
  */
 public class App extends Application {
 
-    private static Scene scene;
+    public static Scene scene;
     
 
     @Override
@@ -27,6 +27,11 @@ public class App extends Application {
     {
         
         scene.setRoot(loadFXML(fxml));
+    }
+    
+    public static void setRoot(Parent root)
+    {
+        scene.setRoot(root);
     }
 
     private static Parent loadFXML(String fxml) throws IOException {

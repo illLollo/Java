@@ -18,15 +18,20 @@ public class TipoMovimento implements Serializable
     private final String desc;
     private final double cost;
     private final double amount;
-    
-    public TipoMovimento(final String desc, final double cost, final double amount)
+
+    public TipoMovimento(final long code, final String desc, final double cost, final double amount) 
     {
-        this.code = id++;
+        this.code = code;
         this.desc = Objects.requireNonNull(desc);
         this.cost = cost;
         if (amount < -1 || amount > 1)
             throw new IllegalArgumentException("Segno must be -1 for negative, +1 for positive!");
         this.amount = amount;
+    }
+    
+    public TipoMovimento(final String desc, final double cost, final double amount)
+    {
+        this(id++, desc, cost, amount);
     }
 
     public long getCode() 

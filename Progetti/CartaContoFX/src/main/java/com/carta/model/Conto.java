@@ -7,8 +7,9 @@ package com.carta.model;
 import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.TreeSet;
@@ -23,19 +24,27 @@ public class Conto implements Comparable<Conto>, Extinguishable, Serializable
     private final Iban iban;
     private final LocalDate openingDate;
     private LocalDate closeDate;
-    private final List<Movimento> movimenti;
+    private final Map<Long, Movimento> movimenti;
     
-    protected Conto(final Iban iban, final LocalDate openingDate, final Intestatario... intestatari)
+    public Conto(final Iban iban, final LocalDate openingDate, final Intestatario... intestatari)
     {
-        this.intestatari = new TreeSet<>();
-        
+        this(iban, intestatarioArrToSet(intestatari), openingDate, null, new HashMap<>());
+    }
+    private static Set<Intestatario> intestatarioArrToSet(final Intestatario[] intestatari)
+    {
+        final Set<Intestatario> intes = new TreeSet<>();
         for (final Intestatario temp : Objects.requireNonNull(intestatari))
-            this.intestatari.add(temp);
+            intes.add(temp);
         
+        return intes;
+    }
+    public Conto(final Iban iban, final Set<Intestatario> intestatari, final LocalDate openingDate, final LocalDate closeDate, final Map<Long, Movimento> movimenti)
+    {
+        this.intestatari = Objects.requireNonNull(intestatari);
         this.iban = Objects.requireNonNull(iban);
         this.openingDate = Objects.requireNonNull(openingDate);
-        this.closeDate = null;
-        this.movimenti = new ArrayList<>();
+        this.closeDate = closeDate;
+        this.movimenti = Objects.requireNonNull(movimenti);
     }
 
     public Iban getIban() { return this.iban; }
@@ -44,7 +53,7 @@ public class Conto implements Comparable<Conto>, Extinguishable, Serializable
     public double saldo()
     {
         double sum = 0;
-        for (final Movimento temp : this.movimenti)
+        for (final Movimento temp : this.movimenti.values())
             sum += (temp.getImporto() * temp.getType().getAmount()) - temp.getType().getCost();
         
         return Double.parseDouble(new DecimalFormat("#.0").format(sum));
@@ -53,22 +62,22 @@ public class Conto implements Comparable<Conto>, Extinguishable, Serializable
     {
         return this.closeDate == null;
     }
-    public Movimento searchMovimento(final int id)
+    public Movimento searchMovimento(final long id)
     {
-        return this.movimenti.stream().filter((final Movimento m) -> id == m.getId()).findFirst().orElse(null);
+        return this.movimenti.get(id);
     }
-    public List<Movimento> getOperazioni()
+    public Collection<Movimento> getOperazioni()
     {
-        return this.movimenti;
+        return this.movimenti.values();
     }
-    public Movimento newOperazione(final TipoMovimento t, final double importo, final LocalDate valdate, final String desc)
+    public Movimento newOperazione(final TipoMovimento t, final Iban destinatario, final double importo, final LocalDate valdate, final String desc)
     {
         if (!this.isOpen())
             throw new IllegalStateException("Cannot execute operation in a extinguished account!");
         
-        final Movimento m = new Movimento(LocalDate.now(), Objects.requireNonNull(valdate), Objects.requireNonNull(desc), this.getIban(), importo, Objects.requireNonNull(t));
+        final Movimento m = new Movimento(this.getIban(), LocalDate.now(), Objects.requireNonNull(valdate), Objects.requireNonNull(desc), Objects.requireNonNull(destinatario), importo, Objects.requireNonNull(t));
         
-        this.movimenti.add(m);
+        this.movimenti.put(m.getId(), m);
         
         return m;
     }
@@ -115,6 +124,11 @@ public class Conto implements Comparable<Conto>, Extinguishable, Serializable
     @Override
     public boolean equals(Object obj) 
     {
+        if (obj == null)
+            return false;
+        if (obj == this)
+            return true;
+        
         if (getClass() == obj.getClass())
             return ((Conto) obj).getIban().equals(this.getIban());
         return false;

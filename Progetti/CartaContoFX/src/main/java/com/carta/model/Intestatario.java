@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.time.LocalDate;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -29,8 +30,8 @@ public class Intestatario implements Comparable<Intestatario>, Serializable
     private String emailAddress;
     private TipoIntestatario power;
     private Map<Iban, Conto> contiAssociati;
-    
-    public Intestatario(final String username, final String password, final TipoIntestatario power, final String cf, final String cognome, final String nome, final LocalDate birthDate, final Indirizzo address, final String phoneNumber, final String email)
+
+    public Intestatario(final String username, final String password, final String cf, final String cognome, final String nome, final LocalDate birthdate, final Indirizzo address, final String phoneNumber, final String emailAddress, final TipoIntestatario power, final Map<Iban, Conto> contiAssociati) 
     {
         this.username = Objects.requireNonNull(username);
         this.password = calcolaHash(Objects.requireNonNull(password));
@@ -42,18 +43,23 @@ public class Intestatario implements Comparable<Intestatario>, Serializable
         
         this.cognome = Objects.requireNonNull(cognome);
         this.nome = Objects.requireNonNull(nome);
-        this.birthdate = Objects.requireNonNull(birthDate);
+        this.birthdate = Objects.requireNonNull(birthdate);
         this.address = Objects.requireNonNull(address);
         
         if (!Objects.requireNonNull(phoneNumber).matches("^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\\s\\./0-9]*$"))
             throw new IllegalArgumentException("Phone number not valid!");
         this.phoneNumber = phoneNumber;
         
-        if (!Objects.requireNonNull(email).matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$"))
+        if (!Objects.requireNonNull(emailAddress).matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$"))
             throw new IllegalArgumentException("Email not valid!");
-        this.emailAddress = email;
+        this.emailAddress = emailAddress;
         
-        this.contiAssociati = new HashMap<>();
+        this.contiAssociati = Objects.requireNonNull(contiAssociati);
+    }
+    
+    public Intestatario(final String username, final String password, final TipoIntestatario power, final String cf, final String cognome, final String nome, final LocalDate birthDate, final Indirizzo address, final String phoneNumber, final String email)
+    {
+        this(username, password, cf, cognome, nome, birthDate, address, phoneNumber, email, power, new HashMap<>());
     }
     public void addConto(final Conto c)
     {
@@ -64,6 +70,14 @@ public class Intestatario implements Comparable<Intestatario>, Serializable
             throw new IllegalArgumentException("Given conto does not belong to this Intestatario!");
         
         this.contiAssociati.put(c.getIban(), c);
+    }
+    public Conto getConto(final Iban iban)
+    {
+        return this.contiAssociati.get(Objects.requireNonNull(iban));
+    }
+    public Collection<Conto> getAllConti()
+    {
+        return this.contiAssociati.values();
     }
     public String getUsername() 
     {
@@ -171,7 +185,7 @@ public class Intestatario implements Comparable<Intestatario>, Serializable
     }
 
     
-    protected static String calcolaHash(final String password) 
+    public static String calcolaHash(final String password) 
     {
         try 
         {
